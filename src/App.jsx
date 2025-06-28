@@ -1,17 +1,24 @@
+import { CssBaseline } from '@mui/material'
+import { Analytics } from '@vercel/analytics/react'
 import React from 'react'
-import Layout from './components/Layout'
-import { Home, About, Services, Contact } from './sections'
+
+import { Layout } from './components'
+import { About, Contact, Home, Models, Projects } from './sections'
+
 import './App.css'
 
 function App() {
   return (
     <Layout>
+      <CssBaseline />
       <div className="app-container">
         <Home />
         <About />
-        <Services />
+        <Projects />
+        <Models />
         <Contact />
       </div>
+      <Analytics />
     </Layout>
   )
 }
