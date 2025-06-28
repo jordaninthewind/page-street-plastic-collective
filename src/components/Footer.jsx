@@ -20,7 +20,7 @@ const Footer = () => {
             <ul className="footer-links">
               <li><a href="#home">Home</a></li>
               <li><a href="#about">About Us</a></li>
-              <li><a href="#services">Services</a></li>
+              <li><a href="#projects">Projects</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
@@ -28,9 +28,7 @@ const Footer = () => {
           <div className="footer-section">
             <h4 className="footer-subtitle">Contact Info</h4>
             <div className="contact-info">
-              <p>📍 123 Page Street, City, State</p>
-              <p>📞 (555) 123-4567</p>
-              <p>✉️ info@pagestreetplastic.com</p>
+              <p>✉️ info@pagestreetplasticcollective.com</p>
             </div>
           </div>
           

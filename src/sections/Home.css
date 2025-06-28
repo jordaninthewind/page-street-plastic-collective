@@ -5,6 +5,9 @@
   color: white;
   border-radius: 12px;
   margin-bottom: 3rem;
+  max-width: fit-content;
+  padding: 2rem;
+  margin: 0 auto;
 }
 
 .hero-section h1 {

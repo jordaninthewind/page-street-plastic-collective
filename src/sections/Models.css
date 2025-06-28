@@ -1,4 +1,4 @@
-.services-section {
+.projects-section {
   background: #f3f6fa;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
@@ -7,13 +7,14 @@
   text-align: center;
 }
 
-.services-section h2 {
+.projects-section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #764ba2;
+  text-align: center;
 }
 
-.services-section ul {
+.projects-section ul {
   list-style: disc inside;
   margin: 0 auto;
   padding: 0;
@@ -22,18 +23,18 @@
   text-align: left;
 }
 
-.services-section li {
+.projects-section li {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 
 @media (max-width: 768px) {
-  .services-section {
+  .projects-section {
     padding: 2rem 1rem;
     margin-bottom: 2rem;
   }
   
-  .services-section ul {
+  .projects-section ul {
     text-align: left;
     padding-left: 1rem;
   }

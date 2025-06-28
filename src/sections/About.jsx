@@ -6,7 +6,10 @@ const About = () => {
     <section id="about" className="about-section">
       <h2>About Us</h2>
       <p>
-        Page Street Plastic Collective is dedicated to reducing plastic waste and promoting sustainable practices in our community. Our mission is to educate, innovate, and collaborate for a cleaner future.
+        Page Street Pastic Collective is a group of San Francisco residents who are interested in solving problems with 3D printing.
+      </p>
+      <p>
+        The idea is part of a broader concept called 'print-frastructure', which says that we can solve local problems by designing and printing them ourselves.
       </p>
     </section>
   );

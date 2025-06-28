@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <section id="home" className="hero-section">
       <h1>Welcome to Page Street Plastic Collective</h1>
-      <p>Your partner in sustainable plastic solutions</p>
+      <p>Building community solutions with 3D printing</p>
     </section>
   );
 };

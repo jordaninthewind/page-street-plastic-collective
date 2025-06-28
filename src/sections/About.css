@@ -4,19 +4,20 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   padding: 3rem 2rem;
   margin-bottom: 3rem;
-  text-align: center;
+  text-align: left;
 }
 
 .about-section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #667eea;
+  text-align: center;
 }
 
 .about-section p {
   font-size: 1.1rem;
   color: #444;
-  margin: 0 auto;
+  margin: 0 auto 1rem auto;
   max-width: 700px;
 }
 

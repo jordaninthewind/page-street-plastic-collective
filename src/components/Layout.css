@@ -1,7 +1,13 @@
-.layout {
+#root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
 }
 
 .main-content {
@@ -10,17 +16,6 @@
   background-color: #f8f9fa;
 }
 
-/* Ensure the layout takes full viewport height */
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
