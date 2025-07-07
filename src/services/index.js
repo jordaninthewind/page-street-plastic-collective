@@ -7,7 +7,7 @@ export const saveMessage = async (message) => {
     body: JSON.stringify(message),
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': SUPABASE_ANON_KEY
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
     }
   });
 
