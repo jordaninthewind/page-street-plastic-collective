@@ -1,26 +1,17 @@
-import { CssBaseline } from '@mui/material'
-import { Analytics } from '@vercel/analytics/react'
 import React from 'react'
 
-import { Layout } from './components'
-import { About, Contact, Home, Models, Projects } from './sections'
+import { Layout } from './containers'
+import { Contact, Goals, Models, Privacy, Problem, Solution } from './sections'
 
-import './App.css'
-
-function App() {
-  return (
+const App = () => (
     <Layout>
-      <CssBaseline />
-      <div className="app-container">
-        <Home />
-        <About />
-        <Projects />
-        <Models />
-        <Contact />
-      </div>
-      <Analytics />
+      <Problem />
+      <Solution />
+      <Models />
+      <Goals />
+      <Contact />
+      <Privacy />
     </Layout>
-  )
-}
+  );
 
-export default App
+export default App;
