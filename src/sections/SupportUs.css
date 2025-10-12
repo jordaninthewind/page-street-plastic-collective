@@ -1,0 +1,52 @@
+/* SupportUs section specific styles */
+
+.support-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.support-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.donation-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.donation-button:hover {
+  transform: scale(1.05);
+}
+
+.volunteer-button {
+  background: linear-gradient(45deg, #4caf50, #66bb6a);
+  transition: all 0.2s ease-in-out;
+}
+
+.volunteer-button:hover {
+  background: linear-gradient(45deg, #388e3c, #4caf50);
+  transform: translateY(-1px);
+}
+
+.share-button {
+  border: 2px solid #2196f3;
+  color: #2196f3;
+  transition: all 0.2s ease-in-out;
+}
+
+.share-button:hover {
+  background-color: #2196f3;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .support-card {
+    margin-bottom: 1rem;
+  }
+  
+  .donation-button {
+    min-width: 50px;
+    font-size: 0.875rem;
+  }
+}

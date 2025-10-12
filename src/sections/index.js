@@ -6,3 +6,4 @@ export { default as Privacy } from './Privacy';
 export { default as Problem } from './Problem';
 export { default as Solution } from './Solution';
 export { default as SocialLinks } from './SocialLinks';
+export { default as SupportUs } from './SupportUs';

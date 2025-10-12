@@ -2,7 +2,7 @@ import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 
 import { Layout } from '@app/containers';
-import { Contact, CoverTheCity, Model3D, Partners, Privacy, Problem, SocialLinks, Solution } from '@app/sections';
+import { Contact, CoverTheCity, Model3D, Partners, Privacy, Problem, SocialLinks, Solution, SupportUs } from '@app/sections';
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
@@ -18,6 +18,7 @@ const App = () => (
       <Partners />
       <CoverTheCity />
       <Contact />
+      <SupportUs />
       <SocialLinks />
       <Privacy />
     </Layout>

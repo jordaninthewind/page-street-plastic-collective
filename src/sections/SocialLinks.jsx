@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 import { Section } from '@app/containers';
 
@@ -20,13 +20,6 @@ const SocialLinks = () => (
         >
             <a className="instagram-link" href="https://instagram.com/pagestreetplasticcollective" target="_blank" rel="noopener noreferrer">Follow us on Instagram</a>
         </Box>
-        <Typography 
-            variant="body2" 
-            align="center" 
-            sx={{ mt: 3, color: 'text.secondary' }}
-        >
-            Join our community and help us make a difference!
-        </Typography>
         </Container>
     </Section>
 );
