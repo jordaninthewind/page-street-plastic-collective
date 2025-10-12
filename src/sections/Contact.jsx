@@ -12,7 +12,7 @@ import { saveMessage } from '@app/services';
 
 import '@app/sections/Contact.css';
 
-const title = 'Join In!';
+const title = 'Shoot us a message!';
 const subtitle = 'We would love to hear from you! Please fill out the form below to send us a message.';
 
 const Contact = () => {

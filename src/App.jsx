@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Layout } from './containers';
-import { Contact, CoverTheCity, Model3D, Partners, Privacy, Problem, Solution } from './sections';
+import { Contact, CoverTheCity, Model3D, Partners, Privacy, Problem, Solution, SocialLinks } from './sections';
 
 const App = () => (
     <Layout>
@@ -11,6 +11,7 @@ const App = () => (
       <Partners />
       <CoverTheCity />
       <Contact />
+      <SocialLinks />
       <Privacy />
     </Layout>
   );
