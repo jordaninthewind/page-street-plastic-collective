@@ -47,6 +47,35 @@
   margin: 0;
 }
 
+.partner-item img {
+  border-radius: 16px;
+}
+
+.instagram-link {
+  background: linear-gradient(70deg, #feda75 0%, #fa7e1e 40%, #d62976 60%, #962fbf 80%, #4f5bd5 100%);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px 0 rgba(220, 53, 140, 0.18);
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  filter: brightness(1);
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.6em 1.3em;
+  text-decoration: none;
+  text-shadow: 0 1px 8px rgba(31, 31, 31, 0.22);
+  transition: box-shadow 0.2s, transform 0.2s, filter 0.2s;
+}
+
+.instagram-link:hover, 
+.instagram-link:focus {
+  box-shadow: 0 8px 28px 0 rgba(220, 53, 140, 0.30);
+  color: #fff;
+  filter: brightness(1.05);
+  transform: translateY(-2px) scale(1.1);
+}
+
 @media (max-width: 768px) {
   .partners-container {
     padding: 1rem;

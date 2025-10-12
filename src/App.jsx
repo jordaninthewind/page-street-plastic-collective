@@ -7,9 +7,9 @@ const App = () => (
     <Layout>
       <Problem />
       <Solution />
-      <CoverTheCity />
-      <Partners />
       <Model3D />
+      <Partners />
+      <CoverTheCity />
       <Contact />
       <Privacy />
     </Layout>

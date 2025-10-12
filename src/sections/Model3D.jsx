@@ -8,7 +8,7 @@ import './Model3D.css';
 
 const modelUrl = 'https://cwzlegpvruihgjyzqemv.supabase.co/storage/v1/object/sign/models/Pipe%20Cover%20v4.stl?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kYTg4MzExZi0wOTVjLTQ1OWEtYmZhYS05YTdlNWI4YjY2NTMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtb2RlbHMvUGlwZSBDb3ZlciB2NC5zdGwiLCJpYXQiOjE3NjAzMDQ0NTYsImV4cCI6MTc2Mjg5NjQ1Nn0.4ncYPjv3LCwSsTv8YA_E5rvDjNZxwFCDNWdkU6m8JoY';    
 
-const title = '3D Model';
+const title = 'Basic 3D Model';
 const subtitle = 'Explore our drain cover design in 3D. You can rotate, zoom, and download the model for 3D printing and further development.';
 
 const Model3D = () => {
@@ -45,7 +45,7 @@ const Model3D = () => {
             </div> 
             : 
             <div className="model-viewer">
-              <Button onClick={onViewClick}>View V4 Model</Button>
+              <Button onClick={onViewClick} variant="contained" size="large" color="primary">View V4 Model</Button>
             </div>
           }
           <div className="model-actions">
@@ -58,7 +58,7 @@ const Model3D = () => {
                 <li>Format: STL (Stereolithography)</li>
                 <li>Compatible with all 3D printers</li>
                 <li>Optimized for FDM printing</li>
-                <li>Material: PLA, PETG, or ABS recommended</li>
+                <li>Material: PLA or ABS recommended, or stronger materials</li>
               </ul>
             </div>
           </div>

@@ -14,7 +14,7 @@ const Partners = () =>  (
           <div className="partner-item">
             <h3>draINvader</h3>
             <p>Inspired by Space Invader, draINvader uses multi-colored filament to create art and cover the city!</p>
-            <img src={DrainVaderImage} alt="draINvader" />
+            <img src={DrainVaderImage} alt="draINvader" width="100%" />
             <a 
               href="https://www.instagram.com/drainvader/" 
               target="_blank" 

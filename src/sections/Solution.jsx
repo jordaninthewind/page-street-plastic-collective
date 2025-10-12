@@ -2,7 +2,7 @@ import { Section } from '@app/containers';
 
 import './Solution.css';
 
-const title = 'Solution';
+const title = 'A Simple Solution';
 const subtitle = 'As always, there\'s an opportunity to solve the issue with creativity and community.';
 
 const Solution = () => (
