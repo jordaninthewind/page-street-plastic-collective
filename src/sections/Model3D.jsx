@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StlViewer } from 'react-stl-viewer';
 
 import { Section } from '@app/containers';
+import { trackEvent } from '@app/services/analytics';
 
 import './Model3D.css';
 
@@ -17,6 +18,7 @@ const Model3D = () => {
 
   const onViewClick = () => {
     setLoad(true);
+    trackEvent('model_viewed');
   };
 
   return (

@@ -1,18 +1,16 @@
+import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 
 import { Layout } from '@app/containers';
 import { Contact, CoverTheCity, Model3D, Partners, Privacy, Problem, SocialLinks, Solution } from '@app/sections';
 
-const options = {
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
   defaults: '2025-05-24',
-}
+});
 
 const App = () => (
-  <PostHogProvider
-    options={options}
-    apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
-  >
+  <PostHogProvider client={posthog}>
     <Layout>
       <Problem />
       <Solution />

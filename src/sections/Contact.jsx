@@ -9,10 +9,11 @@ import { useState } from 'react';
 
 import { Section } from '@app/containers';
 import { saveMessage } from '@app/services';
+import { trackEvent, identifyUser } from '@app/services/analytics';
 
 import '@app/sections/Contact.css';
 
-const title = 'Shoot us a message!';
+const title = 'Shoot us a message !';
 const subtitle = 'We would love to hear from you! Please fill out the form below to send us a message.';
 
 const Contact = () => {
@@ -42,14 +43,16 @@ const Contact = () => {
       setEmailError(null);
     }
   }
-
   
   const handleMessageChange = ({target: {value}}) => {
     setMessage(value);
   }
 
-       const handleSubmit = async ({preventDefault}) => {
+  const handleSubmit = async ({preventDefault}) => {
     preventDefault();
+
+    trackEvent('contact_message_sent', { name, email, message });
+    identifyUser(email);
 
     setIsLoading(true);
 
