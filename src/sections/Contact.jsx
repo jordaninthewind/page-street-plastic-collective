@@ -19,20 +19,19 @@ const Contact = () => {
   const [emailError, setEmailError] = useState(null);
   const [messageSent, setMessageSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [resendMessage, setResendMessage] = useState(false);
 
   const hasSentAMessage = window.localStorage.getItem('hasSentAMessage');
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
+  const handleNameChange = ({target: {value}}) => {
+    setName(value);
   }
 
   const validateEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-  
+  const handleEmailChange = ({target: {value}}) => {
     setEmail(value);
   
     if (!validateEmail(value)) {
@@ -43,12 +42,12 @@ const Contact = () => {
   }
 
   
-  const handleMessageChange = (e) => {
-    setMessage(e.target.value);
+  const handleMessageChange = ({target: {value}}) => {
+    setMessage(value);
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+       const handleSubmit = async ({preventDefault}) => {
+    preventDefault();
 
     setIsLoading(true);
 
@@ -63,11 +62,7 @@ const Contact = () => {
 
   return (
     <Section id="contact" title={messageSent ? 'Thanks!' : 'Join In!'}>
-      {hasSentAMessage ? (
-        <Typography variant="h6" align="center">
-          Thanks for your message! We'll get back to you soon.
-        </Typography>
-      ) : (
+      {!hasSentAMessage || resendMessage ? (
       <Container maxWidth="sm" sx={{ pb: 3 }}>
         <Box
           component="form"
@@ -82,7 +77,7 @@ const Contact = () => {
           }}
         >
           <TextField
-            label="Your Name"
+            label="Name"
             variant="outlined"
             value={name}
             onChange={handleNameChange}
@@ -90,7 +85,7 @@ const Contact = () => {
             fullWidth
           />
           <TextField
-            label="Your Email"
+            label="Email"
             type="email"
             variant="outlined"
             value={email}
@@ -101,7 +96,7 @@ const Contact = () => {
             helperText={emailError}
             />
           <TextField
-            label="Your Message"
+            label="Message"
             variant="outlined"
             multiline
             rows={4}
@@ -119,12 +114,23 @@ const Contact = () => {
               mt: 2,
               py: 1.5,
             }}
-            disabled={!name || !email || !!emailError || !message || isLoading}
           >
             {isLoading ? 'Sending...' : 'Send'}
           </Button>
          </Box>
       </Container>
+      ) : (
+        <Container maxWidth="sm" sx={{ pb: 3 }}>  
+          <Typography variant="h6" align="center">
+            Thanks for your message! We'll get back to you soon.
+          </Typography>
+          <Button
+            variant="outlined"
+            onClick={() => setResendMessage(true)}
+          >
+            Send Another Message
+          </Button>
+          </Container>
       )}
     </Section>
   );
