@@ -3,11 +3,13 @@ import { Section } from '@app/containers';
 
 import './Partners.css';
 
+const title = 'Partners';
+const subtitle = 'We are a loose collective of neighbors who want to solve local problems creatively and sustainably.';
+
 const Partners = () =>  (
-  <Section id="partners" title="Partners">
+  <Section id="partners" title={title} subtitle={subtitle}>
     <div className="partners-container">
       <div className="partners-content">
-        <p>We are a loose collective of neighbors who want to solve local problems creatively and sustainably.</p>
         <div className="partners-grid">
           <div className="partner-item">
             <h3>draINvader</h3>

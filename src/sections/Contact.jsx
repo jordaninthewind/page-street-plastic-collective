@@ -12,12 +12,14 @@ import { saveMessage } from '@app/services';
 
 import '@app/sections/Contact.css';
 
+const title = 'Join In!';
+const subtitle = 'We would love to hear from you! Please fill out the form below to send us a message.';
+
 const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [emailError, setEmailError] = useState(null);
-  const [messageSent, setMessageSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [resendMessage, setResendMessage] = useState(false);
 
@@ -54,14 +56,12 @@ const Contact = () => {
     await saveMessage({ name, email, message });
 
     window.localStorage.setItem('hasSentAMessage', true);
-
-    setMessageSent(true);
   
     setIsLoading(false);
   }
 
   return (
-    <Section id="contact" title={messageSent ? 'Thanks!' : 'Join In!'}>
+    <Section id="contact" title={title} subtitle={subtitle}>
       {!hasSentAMessage || resendMessage ? (
       <Container maxWidth="sm" sx={{ pb: 3 }}>
         <Box

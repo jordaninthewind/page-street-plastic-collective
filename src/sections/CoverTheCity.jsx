@@ -1,17 +1,23 @@
-import { Section } from '../containers';
+import { Divider } from '@mui/material';
+
+import { Section } from '@app/containers';
 
 import './CoverTheCity.css';
 
+const title = 'Cover the City';
+const subtitle = 'Our vision extends beyond Page Street. We aim to enable the whole city to cover their drain covers.';
+
 const CoverTheCity = () => (
-    <Section id="cover-the-city" title="Cover the City">
+    <Section id="cover-the-city" title={title} subtitle={subtitle}>
       <div className="cover-city-container">
         <div className="cover-city-content">
-          <p>Our vision extends beyond Page Street. We aim to enable the whole city to cover their drain covers.</p>
           <div className="city-phases">
-            <div className="phase-item">
+            <div className="phase-item phase-item-active">
               <div className="phase-number">1</div>
               <h3>Page Street</h3>
               <p>Starting with our local neighborhood from Market to Stanyan Street.</p>
+              <Divider sx={{ margin: '10px 0' }} />
+              <p style={{ color: '#ff00cc', fontStyle: 'italic' }}>We have nearly covered 100% of the drain covers in Page Street.</p>
             </div>
             <div className="phase-item">
               <div className="phase-number">2</div>

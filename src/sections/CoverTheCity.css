@@ -33,6 +33,11 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.phase-item-active {
+  border: 1px solid #ff00cc;
+  box-shadow: 0 0 12px 10px #ff00cc66;
+}
+
 .phase-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);

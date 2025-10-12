@@ -1,13 +1,14 @@
 import { Stack } from '@mui/material';
 
-import { Section } from '../containers';
+import { Section } from '@app/containers';
 
 import './Problem.css';
 
-const Problem = () => (
-    <Section id="problem" title="Problem">
-      <p>In San Francisco, homeowners are required to cover the drain pipes in front of their homes with grates to prevent litter from entering the pipes. These covers are made of steel and they a frequently stolen. Historically, they were made of brass.</p>
+const title = 'Problem';
+const subtitle = 'In San Francisco, homeowners are required to cover the drain pipes in front of their homes with grates to prevent litter from entering the pipes. These covers are made of steel and they a frequently stolen. Historically, they were made of brass.';
 
+const Problem = () => (
+    <Section id="problem" title={title} subtitle={subtitle}>
       <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
         <img style={{ width: '49%' }} src="uncovered-sewer-cap-type-1.jpg" alt="Uncovered sewer cap type 1" />
         <img style={{ width: '49%' }} src="uncovered-sewer-cap-type-1-a.jpg" alt="Uncovered sewer cap type 2" />
