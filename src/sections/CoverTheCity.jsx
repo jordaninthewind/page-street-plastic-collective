@@ -23,19 +23,29 @@ const CoverTheCity = () => (
               <h3>Citywide Coverage</h3>
               <p>Scaling our solution across all of San Francisco's storm drain network.</p>
             </div>
+            <div className="phase-item">
+              <div className="phase-number">4</div>
+              <h3>WORLDWIDE</h3>
+              <p>Scaling our solution across the world.</p>
+              <p>(Okay, maybe not the whole world, but we can dream!)</p>
+            </div>
           </div>
           <div className="impact-stats">
             <div className="stat-item">
               <h4>10,000+</h4>
-              <p>Storm drains in San Francisco</p>
+              <p>Building drain covers in San Francisco</p>
             </div>
             <div className="stat-item">
               <h4>100%</h4>
-              <p>Coverage goal for environmental protection</p>
+              <p>Coverage goal for all drain covers in San Francisco</p>
             </div>
             <div className="stat-item">
               <h4>Community</h4>
               <p>Driven by local residents and organizations</p>
+            </div>
+            <div className="stat-item">
+              <h4>Worldwide</h4>
+              <p>Scaling our solution across the world.</p>
             </div>
           </div>
         </div>
