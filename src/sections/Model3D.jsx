@@ -6,8 +6,9 @@ import { Section } from '@app/containers';
 
 import './Model3D.css';
 
+const modelUrl = 'https://cwzlegpvruihgjyzqemv.supabase.co/storage/v1/object/sign/models/Pipe%20Cover%20v4.stl?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kYTg4MzExZi0wOTVjLTQ1OWEtYmZhYS05YTdlNWI4YjY2NTMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtb2RlbHMvUGlwZSBDb3ZlciB2NC5zdGwiLCJpYXQiOjE3NjAzMDQ0NTYsImV4cCI6MTc2Mjg5NjQ1Nn0.4ncYPjv3LCwSsTv8YA_E5rvDjNZxwFCDNWdkU6m8JoY';    
+
 const Model3D = () => {
-  const modelUrl = 'https://cwzlegpvruihgjyzqemv.supabase.co/storage/v1/object/sign/models/Pipe%20Cover%20v4.stl?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kYTg4MzExZi0wOTVjLTQ1OWEtYmZhYS05YTdlNWI4YjY2NTMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtb2RlbHMvUGlwZSBDb3ZlciB2NC5zdGwiLCJpYXQiOjE3NjAzMDQ0NTYsImV4cCI6MTc2Mjg5NjQ1Nn0.4ncYPjv3LCwSsTv8YA_E5rvDjNZxwFCDNWdkU6m8JoY';    
 
   const [load, setLoad] = useState(false);
 
@@ -19,7 +20,7 @@ const Model3D = () => {
     <Section id="model-3d" title="3D Model">
       <div className="model-3d-container">
         <div className="model-3d-content">
-          <p>Explore our drain cover design in 3D. You can rotate, zoom, and download the model for 3D printing or further development.</p>
+          <p>Explore our drain cover design in 3D. You can rotate, zoom, and download the model for 3D printing and further development.</p>
           {load ?         
             <div className="model-viewer">
               <StlViewer
@@ -42,7 +43,7 @@ const Model3D = () => {
             </div> 
             : 
             <div className="model-viewer">
-              <Button onClick={onViewClick}>Load Model</Button>
+              <Button onClick={onViewClick}>View V4 Model</Button>
             </div>
           }
           <div className="model-actions">
