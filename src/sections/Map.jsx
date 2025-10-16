@@ -5,7 +5,7 @@ import { Section } from '@app/containers';
 import './Map.css';
 
 const title = 'Interactive Map';
-const subtitle = 'Explore the locations where drain covers have been reported stolen or need replacement. Help us track and address this city-wide issue.';
+const subtitle = 'Explore the locations where drain covers have been reported stolen or need replacement. Help us capture and address this city-wide issue.';
 
 const Map = () => (
     <Section id="map" title={title} subtitle={subtitle}>

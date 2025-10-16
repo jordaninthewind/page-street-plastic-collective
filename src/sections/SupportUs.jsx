@@ -1,4 +1,3 @@
-import { trackEvent } from '@app/services/analytics';
 import {
   Box,
   Button,
@@ -8,6 +7,7 @@ import {
   Stack,
   Typography
 } from '@mui/material';
+import { usePostHog } from 'posthog-js/react';
 
 import { Section } from '@app/containers';
 
@@ -17,8 +17,10 @@ const title = 'Support Our Mission';
 const subtitle = 'Help us make a difference in our community by supporting our plastic collection initiative.';
 
 const SupportUs = () => {
+  const { capture } = usePostHog();
+
   const handleShareClick = () => {
-    trackEvent('support_share_clicked');
+    capture('support_share_clicked');
 
     if (navigator.share) {
       navigator.share({

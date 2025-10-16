@@ -1,17 +1,23 @@
 import { CssBaseline, Stack, ThemeProvider } from '@mui/material';
 import { Analytics } from '@vercel/analytics/react';
+import { usePostHog } from 'posthog-js/react';
 import { useEffect } from 'react';
 
 import { Title } from '@app/components';
-import { trackEvent } from '@app/services/analytics';
 import theme from '@app/theme';
 
 import '@app/containers/Layout.css';
 
 const Layout = ({ children }) => {
+  const posthog = usePostHog();
+
   useEffect(() => {
-    trackEvent('site_loaded');
-  }, []);
+    posthog?.identify(window.navigator.userAgent);
+
+    posthog?.capture('page_view', {
+      url: window.location.href,
+    });
+  }, [posthog]);
 
   return (
     <ThemeProvider theme={theme}>

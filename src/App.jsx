@@ -6,7 +6,7 @@ import { Contact, CoverTheCity, Map, Model3D, Partners, Privacy, Problem, Social
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-  defaults: '2025-05-24',
+  defaults: '2025-05-24'
 });
 
 const App = () => (
@@ -24,6 +24,6 @@ const App = () => (
       <Privacy />
     </Layout>
   </PostHogProvider>
- );
+);
 
 export default App;
