@@ -1,10 +1,10 @@
 #root {
-  background-color: #010101;
+  background-color: #AAA;
   min-height: 100%;
   min-width: 100%;
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1080px;
   margin: 1rem auto;
 }

@@ -1,6 +1,6 @@
 .title {
-  font-family: 'Honk', sans-serif;
-  font-weight: 600;
+  font-family: 'BBH Sans Hegarty', sans-serif;
+  font-weight: 300;
   margin: 0 0 1rem 0;
   display: flex;
   flex-wrap: wrap;
@@ -18,10 +18,12 @@
     opacity: 0;
     transform: translateY(20px) scale(0.8);
   }
+
   50% {
     opacity: 1;
     transform: translateY(-5px) scale(1.1);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
