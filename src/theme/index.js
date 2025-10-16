@@ -72,7 +72,7 @@ const colors = {
 
 // Typography configuration
 const typography = {
-  fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+  fontFamily: 'Roboto, sans-serif',
   h1: {
     fontSize: '2.5rem',
     fontWeight: 700,
@@ -112,6 +112,11 @@ const typography = {
   },
   body2: {
     fontSize: '0.875rem',
+    lineHeight: 1.5,
+    letterSpacing: '0.01em',
+  },
+  list: {
+    fontSize: '1rem',
     lineHeight: 1.5,
     letterSpacing: '0.01em',
   },

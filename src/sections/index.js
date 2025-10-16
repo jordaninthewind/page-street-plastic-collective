@@ -1,5 +1,6 @@
 export { default as Contact } from './Contact';
 export { default as CoverTheCity } from './CoverTheCity';
+export { default as Map } from './Map';
 export { default as Model3D } from './Model3D';
 export { default as Partners } from './Partners';
 export { default as Privacy } from './Privacy';
