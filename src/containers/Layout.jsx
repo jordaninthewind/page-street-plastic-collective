@@ -14,15 +14,15 @@ const Layout = ({ children }) => {
   }, []);
 
   return (
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Stack direction="column" spacing={2}  className="container">
-      <Title>Page Street Plastic Collective</Title>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Stack direction="column" spacing={2} className="layout">
+        <Title>Page Street Plastic Collective</Title>
         {children}
-    </Stack >
-    <Analytics />
-  </ThemeProvider>
+      </Stack>
+      <Analytics />
+    </ThemeProvider>
   );
 };
 
-export default Layout; 
+export default Layout;
