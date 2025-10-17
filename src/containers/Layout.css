@@ -16,12 +16,8 @@
   padding: 16px 48px;
   text-align: justify;
   width: 100%;
-}
 
-.subtitle {
-  color: black;
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
-  line-height: 2;
-  margin-bottom: 16px;
+  @media (max-width: 768px) {
+    padding: 16px 24px;
+  }
 }

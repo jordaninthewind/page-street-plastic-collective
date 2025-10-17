@@ -1,4 +1,4 @@
-import { Container, Typography } from '@mui/material';
+import { Container, Divider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 const Section = ({ children, title, subtitle }) => (
@@ -10,7 +10,7 @@ const Section = ({ children, title, subtitle }) => (
       alignItems: 'center',
       justifyContent: 'flex-start',
       width: '100%',
-      gap: 4,
+      py: 4,
     }}
   >
     <Box sx={{ width: '100%' }}>

@@ -26,15 +26,16 @@ const Reason = ({ text, idx }) => (
 );
 
 const Problem = () => (
-  <Section id="problem" title={title}>
+  <Section id="problem">
     <Grid container spacing={4}>
-      <Grid size={6}>
+      <Typography variant="sectionTitle">{title}</Typography>
+      <Grid item size={{ xs: 12, md: 6 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <img src="uncovered-sewer-cap-type-1.jpg" alt="Uncovered sewer cap example" />
           <img src="uncovered-sewer-cap-type-1-a.jpg" alt="Uncovered sewer cap example" />
         </Box>
       </Grid>
-      <Grid size={6}>
+      <Grid item size={{ xs: 12, md: 6 }}>
         <Divider sx={{ border: '3px solid #000', mb: 2 }} />
         <Typography variant="subtitle">{subtitle}</Typography>
         <List>{reasons.map((reason, idx) => <Reason text={reason} idx={idx} key={idx} />)}</List>
