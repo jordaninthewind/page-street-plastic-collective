@@ -1,4 +1,4 @@
-.title {
+.header {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.03em;
@@ -10,7 +10,7 @@
   text-wrap: nowrap;
 }
 
-.title-letter {
+.header-letter {
   display: inline-block;
   animation: letterAnimation 0.05s linear forwards;
   opacity: 0;
