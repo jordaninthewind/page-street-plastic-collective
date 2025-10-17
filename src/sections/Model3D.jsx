@@ -47,7 +47,7 @@ const Model3D = () => {
             </div>
             :
             <div className="model-viewer">
-              <Button onClick={onViewClick} variant="contained" size="large" color="primary">View V4 Model</Button>
+              <Button onClick={onViewClick} variant="contained" size="large" color="secondary">View V4 Model</Button>
             </div>
           }
           <div className="model-actions">

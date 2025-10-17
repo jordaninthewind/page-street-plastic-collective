@@ -59,6 +59,7 @@ const SupportUs = () => {
               <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
                 <Button
                   variant="outlined"
+                  color="secondary"
                   onClick={handleShareClick}
                   sx={{ minWidth: '120px' }}
                 >

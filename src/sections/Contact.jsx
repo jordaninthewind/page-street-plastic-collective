@@ -113,6 +113,7 @@ const Contact = () => {
               type="submit"
               variant="contained"
               size="large"
+              color="secondary"
               loading={isLoading}
               sx={{
                 mt: 2,

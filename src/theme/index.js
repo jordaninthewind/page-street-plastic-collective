@@ -11,7 +11,7 @@ const colors = {
   },
   // Secondary colors - pink
   secondary: {
-    main: '#9C27B0', // Lavender
+    main: "rgba(194,90,60, 1)",
     light: '#E91E63', // Light pink
     dark: '#6A1B9A', // Dark purple
     contrastText: '#FFFFFF',
@@ -57,6 +57,9 @@ const colors = {
     800: '#424242',
     900: '#212121',
   },
+  accent: {
+    main: "rgba(194,90,60, 1)"
+  },
   // Background colors - white
   background: {
     default: '#FAFAFA',
@@ -79,6 +82,12 @@ const typography = {
     lineHeight: 1.2,
     letterSpacing: '-0.02em',
     textTransform: 'uppercase',
+  },
+  subtitle: {
+    fontSize: '2rem',
+    fontWeight: 500,
+    lineHeight: 1.4,
+    letterSpacing: '0.02em',
   },
   h1: {
     fontSize: '2.5rem',
@@ -126,6 +135,13 @@ const typography = {
     fontSize: '1rem',
     lineHeight: 1.5,
     letterSpacing: '0.01em',
+  },
+  listText: {
+    fontSize: '4rem',
+    fontWeight: 600,
+    lineHeight: 1.2,
+    letterSpacing: '-0.02em',
+    color: colors.accent.main,
   },
   button: {
     fontSize: '0.875rem',
