@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Stack direction="column" spacing={2} className="layout">
+      <Stack direction="column" className="layout">
         <Title>Page Street Plastic Collective</Title>
         {children}
       </Stack>

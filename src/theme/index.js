@@ -72,7 +72,14 @@ const colors = {
 
 // Typography configuration
 const typography = {
-  fontFamily: 'Roboto, sans-serif',
+  fontFamily: '"Open Sans", sans-serif',
+  sectionTitle: {
+    fontSize: '4.75rem',
+    fontWeight: 700,
+    lineHeight: 1.2,
+    letterSpacing: '-0.02em',
+    textTransform: 'uppercase',
+  },
   h1: {
     fontSize: '2.5rem',
     fontWeight: 700,
