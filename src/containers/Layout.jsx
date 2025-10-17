@@ -3,7 +3,6 @@ import { Analytics } from '@vercel/analytics/react';
 import { usePostHog } from 'posthog-js/react';
 import { useEffect } from 'react';
 
-import { Title } from '@app/components';
 import theme from '@app/theme';
 
 import '@app/containers/Layout.css';
@@ -23,7 +22,6 @@ const Layout = ({ children }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Stack direction="column" className="layout">
-        <Title>Page Street Plastic Collective</Title>
         {children}
       </Stack>
       <Analytics />

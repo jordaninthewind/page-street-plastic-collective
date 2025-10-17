@@ -1,9 +1,9 @@
-import '@app/components/Title.css';
+import '@app/components/Header.css';
 
-const Title = ({ children }) => {
-  const letters = children.split('').map((letter, index) => (
-    <span 
-      key={index} 
+const Header = () => {
+  const letters = 'Page Street Plastic Collective'.split('').map((letter, index) => (
+    <span
+      key={index}
       className="title-letter"
       style={{ animationDelay: `${index * 0.05}s` }}
     >
@@ -20,4 +20,4 @@ const Title = ({ children }) => {
   );
 };
 
-export default Title;
+export default Header;

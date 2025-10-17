@@ -1,5 +1,4 @@
-import { List, ListItem, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material';
-import { CheckCircle } from '@mui/icons-material';
+import { Box, Divider, Grid, List, ListItem, ListItemText, Typography } from '@mui/material';
 
 import { Section } from '@app/containers';
 
@@ -10,18 +9,16 @@ const subtitle = 'In San Francisco, homeowners are required to cover the drain p
 
 const reasons = [
   'Recyclable materials',
-  'Used as a medium for art',
-  'Specific size and shape and are often in short supply',
+  'Used for art',
+  'Hard to replace',
   'Easy to steal'
 ];
 
-const Reason = ({ text }) => (
-  <ListItem key={text} >
-    <ListItemIcon>
-      <CheckCircle color='success' />
-    </ListItemIcon>
-    <ListItemText>
-      <Typography variant="list">
+const Reason = ({ text, idx }) => (
+  <ListItem>
+    <Typography variant="listText">0{idx + 1}</Typography>
+    <ListItemText sx={{ alignSelf: 'flex-start', ml: 2, mt: 1 }}>
+      <Typography variant="subtitle">
         {text}
       </Typography>
     </ListItemText>
@@ -29,13 +26,20 @@ const Reason = ({ text }) => (
 );
 
 const Problem = () => (
-  <Section id="problem" title={title} subtitle={subtitle}>
-    <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
-      <img style={{ width: '49%' }} src="uncovered-sewer-cap-type-1.jpg" alt="Uncovered sewer cap type 1" />
-      <img style={{ width: '49%' }} src="uncovered-sewer-cap-type-1-a.jpg" alt="Uncovered sewer cap type 2" />
-    </Stack>
-    <Typography variant="h5" sx={{ mt: 2 }}>There are a few reasons that these covers are frequently stolen:</Typography>
-    <List>{reasons.map((reason, idx) => <Reason text={reason} key={idx} />)}</List>
+  <Section id="problem" title={title}>
+    <Grid container spacing={4}>
+      <Grid size={6}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <img src="uncovered-sewer-cap-type-1.jpg" alt="Uncovered sewer cap example" />
+          <img src="uncovered-sewer-cap-type-1-a.jpg" alt="Uncovered sewer cap example" />
+        </Box>
+      </Grid>
+      <Grid size={6}>
+        <Divider sx={{ border: '3px solid #000', mb: 2 }} />
+        <Typography variant="subtitle">{subtitle}</Typography>
+        <List>{reasons.map((reason, idx) => <Reason text={reason} idx={idx} key={idx} />)}</List>
+      </Grid>
+    </Grid>
   </Section>
 );
 
