@@ -1,66 +1,60 @@
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography
-} from '@mui/material';
-import { usePostHog } from 'posthog-js/react';
-import { useState } from 'react';
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { usePostHog } from "posthog-js/react";
+import { useState } from "react";
 
-import { COPY_PROPS } from '@app/constants';
-import { Section } from '@app/containers';
-import { saveMessage } from '@app/services';
+import { COPY_PROPS } from "@app/constants";
+import { Section } from "@app/containers";
+import { saveMessage } from "@app/services";
 
-import '@app/sections/Contact/Contact.css';
+import "@app/sections/Contact/Contact.css";
 
 const Contact = () => {
   const { capture, identify } = usePostHog();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [emailError, setEmailError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [resendMessage, setResendMessage] = useState(false);
 
-  const hasSentAMessage = window.localStorage.getItem('hasSentAMessage');
+  const hasSentAMessage = window.localStorage.getItem("hasSentAMessage");
 
   const handleNameChange = ({ target: { value } }) => {
     setName(value);
-  }
+  };
 
   const validateEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
+  };
 
   const handleEmailChange = ({ target: { value } }) => {
     setEmail(value);
 
     if (!validateEmail(value)) {
-      setEmailError('Please enter a valid email address');
+      setEmailError("Please enter a valid email address");
     } else {
       setEmailError(null);
     }
-  }
+  };
 
   const handleMessageChange = ({ target: { value } }) => {
     setMessage(value);
-  }
+  };
 
   const handleSubmit = async ({ preventDefault }) => {
     preventDefault();
 
-    capture('contact_message_sent', { name, email, message });
+    capture("contact_message_sent", { name, email, message });
     identify(email);
 
     setIsLoading(true);
 
     await saveMessage({ name, email, message });
 
-    window.localStorage.setItem('hasSentAMessage', true);
+    window.localStorage.setItem("hasSentAMessage", true);
 
     setIsLoading(false);
-  }
+  };
 
   return (
     <Section id="contact" {...COPY_PROPS.contact}>
@@ -70,11 +64,11 @@ const Contact = () => {
             component="form"
             onSubmit={handleSubmit}
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
               gap: 1,
-              '& .MuiTextField-root': {
-                width: '100%',
+              "& .MuiTextField-root": {
+                width: "100%",
               },
             }}
           >
@@ -118,7 +112,7 @@ const Contact = () => {
                 py: 1.5,
               }}
             >
-              {isLoading ? 'Sending...' : 'Send'}
+              {isLoading ? "Sending..." : "Send"}
             </Button>
           </Box>
         </Container>
@@ -127,16 +121,13 @@ const Contact = () => {
           <Typography variant="h6" align="center">
             Thanks for your message! We'll get back to you soon.
           </Typography>
-          <Button
-            variant="outlined"
-            onClick={() => setResendMessage(true)}
-          >
+          <Button variant="outlined" onClick={() => setResendMessage(true)}>
             Send Another Message
           </Button>
         </Container>
       )}
     </Section>
   );
-}
+};
 
-export default Contact; 
+export default Contact;

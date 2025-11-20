@@ -1,8 +1,8 @@
-import DrainVaderImage from '@app/assets/draINvader.png';
-import { COPY_PROPS } from '@app/constants';
-import { Section } from '@app/containers';
+import DrainVaderImage from "@app/assets/draINvader.png";
+import { COPY_PROPS } from "@app/constants";
+import { Section } from "@app/containers";
 
-import '@app/sections/Partners/Partners.css';
+import "@app/sections/Partners/Partners.css";
 
 const Partners = () => (
   <Section id="partners" {...COPY_PROPS.partners}>
@@ -11,7 +11,10 @@ const Partners = () => (
         <div className="partners-grid">
           <div className="partner-item">
             <h3>draINvader</h3>
-            <p>Inspired by Space Invader, draINvader uses multi-colored filament to create art and cover the city!</p>
+            <p>
+              Inspired by Space Invader, draINvader uses multi-colored filament
+              to create art and cover the city!
+            </p>
             <img src={DrainVaderImage} alt="draINvader" width="100%" />
             <a
               href="https://www.instagram.com/drainvader/"

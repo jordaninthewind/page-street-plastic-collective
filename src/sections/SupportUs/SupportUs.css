@@ -1,7 +1,9 @@
 /* SupportUs section specific styles */
 
 .support-card {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .support-card:hover {
@@ -44,7 +46,7 @@
   .support-card {
     margin-bottom: 1rem;
   }
-  
+
   .donation-button {
     min-width: 50px;
     font-size: 0.875rem;

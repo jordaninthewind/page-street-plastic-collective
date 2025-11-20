@@ -3,12 +3,12 @@ const SUPABASE_ANON_KEY = import.meta.env.VITE_REACT_APP_AUTHORIZATION_TOKEN;
 
 export const saveMessage = async (message) => {
   const response = await fetch(SUPABASE_URL, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(message),
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-    }
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    },
   });
 
   return response.json();

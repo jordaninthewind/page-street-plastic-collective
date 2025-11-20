@@ -27,21 +27,23 @@ The theme uses a nature-inspired color palette suitable for an environmental/sus
 The theme includes custom properties specific to the plastic collective:
 
 #### Environmental Impact Colors
+
 ```javascript
-theme.custom.environmental.positive   // #4CAF50
-theme.custom.environmental.neutral    // #FF9800
-theme.custom.environmental.negative   // #F44336
+theme.custom.environmental.positive; // #4CAF50
+theme.custom.environmental.neutral; // #FF9800
+theme.custom.environmental.negative; // #F44336
 ```
 
 #### Plastic Type Colors
+
 ```javascript
-theme.custom.plasticTypes.pet   // #2196F3 (Blue)
-theme.custom.plasticTypes.hdpe  // #4CAF50 (Green)
-theme.custom.plasticTypes.pvc   // #FF9800 (Orange)
-theme.custom.plasticTypes.ldpe  // #9C27B0 (Purple)
-theme.custom.plasticTypes.pp    // #795548 (Brown)
-theme.custom.plasticTypes.ps    // #607D8B (Blue Grey)
-theme.custom.plasticTypes.other // #9E9E9E (Grey)
+theme.custom.plasticTypes.pet; // #2196F3 (Blue)
+theme.custom.plasticTypes.hdpe; // #4CAF50 (Green)
+theme.custom.plasticTypes.pvc; // #FF9800 (Orange)
+theme.custom.plasticTypes.ldpe; // #9C27B0 (Purple)
+theme.custom.plasticTypes.pp; // #795548 (Brown)
+theme.custom.plasticTypes.ps; // #607D8B (Blue Grey)
+theme.custom.plasticTypes.other; // #9E9E9E (Grey)
 ```
 
 ## Usage
@@ -49,17 +51,19 @@ theme.custom.plasticTypes.other // #9E9E9E (Grey)
 ### Basic Theme Usage
 
 ```javascript
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
 const MyComponent = () => {
   const theme = useTheme();
-  
+
   return (
-    <Box sx={{ 
-      bgcolor: 'primary.main',
-      color: 'primary.contrastText',
-      p: 2 
-    }}>
+    <Box
+      sx={{
+        bgcolor: "primary.main",
+        color: "primary.contrastText",
+        p: 2,
+      }}
+    >
       Hello World
     </Box>
   );
@@ -69,17 +73,17 @@ const MyComponent = () => {
 ### Using Custom Theme Properties
 
 ```javascript
-import { usePlasticCollectiveTheme } from '@app/theme';
+import { usePlasticCollectiveTheme } from "@app/theme";
 
 const MyComponent = () => {
   const theme = usePlasticCollectiveTheme();
-  
+
   return (
     <Chip
       label="PET Plastic"
-      sx={{ 
+      sx={{
         bgcolor: theme.custom.plasticTypes.pet,
-        color: 'white' 
+        color: "white",
       }}
     />
   );
@@ -89,32 +93,26 @@ const MyComponent = () => {
 ### Using Utility Functions
 
 ```javascript
-import { 
+import {
   getEnvironmentalImpactColor,
   getPlasticTypeColor,
   getRecyclingStatusColor,
-  getImpactLevelColor 
-} from '@app/theme';
+  getImpactLevelColor,
+} from "@app/theme";
 
 const MyComponent = () => {
   return (
     <Box>
       <Chip
         label="Positive Impact"
-        sx={{ bgcolor: getEnvironmentalImpactColor('positive') }}
+        sx={{ bgcolor: getEnvironmentalImpactColor("positive") }}
       />
-      <Chip
-        label="PET"
-        sx={{ bgcolor: getPlasticTypeColor('pet') }}
-      />
+      <Chip label="PET" sx={{ bgcolor: getPlasticTypeColor("pet") }} />
       <Chip
         label="Recyclable"
-        sx={{ bgcolor: getRecyclingStatusColor('recyclable') }}
+        sx={{ bgcolor: getRecyclingStatusColor("recyclable") }}
       />
-      <Chip
-        label="Low Impact"
-        sx={{ bgcolor: getImpactLevelColor(1) }}
-      />
+      <Chip label="Low Impact" sx={{ bgcolor: getImpactLevelColor(1) }} />
     </Box>
   );
 };
@@ -125,27 +123,32 @@ const MyComponent = () => {
 The theme includes custom styling for common MUI components:
 
 ### Buttons
+
 - Rounded corners (8px border radius)
 - No text transform (preserves original case)
 - Hover effects with subtle shadows
 - Consistent padding (10px 24px)
 
 ### Cards
+
 - Rounded corners (12px border radius)
 - Subtle shadows with hover effects
 - Consistent spacing
 
 ### Text Fields
+
 - Rounded input borders (8px border radius)
 - Consistent styling
 
 ### Chips
+
 - Rounded corners (16px border radius)
 - Medium font weight
 
 ## Responsive Design
 
 The theme includes standard MUI breakpoints:
+
 - `xs`: 0px and up
 - `sm`: 600px and up
 - `md`: 960px and up
@@ -155,6 +158,7 @@ The theme includes standard MUI breakpoints:
 ## Typography
 
 The theme uses Roboto as the primary font with a comprehensive typography scale:
+
 - `h1` - 2.5rem, bold
 - `h2` - 2rem, semibold
 - `h3` - 1.75rem, semibold
@@ -170,6 +174,7 @@ The theme uses Roboto as the primary font with a comprehensive typography scale:
 ## Spacing
 
 The theme uses an 8px base spacing unit, which means:
+
 - `theme.spacing(1)` = 8px
 - `theme.spacing(2)` = 16px
 - `theme.spacing(3)` = 24px
@@ -184,10 +189,10 @@ See `src/components/ThemeExample.jsx` for a comprehensive example of how to use 
 To add the theme example to your app temporarily for testing:
 
 ```javascript
-import { ThemeExample } from '@app/components';
+import { ThemeExample } from "@app/components";
 
 // Add to your App.jsx or any section
-<ThemeExample />
+<ThemeExample />;
 ```
 
-This will show all the theme colors, typography, and component styles in one place. 
+This will show all the theme colors, typography, and component styles in one place.
