@@ -3,11 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-    "scripts": {
-    "start": "vite",
+  "scripts": {
     "build": "vite build",
+    "format": "prettier --write .",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -29,6 +30,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.2.0",
+    "prettier": "^3.6.2",
     "vite": "^7.0.0"
   }
 }
