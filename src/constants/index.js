@@ -25,8 +25,7 @@ export const COPY_PROPS = {
     },
     privacy: {
         title: 'Simple Privacy',
-        subtitle: 'We get info about how many people have visited our page, but we don\'t collect any other information.',
-        subtitle: 'We\'re just here to connect with neighbors and solve some solvable problems.',
+        subtitle: 'We get info about how many people have visited our page, but we don\'t collect any other information.'
     },
     solution: {
         title: 'A Simple Solution',
