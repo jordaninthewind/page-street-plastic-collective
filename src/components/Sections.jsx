@@ -1,5 +1,6 @@
 import { Divider } from '@mui/material';
 import { Problem, Solution, Model3D, Map, Partners, CoverTheCity, Contact, SupportUs, SocialLinks, Privacy } from '@app/sections';
+import { COPY_PROPS } from '@app/constants';
 
 const DashedDivider = () => (
     <Divider sx={{ border: '3px dashed #000', mb: 2, width: '100vw' }} />
@@ -8,25 +9,25 @@ const DashedDivider = () => (
 const Sections = () => (
     <>
         <DashedDivider />
-        <Problem />
+        <Problem {...COPY_PROPS.problem} />
         <DashedDivider />
-        <Solution />
+        <Solution {...COPY_PROPS.solution} />
         <DashedDivider />
-        <Model3D />
+        <Model3D {...COPY_PROPS.model3D} />
         <DashedDivider />
-        <Map />
+        <Map {...COPY_PROPS.map} />
         <DashedDivider />
-        <Partners />
+        <Partners {...COPY_PROPS.partners} />
         <DashedDivider />
-        <CoverTheCity />
+        <CoverTheCity {...COPY_PROPS.coverTheCity} />
         <DashedDivider />
-        <Contact />
+        <Contact {...COPY_PROPS.contact} />
         <DashedDivider />
-        <SupportUs />
+        <SupportUs {...COPY_PROPS.supportUs} />
         <DashedDivider />
-        <SocialLinks />
+        <SocialLinks {...COPY_PROPS.socialLinks} />
         <DashedDivider />
-        <Privacy />
+        <Privacy {...COPY_PROPS.privacy} />
     </>
 );
 

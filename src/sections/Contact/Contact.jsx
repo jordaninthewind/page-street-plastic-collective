@@ -11,12 +11,9 @@ import { useState } from 'react';
 import { Section } from '@app/containers';
 import { saveMessage } from '@app/services';
 
-import '@app/sections/Contact.css';
+import '@app/sections/Contact/Contact.css';
 
-const title = 'Shoot us a message !';
-const subtitle = 'We would love to hear from you! Please fill out the form below to send us a message.';
-
-const Contact = () => {
+const Contact = (props) => {
   const { capture, identify } = usePostHog();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -65,7 +62,7 @@ const Contact = () => {
   }
 
   return (
-    <Section id="contact" title={title} subtitle={subtitle}>
+    <Section id="contact" {...props}>
       {!hasSentAMessage || resendMessage ? (
         <Container maxWidth="sm" sx={{ pb: 3 }}>
           <Box

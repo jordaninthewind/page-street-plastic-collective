@@ -2,10 +2,7 @@ import { Box, Divider, Grid, List, ListItem, ListItemText, Typography } from '@m
 
 import { Section } from '@app/containers';
 
-import './Problem.css';
-
-const title = 'A Frustrating Problem';
-const subtitle = 'In San Francisco, homeowners are required to cover the drain pipes in front of their homes with grates to prevent litter from entering the pipes. These covers are made of steel and they a frequently stolen. Historically, they were made of brass.';
+import '@app/sections/Problem/Problem.css';
 
 const reasons = [
   'Recyclable materials',
@@ -25,8 +22,8 @@ const Reason = ({ text, idx }) => (
   </ListItem>
 );
 
-const Problem = () => (
-  <Section id="problem">
+const Problem = ({ title, subtitle, ...props }) => (
+  <Section id="problem" {...props}>
     <Grid container spacing={4}>
       <Typography variant="sectionTitle">{title}</Typography>
       <Grid item size={{ xs: 12, md: 6 }}>

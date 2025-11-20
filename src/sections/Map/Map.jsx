@@ -2,13 +2,10 @@ import { Card, Container, Stack, Typography } from '@mui/material';
 
 import { Section } from '@app/containers';
 
-import './Map.css';
+import '@app/sections/Map/Map.css';
 
-const title = 'Interactive Map';
-const subtitle = 'Explore the locations where drain covers have been reported stolen or need replacement. Help us capture and address this city-wide issue.';
-
-const Map = () => (
-    <Section id="map" title={title} subtitle={subtitle}>
+const Map = (props) => (
+    <Section id="map" {...props}>
         <Container>
             <Card width="100%" sx={{ textAlign: 'center', p: 12, gap: 2 }}>
                 <Stack direction="column" spacing={2}>

@@ -82,12 +82,16 @@ const typography = {
     lineHeight: 1.2,
     letterSpacing: '-0.02em',
     textTransform: 'uppercase',
+    wordBreak: 'keep-all',
+    '@media (max-width:600px)': {
+      fontSize: '2.5rem',
+    },
   },
   subtitle: {
     fontSize: '2rem',
     fontWeight: 500,
     lineHeight: 1.4,
-    letterSpacing: '0.02em',
+    letterSpacing: '0.02em'    
   },
   h1: {
     fontSize: '2.5rem',

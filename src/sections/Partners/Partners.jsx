@@ -1,13 +1,10 @@
 import DrainVaderImage from '@app/assets/draINvader.png';
 import { Section } from '@app/containers';
 
-import './Partners.css';
+import '@app/sections/Partners/Partners.css';
 
-const title = 'Partners';
-const subtitle = 'We are a loose collective of neighbors who want to solve local problems creatively and sustainably.';
-
-const Partners = () =>  (
-  <Section id="partners" title={title} subtitle={subtitle}>
+const Partners = (props) => (
+  <Section id="partners" {...props}>
     <div className="partners-container">
       <div className="partners-content">
         <div className="partners-grid">
@@ -15,9 +12,9 @@ const Partners = () =>  (
             <h3>draINvader</h3>
             <p>Inspired by Space Invader, draINvader uses multi-colored filament to create art and cover the city!</p>
             <img src={DrainVaderImage} alt="draINvader" width="100%" />
-            <a 
-              href="https://www.instagram.com/drainvader/" 
-              target="_blank" 
+            <a
+              href="https://www.instagram.com/drainvader/"
+              target="_blank"
               rel="noopener noreferrer"
               className="instagram-link"
             >

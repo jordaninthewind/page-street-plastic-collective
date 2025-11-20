@@ -2,7 +2,7 @@ import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 
 import { Copywrite, Header, Sections } from '@app/components';
-import { Layout } from '@app/containers';
+import { Layout, Modal } from '@app/containers';
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
@@ -15,6 +15,7 @@ const App = () => (
       <Header />
       <Sections />
       <Copywrite />
+      <Modal />
     </Layout>
   </PostHogProvider>
 );

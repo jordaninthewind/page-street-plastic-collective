@@ -11,12 +11,9 @@ import { usePostHog } from 'posthog-js/react';
 
 import { Section } from '@app/containers';
 
-import '@app/sections/SupportUs.css';
+import '@app/sections/SupportUs/SupportUs.css';
 
-const title = 'Support Our Mission';
-const subtitle = 'Help us make a difference in our community by supporting our plastic collection initiative.';
-
-const SupportUs = () => {
+const SupportUs = (props) => {
   const { capture } = usePostHog();
 
   const handleShareClick = () => {
@@ -35,7 +32,7 @@ const SupportUs = () => {
   };
 
   return (
-    <Section id="support" title={title} subtitle={subtitle}>
+    <Section id="support" {...props}>
       <Stack direction="column" spacing={3} width="100%" justifyContent="center" alignItems="center">
         <Grid item xs={12} md={6} width="100%">
           <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2 }}>
