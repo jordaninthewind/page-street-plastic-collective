@@ -1,11 +1,12 @@
 import { Card, Container, Stack, Typography } from '@mui/material';
 
+import { COPY_PROPS } from '@app/constants';
 import { Section } from '@app/containers';
 
 import '@app/sections/Map/Map.css';
 
-const Map = (props) => (
-    <Section id="map" {...props}>
+const Map = () => (
+    <Section id="map" {...COPY_PROPS.map}>
         <Container>
             <Card width="100%" sx={{ textAlign: 'center', p: 12, gap: 2 }}>
                 <Stack direction="column" spacing={2}>

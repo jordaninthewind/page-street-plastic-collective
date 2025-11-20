@@ -4,7 +4,7 @@ export const COPY_PROPS = {
         subtitle: 'Explore the locations where drain covers have been reported stolen or need replacement. Help us capture and address this city-wide issue.',
     },
     contact: {
-        title: 'Shoot us a message !',
+        title: 'Send us a message!',
         subtitle: 'We would love to hear from you! Please fill out the form below to send us a message.',
     },
     coverTheCity: {
@@ -18,6 +18,10 @@ export const COPY_PROPS = {
     partners: {
         title: 'Partners',
         subtitle: 'We are a loose collective of neighbors who want to solve local problems creatively and sustainably.',
+    },
+    problem: {
+        title: 'A Frustrating Problem',
+        subtitle: 'In San Francisco, homeowners are required to cover the drain pipes in front of their homes with grates to prevent litter from entering the pipes. These covers are made of steel and they a frequently stolen. Historically, they were made of brass.',
     },
     privacy: {
         title: 'Simple Privacy',

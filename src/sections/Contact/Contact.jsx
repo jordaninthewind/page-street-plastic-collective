@@ -8,12 +8,13 @@ import {
 import { usePostHog } from 'posthog-js/react';
 import { useState } from 'react';
 
+import { COPY_PROPS } from '@app/constants';
 import { Section } from '@app/containers';
 import { saveMessage } from '@app/services';
 
 import '@app/sections/Contact/Contact.css';
 
-const Contact = (props) => {
+const Contact = () => {
   const { capture, identify } = usePostHog();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -62,7 +63,7 @@ const Contact = (props) => {
   }
 
   return (
-    <Section id="contact" {...props}>
+    <Section id="contact" {...COPY_PROPS.contact}>
       {!hasSentAMessage || resendMessage ? (
         <Container maxWidth="sm" sx={{ pb: 3 }}>
           <Box

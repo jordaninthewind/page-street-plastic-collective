@@ -13,7 +13,7 @@ const Section = ({ children, title, subtitle }) => (
       py: 4,
     }}
   >
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', mb: 4 }}>
       <Typography variant="sectionTitle">{title}</Typography>
       {subtitle && <Typography variant="h2">{subtitle}</Typography>}
     </Box>

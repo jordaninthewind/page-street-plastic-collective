@@ -1,10 +1,11 @@
 import DrainVaderImage from '@app/assets/draINvader.png';
+import { COPY_PROPS } from '@app/constants';
 import { Section } from '@app/containers';
 
 import '@app/sections/Partners/Partners.css';
 
-const Partners = (props) => (
-  <Section id="partners" {...props}>
+const Partners = () => (
+  <Section id="partners" {...COPY_PROPS.partners}>
     <div className="partners-container">
       <div className="partners-content">
         <div className="partners-grid">

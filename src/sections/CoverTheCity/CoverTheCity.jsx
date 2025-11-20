@@ -1,11 +1,12 @@
 import { Divider } from '@mui/material';
 
+import { COPY_PROPS } from '@app/constants';
 import { Section } from '@app/containers';
 
 import '@app/sections/CoverTheCity/CoverTheCity.css';
 
-const CoverTheCity = (props) => (
-  <Section id="cover-the-city" {...props}>
+const CoverTheCity = () => (
+  <Section id="cover-the-city" {...COPY_PROPS.coverTheCity}>
     <div className="cover-city-container">
       <div className="cover-city-content">
         <div className="city-phases">

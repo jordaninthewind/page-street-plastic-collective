@@ -9,11 +9,12 @@ import {
 } from '@mui/material';
 import { usePostHog } from 'posthog-js/react';
 
+import { COPY_PROPS } from '@app/constants';
 import { Section } from '@app/containers';
 
 import '@app/sections/SupportUs/SupportUs.css';
 
-const SupportUs = (props) => {
+const SupportUs = () => {
   const { capture } = usePostHog();
 
   const handleShareClick = () => {
@@ -32,7 +33,7 @@ const SupportUs = (props) => {
   };
 
   return (
-    <Section id="support" {...props}>
+    <Section id="support" {...COPY_PROPS.supportUs}>
       <Stack direction="column" spacing={3} width="100%" justifyContent="center" alignItems="center">
         <Grid item xs={12} md={6} width="100%">
           <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2 }}>

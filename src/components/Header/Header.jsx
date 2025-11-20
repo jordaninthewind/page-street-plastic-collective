@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 
-import '@app/components/Header.css';
+import '@app/components/Header/Header.css';
 
 const Header = () => {
   const letters = 'Page Street Plastic Collective'.split('').map((letter, index) => (
