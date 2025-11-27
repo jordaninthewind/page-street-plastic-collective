@@ -8,8 +8,7 @@ import { Section } from "@app/containers";
 
 import "@app/sections/Model3D/Model3D.css";
 
-const modelUrl =
-  "https://cwzlegpvruihgjyzqemv.supabase.co/storage/v1/object/sign/models/Pipe%20Cover%20v4.stl?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kYTg4MzExZi0wOTVjLTQ1OWEtYmZhYS05YTdlNWI4YjY2NTMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtb2RlbHMvUGlwZSBDb3ZlciB2NC5zdGwiLCJpYXQiOjE3NjAzMDQ0NTYsImV4cCI6MTc2Mjg5NjQ1Nn0.4ncYPjv3LCwSsTv8YA_E5rvDjNZxwFCDNWdkU6m8JoY";
+const modelUrl = import.meta.env.VITE_3D_MODEL_URL;
 
 const Model3D = () => {
   const { capture } = usePostHog();
