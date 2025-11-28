@@ -1,7 +1,7 @@
 .contact-section {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   padding: 3rem 2rem;
   margin-bottom: 3rem;
   text-align: center;
@@ -52,4 +52,4 @@
     padding: 2rem 1rem;
     margin-bottom: 2rem;
   }
-} 
+}

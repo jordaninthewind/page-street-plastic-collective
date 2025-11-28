@@ -30,7 +30,9 @@
   border-radius: 12px;
   text-align: center;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .phase-item-active {
@@ -99,22 +101,22 @@
   .cover-city-container {
     padding: 1rem;
   }
-  
+
   .city-phases {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .phase-item {
     padding: 1.5rem;
   }
-  
+
   .impact-stats {
     padding: 2rem 1rem;
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .stat-item h4 {
     font-size: 2rem;
   }

@@ -1,11 +1,11 @@
-import { CssBaseline, Stack, ThemeProvider } from '@mui/material';
-import { Analytics } from '@vercel/analytics/react';
-import { usePostHog } from 'posthog-js/react';
-import { useEffect } from 'react';
+import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
+import { Analytics } from "@vercel/analytics/react";
+import { usePostHog } from "posthog-js/react";
+import { useEffect } from "react";
 
-import theme from '@app/theme';
+import theme from "@app/theme";
 
-import '@app/containers/Layout.css';
+import "@app/containers/Layout.css";
 
 const Layout = ({ children }) => {
   const posthog = usePostHog();
@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     posthog?.identify(window.navigator.userAgent);
 
-    posthog?.capture('page_view', {
+    posthog?.capture("page_view", {
       url: window.location.href,
     });
   }, [posthog]);

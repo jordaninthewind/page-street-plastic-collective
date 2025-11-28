@@ -100,17 +100,17 @@
   .model-3d-container {
     padding: 1rem;
   }
-  
+
   .model-actions {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .download-btn {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
   }
-  
+
   .model-viewer {
     padding: 0.5rem;
   }
