@@ -1,6 +1,6 @@
 import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
 import { Analytics } from "@vercel/analytics/react";
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 import { useEffect } from "react";
 
 import theme from "@app/theme";

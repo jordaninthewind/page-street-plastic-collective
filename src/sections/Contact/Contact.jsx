@@ -1,5 +1,5 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 import { useState } from "react";
 
 import { COPY_PROPS } from "@app/constants";
@@ -9,7 +9,8 @@ import { saveMessage } from "@app/services";
 import "@app/sections/Contact/Contact.css";
 
 const Contact = () => {
-  const { capture, identify } = usePostHog();
+  const posthog = usePostHog();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -44,8 +45,8 @@ const Contact = () => {
   const handleSubmit = async ({ preventDefault }) => {
     preventDefault();
 
-    capture("contact_message_sent", { name, email, message });
-    identify(email);
+    posthog.capture("contact_message_sent", { name, email, message });
+    posthog.identify(email);
 
     setIsLoading(true);
 

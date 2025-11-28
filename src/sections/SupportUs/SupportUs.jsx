@@ -7,7 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 
 import { COPY_PROPS } from "@app/constants";
 import { Section } from "@app/containers";
@@ -15,21 +15,18 @@ import { Section } from "@app/containers";
 import "@app/sections/SupportUs/SupportUs.css";
 
 const SupportUs = () => {
-  const { capture } = usePostHog();
+  const posthog = usePostHog();
 
   const handleShareClick = () => {
-    capture("support_share_clicked");
-
-    if (navigator.share) {
-      navigator.share({
+    navigator
+      .share({
         title: "Page Street Plastic Collective",
         text: "Join us in cleaning up our community!",
         url: window.location.href,
+      })
+      .then(() => {
+        posthog.capture("support_share_clicked");
       });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert("Link copied to clipboard!");
-    }
   };
 
   return (

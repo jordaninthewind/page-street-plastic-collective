@@ -1,5 +1,5 @@
 import posthog from "posthog-js";
-import { PostHogProvider } from "posthog-js/react";
+import { PostHogProvider } from "@posthog/react";
 
 import { Copywrite, Header, Sections } from "@app/components";
 import { Layout, Modal } from "@app/containers";
