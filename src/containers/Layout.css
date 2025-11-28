@@ -5,7 +5,7 @@
 }
 
 .layout {
-  align-items: center;
+  /* align-items: center; */
   display: flex;
   flex-direction: column;
   border-left: 10px solid rgba(0, 0, 0, 1);

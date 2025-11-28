@@ -11,31 +11,27 @@ import {
   Solution,
   SupportUs,
 } from "@app/sections";
+import { Fragment } from "react";
 
-const Sections = () => (
-  <>
-    <DashedDivider />
-    <Problem />
-    <DashedDivider />
-    <Solution />
-    <DashedDivider />
-    <Model3D />
-    <DashedDivider />
-    <Map />
-    <DashedDivider />
-    <Partners />
-    <DashedDivider />
-    <CoverTheCity />
-    <DashedDivider />
-    <SupportUs />
-    <DashedDivider />
-    <SocialLinks />
-    <DashedDivider />
-    <Contact />
-    <DashedDivider />
-    <Privacy />
-    <DashedDivider />
-  </>
-);
+const sections = [
+  Problem,
+  Solution,
+  Model3D,
+  Map,
+  Partners,
+  CoverTheCity,
+  SupportUs,
+  SocialLinks,
+  Contact,
+  Privacy,
+];
+
+const Sections = () =>
+  sections.map((Section, idx) => (
+    <Fragment key={idx}>
+      <DashedDivider />
+      <Section />
+    </Fragment>
+  ));
 
 export default Sections;

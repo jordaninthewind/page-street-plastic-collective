@@ -1,29 +1,7 @@
-.model-3d-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.model-3d-content {
-  text-align: center;
-}
-
-.model-3d-content > p {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 2rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .model-viewer {
   background: #f8f9fa;
   border-radius: 12px;
-  padding: 1rem;
-  margin: 2rem 0;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border: 2px solid #e9ecef;
 }
 
 .model-actions {
@@ -85,9 +63,9 @@
 }
 
 .model-info li:before {
-  content: "✓";
+  content: "✅";
   position: absolute;
-  left: 0;
+  left: -0.5rem;
   color: #28a745;
   font-weight: bold;
 }
