@@ -5,17 +5,9 @@
 }
 
 .layout {
-  /* align-items: center; */
-  display: flex;
-  flex-direction: column;
   border-left: 10px solid rgba(0, 0, 0, 1);
-  height: 100%;
-  justify-content: flex-start;
   margin: 0 auto;
-  max-width: 1080px;
-  padding: 16px 48px;
-  text-align: justify;
-  width: 100%;
+  max-width: 1580px;
 
   @media (max-width: 768px) {
     padding: 16px 24px;
