@@ -15,7 +15,11 @@ const Partners = () => (
               Inspired by Space Invader, draINvader uses multi-colored filament
               to create art and cover the city!
             </p>
-            <img src={DrainVaderImage} alt="draINvader" style={{ width: "100%", height: "auto", maxWidth: "800px" }} />
+            <img
+              src={DrainVaderImage}
+              alt="draINvader"
+              style={{ width: "100%", height: "auto", maxWidth: "800px" }}
+            />
             <a
               href="https://www.instagram.com/drainvader/"
               target="_blank"
