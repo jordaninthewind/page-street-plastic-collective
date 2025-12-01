@@ -1,6 +1,7 @@
+import { Fragment } from "react";
+
 import { DashedDivider } from "@app/components";
 import {
-  Contact,
   CoverTheCity,
   Map,
   Model3D,
@@ -11,7 +12,6 @@ import {
   Solution,
   SupportUs,
 } from "@app/sections";
-import { Fragment } from "react";
 
 const sections = [
   Problem,
@@ -22,16 +22,16 @@ const sections = [
   CoverTheCity,
   SupportUs,
   SocialLinks,
-  Contact,
   Privacy,
 ];
 
-const Sections = () =>
-  sections.map((Section, idx) => (
-    <Fragment key={idx}>
-      <DashedDivider />
-      <Section />
-    </Fragment>
-  ));
+const ComposedSection = (Section, idx) => (
+  <Fragment key={idx}>
+    <DashedDivider />
+    <Section />
+  </Fragment>
+);
+
+const Sections = () => sections.map(ComposedSection);
 
 export default Sections;
