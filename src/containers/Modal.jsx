@@ -1,30 +1,20 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { Dialog, IconButton, styled } from "@mui/material";
+import { Dialog, IconButton } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router";
 
-import { InteractiveMap } from "@app/components";
-import { Model3D, SupportUs } from "@app/sections";
-
-const StyledDialog = styled(Dialog)({
-  maxWidth: "90vw",
-  maxHeight: "90vh",
-  margin: "auto",
-  borderRadius: "20px",
-  border: "12px solid #FFF",
-});
+import { InteractiveMap, ModelViewer } from "@app/components";
+import { SupportUs } from "@app/sections";
 
 const Modal = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const handleClose = () => {
-    navigate("/");
-  };
-
   const overlay = searchParams.get("overlay");
 
+  const handleClose = () => navigate("/");
+
   return (
-    <StyledDialog
+    <Dialog
       open={!!overlay}
       onClose={handleClose}
       scroll="body"
@@ -52,9 +42,9 @@ const Modal = () => {
         <CloseIcon />
       </IconButton>
       {overlay === "map" && <InteractiveMap />}
-      {overlay === "model-3d" && <Model3D />}
+      {overlay === "model" && <ModelViewer />}
       {overlay === "support-us" && <SupportUs />}
-    </StyledDialog>
+    </Dialog>
   );
 };
 

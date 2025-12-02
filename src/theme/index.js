@@ -237,6 +237,11 @@ const components = {
       },
     },
   },
+  MuiListItem: {
+    defaultProps: {
+      disableGutters: true,
+    },
+  },
   MuiTextField: {
     styleOverrides: {
       root: {

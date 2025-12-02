@@ -3,4 +3,6 @@ export { default as DashedDivider } from "@app/components/DashedDivider/DashedDi
 export { default as Header } from "@app/components/Header/Header";
 export { default as HoverActionCard } from "@app/components/HoverActionCard/HoverActionCard";
 export { default as InteractiveMap } from "@app/components/InteractiveMap/InteractiveMap";
+export { default as ModelViewer } from "@app/components/ModelViewer/ModelViewer";
 export { default as Sections } from "@app/components/Sections/Sections";
+

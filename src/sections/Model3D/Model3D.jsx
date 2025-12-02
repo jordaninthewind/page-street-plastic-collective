@@ -1,49 +1,34 @@
-import { Box, Button, Typography } from "@mui/material";
-import { usePostHog } from "@posthog/react";
-import { useState } from "react";
-import { StlViewer } from "react-stl-viewer";
+import DownloadIcon from "@mui/icons-material/Download";
+import {
+  Box,
+  Button,
+  List,
+  ListItem,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useNavigate } from "react-router";
 
+import { GradientButton } from "@app/components";
 import { COPY_PROPS } from "@app/constants";
 import { Section } from "@app/containers";
 
 import "@app/sections/Model3D/Model3D.css";
 
-const modelUrl = import.meta.env.VITE_3D_MODEL_URL;
-
 const Model3D = () => {
-  const posthog = usePostHog();
+  const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false);
-
-  const onViewClick = () => {
-    setLoading(true);
-    posthog.capture("model_viewed");
-  };
+  const onViewClick = () => navigate("/?overlay=model");
 
   return (
     <Section id="model-3d" {...COPY_PROPS.model3D}>
-      {loading ? (
-        <Box className="model-viewer">
-          <StlViewer
-            style={{
-              width: "100%",
-              height: "500px",
-              backgroundColor: "darkgray",
-              borderRadius: "10px",
-            }}
-            orbitControls
-            shadows
-            url={modelUrl}
-            modelProps={{
-              color: "black",
-              metalness: 0.3,
-              roughness: 0.4,
-              scale: 3,
-            }}
-          />
-        </Box>
-      ) : (
-        <Box className="model-viewer" sx={{ width: "100%", height: "500px" }}>
+      <Stack
+        direction="row"
+        spacing={2}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Stack direction="column" spacing={2}>
           <Button
             onClick={onViewClick}
             variant="contained"
@@ -52,22 +37,36 @@ const Model3D = () => {
           >
             View V4 Model
           </Button>
-        </Box>
-      )}
-      <Box className="model-actions">
-        <a href={modelUrl} download className="download-btn">
-          📥 Download STL File
-        </a>
-        <Box className="model-info">
+          <GradientButton
+            href={import.meta.env.VITE_3D_MODEL_URL}
+            download
+            variant="contained"
+            color="primary"
+            startIcon={<DownloadIcon />}
+            className="download-btn"
+          >
+            Download STL File
+          </GradientButton>
+        </Stack>
+        <Box
+          sx={{
+            background: "#f8f9fa",
+            border: "2px solid #2c3e50",
+            borderRadius: "8px",
+            px: 2,
+            pt: 1,
+            maxWidth: "fit-content",
+          }}
+        >
           <Typography variant="h4">Model Specifications</Typography>
-          <ul>
-            <li>Format: STL (Stereolithography)</li>
-            <li>Compatible with all 3D printers</li>
-            <li>Optimized for FDM printing</li>
-            <li>Material: PLA or ABS recommended, or stronger materials</li>
-          </ul>
+          <List>
+            <ListItem>Format: STL (Stereolithography)</ListItem>
+            <ListItem>Compatible with all 3D printers</ListItem>
+            <ListItem>Optimized for FDM printing</ListItem>
+            <ListItem>Material: PLA, ABS, or stronger</ListItem>
+          </List>
         </Box>
-      </Box>
+      </Stack>
     </Section>
   );
 };
