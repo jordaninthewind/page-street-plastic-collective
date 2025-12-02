@@ -1,5 +1,5 @@
-import { Card, Box, styled, Typography } from "@mui/material";
 import { OpenInBrowser } from "@mui/icons-material";
+import { Box, Card, styled, Typography } from "@mui/material";
 
 const StyledCard = styled(Card)({
   alignItems: "center",
@@ -25,22 +25,27 @@ const StyledBox = styled(Box)({
   zIndex: 1000,
   "&:hover": {
     backgroundColor: "rgba(0, 0, 0, 0.35)",
-    transition: "background-color 0.2s ease-in-out",
+    transition: "background-color 0.1s ease-in-out",
   },
 });
 
-const HoverActionCard = ({ onClick, children }) => (
+const HoverActionCard = ({
+  title = "Open map",
+  Icon = OpenInBrowser,
+  onClick,
+  children,
+}) => (
   <StyledCard onClick={onClick}>
     <StyledBox>
-      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <Box style={{ width: "100%", display: "flex", justifyContent: "center" }}>
         <Typography
-          sx={{ display: "flex", alignItems: "center", gap: 1 }}
           variant="h4"
           color="white"
+          sx={{ display: "flex", alignItems: "center", gap: 1 }}
         >
-          Open map <OpenInBrowser sx={{ fontSize: "2rem" }} />
+          {title} {Icon && <Icon sx={{ fontSize: "2rem" }} />}
         </Typography>
-      </div>
+      </Box>
     </StyledBox>
     {children}
   </StyledCard>

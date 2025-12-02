@@ -44,8 +44,8 @@ page-street-plastic-collective/
 │ │ ├── Map.css # Map styling
 │ │ ├── Model3D.jsx # 3D model viewer
 │ │ ├── Model3D.css # 3D model styling
-│ │ ├── Partners.jsx # Partners section
-│ │ ├── Partners.css # Partners styling
+│ │ ├── Contributors.jsx # Contributors section
+│ │ ├── Contributors.css # Contributors styling
 │ │ ├── Privacy.jsx # Privacy policy
 │ │ ├── Privacy.css # Privacy styling
 │ │ ├── Problem.jsx # Problem description
@@ -126,7 +126,7 @@ The app follows a linear section-based layout:
 2. **Solution** - Presents the community solution
 3. **Model3D** - Interactive 3D model viewer
 4. **Map** - Geographic visualization
-5. **Partners** - Community partners
+5. **Contributors** - Community contributors
 6. **CoverTheCity** - City-wide coverage initiative
 7. **Contact** - Contact information
 8. **SupportUs** - Support and donation section

@@ -1,14 +1,11 @@
-import { Fragment } from "react";
-
 import { DashedDivider } from "@app/components";
 import {
   CoverTheCity,
   Map,
   Model3D,
-  Partners,
+  Contributors,
   Privacy,
   Problem,
-  SocialLinks,
   Solution,
   SupportUs,
 } from "@app/sections";
@@ -18,18 +15,17 @@ const sections = [
   Solution,
   Model3D,
   Map,
-  Partners,
+  Contributors,
   CoverTheCity,
   SupportUs,
-  SocialLinks,
   Privacy,
 ];
 
 const ComposedSection = (Section, idx) => (
-  <Fragment key={idx}>
+  <div id={Section.id} key={idx}>
     <DashedDivider />
     <Section />
-  </Fragment>
+  </div>
 );
 
 const Sections = () => sections.map(ComposedSection);

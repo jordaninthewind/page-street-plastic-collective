@@ -1,12 +1,5 @@
 import DownloadIcon from "@mui/icons-material/Download";
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, List, ListItem, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 
 import { GradientButton } from "@app/components";
