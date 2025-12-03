@@ -6,7 +6,7 @@ import { Section } from "@app/containers";
 import "@app/sections/Solution/Solution.css";
 
 const Solution = () => (
-  <Section {...COPY_PROPS.solution}>
+  <Section id={COPY_PROPS.solution.id}>
     <Grid container spacing={4}>
       <Grid item size={{ xs: 12, md: 5 }}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>

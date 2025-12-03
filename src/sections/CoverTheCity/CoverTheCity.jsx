@@ -28,24 +28,24 @@ const PhaseItem = ({ done, number, title, description }) => (
       border: done ? "2px solid lime" : "none",
       borderRadius: 2,
       display: "flex",
-      flexDirection: "column",
       flex: 1,
+      flexDirection: "column",
       height: "100%",
       gap: 1,
-      justifyContent: "center",
+      justifyContent: "space-between",
       p: 2,
       width: "100%",
     }}
   >
     <Box
       sx={{
+        alignItems: "center",
         backgroundColor: done ? "lime" : "black",
-        height: "75px",
-        width: "75px",
         borderRadius: "50%",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        height: "85px",
+        width: "85px",
       }}
     >
       <Typography variant="h1" color={"white"}>

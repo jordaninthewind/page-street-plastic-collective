@@ -30,7 +30,7 @@ const Reason = ({ text, idx }) => (
 );
 
 const Problem = () => (
-  <Section {...COPY_PROPS.problem}>
+  <Section id={COPY_PROPS.problem.id}>
     <Grid container spacing={4}>
       <Typography variant="sectionTitle">{COPY_PROPS.problem.title}</Typography>
       <Grid item size={{ xs: 12, md: 6 }}>

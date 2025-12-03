@@ -52,9 +52,9 @@ export const COPY_PROPS = {
   },
   supportUs: {
     id: "support-us",
-    title: "Support Our Mission",
+    title: "Support Us",
     subtitle:
-      "Help us make a difference in our community by supporting our plastic collection initiative.",
+      "Help us make a difference in our community! The only cost is our plastic filament and the time it takes to print the covers.",
   },
 };
 
@@ -82,7 +82,7 @@ export const IMPLEMENTATION_PHASES = [
       "Starting with our local neighborhood from Market to Stanyan Street.",
   },
   {
-    title: "Lower Haight & Haight Ashbury",
+    title: "Lower Haight / Haight Ashbury",
     description:
       "Expanding to neighboring districts with similar drainage challenges.",
   },
@@ -92,7 +92,7 @@ export const IMPLEMENTATION_PHASES = [
       "Scaling our solution across all of San Francisco's storm drain network.",
   },
   {
-    title: "WORLDWIDE COVERAGE",
+    title: "WORLDWIDE",
     description:
       "Scaling our solution across the world. (Okay, maybe not the whole world, but we're trying to make a big impact!)",
   },
