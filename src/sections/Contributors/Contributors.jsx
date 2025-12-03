@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 
 import { ContributorCard } from "@app/components";
 import { CONTRIBUTORS, COPY_PROPS } from "@app/constants";
@@ -8,16 +8,13 @@ import "@app/sections/Contributors/Contributors.css";
 
 const Contributors = () => (
   <Section id="contributors" {...COPY_PROPS.contributors}>
-    <Stack
-      direction="row"
-      spacing={2}
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Grid container spacing={2} justifyContent="center" alignItems="center">
       {CONTRIBUTORS.map((contributor, index) => (
-        <ContributorCard key={index} {...contributor} />
+        <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+          <ContributorCard {...contributor} />
+        </Grid>
       ))}
-    </Stack>
+    </Grid>
   </Section>
 );
 
