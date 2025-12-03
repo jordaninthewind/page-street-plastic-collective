@@ -19,6 +19,7 @@ const ModelViewer = () => {
   return (
     <StlViewer
       url={import.meta.env.VITE_3D_MODEL_URL}
+      style={{ width: "100%", height: "100%" }}
       modelProps={modelProps}
       orbitControls
       shadows
