@@ -14,7 +14,7 @@ const ModelViewer = () => {
 
   useEffect(() => {
     posthog.capture("model_viewed");
-  }, []);
+  }, [posthog]);
 
   return (
     <StlViewer
