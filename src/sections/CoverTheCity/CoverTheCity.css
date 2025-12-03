@@ -1,22 +1,3 @@
-.cover-city-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.cover-city-content {
-  text-align: center;
-}
-
-.cover-city-content > p {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 3rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .city-phases {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -95,29 +76,4 @@
   font-size: 1.1rem;
   opacity: 0.9;
   margin: 0;
-}
-
-@media (max-width: 768px) {
-  .cover-city-container {
-    padding: 1rem;
-  }
-
-  .city-phases {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .phase-item {
-    padding: 1.5rem;
-  }
-
-  .impact-stats {
-    padding: 2rem 1rem;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .stat-item h4 {
-    font-size: 2rem;
-  }
 }

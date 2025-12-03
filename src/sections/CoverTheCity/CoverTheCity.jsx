@@ -1,70 +1,90 @@
-import { Divider } from "@mui/material";
+import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 
-import { COPY_PROPS } from "@app/constants";
+import { COPY_PROPS, COVER_STATS, IMPLEMENTATION_PHASES } from "@app/constants";
 import { Section } from "@app/containers";
 
-import "@app/sections/CoverTheCity/CoverTheCity.css";
+const StatItem = ({ title, value }) => (
+  <Box
+    component="div"
+    sx={{
+      p: 2,
+      width: "280px",
+      textAlign: "center",
+    }}
+  >
+    <Typography variant="h1" color="white">
+      {title}
+    </Typography>
+    <Typography variant="body1" color="white">
+      {value}
+    </Typography>
+  </Box>
+);
+
+const PhaseItem = ({ done, number, title, description }) => (
+  <Card
+    sx={{
+      alignItems: "center",
+      border: done ? "2px solid lime" : "none",
+      borderRadius: 2,
+      display: "flex",
+      flexDirection: "column",
+      flex: 1,
+      height: "100%",
+      gap: 1,
+      justifyContent: "center",
+      p: 2,
+      width: "100%",
+    }}
+  >
+    <Box
+      sx={{
+        backgroundColor: done ? "lime" : "black",
+        height: "75px",
+        width: "75px",
+        borderRadius: "50%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Typography variant="h1" color={"white"}>
+        {done ? "✓" : number}
+      </Typography>
+    </Box>
+    <Typography variant="h3" color="black">
+      {title}
+    </Typography>
+    <Typography variant="body1" color="black">
+      {description}
+    </Typography>
+  </Card>
+);
 
 const CoverTheCity = () => (
-  <Section id="cover-the-city" {...COPY_PROPS.coverTheCity}>
-    <div className="cover-city-container">
-      <div className="cover-city-content">
-        <div className="city-phases">
-          <div className="phase-item phase-item-active">
-            <div className="phase-number">1</div>
-            <h3>Page Street</h3>
-            <p>
-              Starting with our local neighborhood from Market to Stanyan
-              Street.
-            </p>
-            <Divider sx={{ margin: "10px 0" }} />
-            <p style={{ color: "#ff00cc", fontStyle: "italic" }}>
-              We have nearly covered 100% of the drain covers in Page Street.
-            </p>
-          </div>
-          <div className="phase-item">
-            <div className="phase-number">2</div>
-            <h3>Lower Haight & Haight Ashbury</h3>
-            <p>
-              Expanding to neighboring districts with similar drainage
-              challenges.
-            </p>
-          </div>
-          <div className="phase-item">
-            <div className="phase-number">3</div>
-            <h3>Citywide Coverage</h3>
-            <p>
-              Scaling our solution across all of San Francisco's storm drain
-              network.
-            </p>
-          </div>
-          <div className="phase-item">
-            <div className="phase-number">4</div>
-            <h3>WORLDWIDE</h3>
-            <p>Scaling our solution across the world.</p>
-            <p>(Okay, maybe not the whole world, but we can dream!)</p>
-          </div>
-        </div>
-        <div className="impact-stats">
-          <div className="stat-item">
-            <h4>10,000+</h4>
-            <p>Building drain covers in San Francisco</p>
-          </div>
-          <div className="stat-item">
-            <h4>100%</h4>
-            <p>Coverage goal for all drain covers in San Francisco</p>
-          </div>
-          <div className="stat-item">
-            <h4>Community</h4>
-            <p>Driven by local residents and organizations</p>
-          </div>
-          <div className="stat-item">
-            <h4>Worldwide</h4>
-            <p>Scaling our solution across the world.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <Section {...COPY_PROPS.coverTheCity}>
+    <Stack direction="column" spacing={4}>
+      <Grid container spacing={2}>
+        {IMPLEMENTATION_PHASES.map((phase, index) => (
+          <Grid item size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+            <PhaseItem key={index} number={index + 1} {...phase} />
+          </Grid>
+        ))}
+      </Grid>
+      <Grid
+        container
+        sx={{
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          p: 2,
+          borderRadius: 2,
+        }}
+        justifyContent="center"
+      >
+        {COVER_STATS.map((stat, index) => (
+          <StatItem key={index} {...stat} />
+        ))}
+      </Grid>
+    </Stack>
   </Section>
 );
 

@@ -14,7 +14,7 @@ const Model3D = () => {
   const onViewClick = () => navigate("/?overlay=model");
 
   return (
-    <Section id="model-3d" {...COPY_PROPS.model3D}>
+    <Section {...COPY_PROPS.model3D}>
       <Stack
         direction="row"
         spacing={2}

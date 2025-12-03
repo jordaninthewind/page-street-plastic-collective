@@ -30,7 +30,7 @@ const SupportUs = () => {
   };
 
   return (
-    <Section id="support" {...COPY_PROPS.supportUs}>
+    <Section {...COPY_PROPS.supportUs}>
       <Stack
         direction="column"
         spacing={3}

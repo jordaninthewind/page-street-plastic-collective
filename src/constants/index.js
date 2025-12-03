@@ -73,3 +73,46 @@ export const CONTRIBUTORS = [
     link: "https://www.instagram.com/drainvader/",
   },
 ];
+
+export const IMPLEMENTATION_PHASES = [
+  {
+    done: true,
+    title: "Page Street",
+    description:
+      "Starting with our local neighborhood from Market to Stanyan Street.",
+  },
+  {
+    title: "Lower Haight & Haight Ashbury",
+    description:
+      "Expanding to neighboring districts with similar drainage challenges.",
+  },
+  {
+    title: "Citywide Coverage",
+    description:
+      "Scaling our solution across all of San Francisco's storm drain network.",
+  },
+  {
+    title: "WORLDWIDE COVERAGE",
+    description:
+      "Scaling our solution across the world. (Okay, maybe not the whole world, but we're trying to make a big impact!)",
+  },
+];
+
+export const COVER_STATS = [
+  {
+    title: "10,000+",
+    value: "Building drain covers in San Francisco",
+  },
+  {
+    title: "100%",
+    value: "Coverage goal for all drain covers in San Francisco",
+  },
+  {
+    title: "Community",
+    value: "Driven by local residents and organizations",
+  },
+  {
+    title: "Worldwide",
+    value: "Scaling our solution across the world.",
+  },
+];

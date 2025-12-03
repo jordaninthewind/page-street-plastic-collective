@@ -17,7 +17,7 @@ const Map = () => {
   };
 
   return (
-    <Section id="map" {...COPY_PROPS.map}>
+    <Section {...COPY_PROPS.map}>
       <Container disableGutters>
         <HoverActionCard onClick={handleClick}>
           <img

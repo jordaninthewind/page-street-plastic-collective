@@ -7,7 +7,7 @@ import { Section } from "@app/containers";
 import "@app/sections/Contributors/Contributors.css";
 
 const Contributors = () => (
-  <Section id="contributors" {...COPY_PROPS.contributors}>
+  <Section {...COPY_PROPS.contributors}>
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       {CONTRIBUTORS.map((contributor, index) => (
         <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
