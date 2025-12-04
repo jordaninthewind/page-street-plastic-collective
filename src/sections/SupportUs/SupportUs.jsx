@@ -38,7 +38,7 @@ const SupportUs = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid xs={12} md={6} width="100%">
+        <Grid size={{ xs: 12, md: 6 }} width="100%">
           <Card
             sx={{
               display: "flex",
@@ -69,7 +69,7 @@ const SupportUs = () => {
             </p>
           </Card>
         </Grid>
-        <Grid xs={12} width="100%">
+        <Grid size={{ xs: 12 }} width="100%">
           <Card width="100%">
             <CardContent>
               <Typography
