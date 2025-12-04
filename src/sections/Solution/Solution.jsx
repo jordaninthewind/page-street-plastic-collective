@@ -11,7 +11,7 @@ const Solution = () => (
       <Grid size={{ xs: 12, md: 5 }}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
           <img
-            src="cover-logo.png"
+            src="cover-logo.svg"
             style={{ maxWidth: "100%", width: "auto", height: "auto" }}
             alt="Cover logo"
           />
