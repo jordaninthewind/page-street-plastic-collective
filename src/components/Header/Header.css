@@ -1,18 +1,22 @@
 .header {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  margin: 0 0 1rem 0;
   display: flex;
   flex-wrap: wrap;
   font-size: 4.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
   text-wrap: nowrap;
 }
 
+.header-container {
+  position: relative;
+}
+
 .header-letter {
-  display: inline-block;
   animation: letterAnimation 0.05s linear forwards;
+  display: inline-block;
   opacity: 0;
   transform: translateX(20px);
 }

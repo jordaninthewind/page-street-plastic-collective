@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { usePostHog } from "@posthog/react";
 
-import { COPY_PROPS } from "@app/constants";
+import { SUPPORT_US_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
 
 import "@app/sections/SupportUs/SupportUs.css";
@@ -30,7 +30,7 @@ const SupportUs = () => {
   };
 
   return (
-    <Section {...COPY_PROPS.supportUs}>
+    <Section {...SUPPORT_US_SECTION}>
       <Stack
         direction="column"
         spacing={3}
@@ -38,7 +38,7 @@ const SupportUs = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={12} md={6} width="100%">
+        <Grid xs={12} md={6} width="100%">
           <Card
             sx={{
               display: "flex",
@@ -69,7 +69,7 @@ const SupportUs = () => {
             </p>
           </Card>
         </Grid>
-        <Grid item xs={12} width="100%">
+        <Grid xs={12} width="100%">
           <Card width="100%">
             <CardContent>
               <Typography

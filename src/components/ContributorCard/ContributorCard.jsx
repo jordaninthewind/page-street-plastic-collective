@@ -17,15 +17,15 @@ const StyledCard = styled(Card)({
   },
 });
 
-const ContributorCard = ({ title, description, image, link }) => (
+const ContributorCard = ({ name, description, image, link }) => (
   <StyledCard onClick={() => window.open(link, "_blank")}>
     <CardActionArea
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <CardMedia component="img" image={image} alt={title} />
+      <CardMedia component="img" image={image} alt={name} />
       <CardContent>
         <Typography variant="h3" sx={{ textAlign: "center" }}>
-          {title}
+          {name}
         </Typography>
         <Typography variant="body1" sx={{ textAlign: "center" }}>
           {description}

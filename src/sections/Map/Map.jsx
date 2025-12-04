@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import PageStreetMap from "@app/assets/page-street-map.png";
 import { HoverActionCard } from "@app/components";
-import { COPY_PROPS } from "@app/constants";
+import { INTERACTIVE_MAP_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
 
 const Map = () => {
@@ -17,7 +17,7 @@ const Map = () => {
   };
 
   return (
-    <Section {...COPY_PROPS.map}>
+    <Section {...INTERACTIVE_MAP_SECTION}>
       <Container disableGutters>
         <HoverActionCard onClick={handleClick}>
           <img

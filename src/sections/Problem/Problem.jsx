@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { COPY_PROPS } from "@app/constants";
+import { PROBLEM_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
 
 import "@app/sections/Problem/Problem.css";
@@ -30,10 +30,10 @@ const Reason = ({ text, idx }) => (
 );
 
 const Problem = () => (
-  <Section id={COPY_PROPS.problem.id}>
+  <Section id={PROBLEM_SECTION.id}>
     <Grid container spacing={4}>
-      <Typography variant="sectionTitle">{COPY_PROPS.problem.title}</Typography>
-      <Grid item size={{ xs: 12, md: 6 }}>
+      <Typography variant="sectionTitle">{PROBLEM_SECTION.title}</Typography>
+      <Grid size={{ xs: 12, md: 6 }}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <img
             src="uncovered-sewer-cap-type-1.jpg"
@@ -47,11 +47,9 @@ const Problem = () => (
           />
         </Box>
       </Grid>
-      <Grid item size={{ xs: 12, md: 6 }}>
+      <Grid size={{ xs: 12, md: 6 }}>
         <Divider sx={{ border: "3px solid #000", mb: 2 }} />
-        <Typography variant="subtitle">
-          {COPY_PROPS.problem.subtitle}
-        </Typography>
+        <Typography variant="subtitle">{PROBLEM_SECTION.subtitle}</Typography>
         <List>
           {reasons.map((reason, idx) => (
             <Reason text={reason} idx={idx} key={idx} />

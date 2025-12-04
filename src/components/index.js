@@ -5,5 +5,7 @@ export { default as GradientButton } from "@app/components/GradientButton/Gradie
 export { default as Header } from "@app/components/Header/Header";
 export { default as HoverActionCard } from "@app/components/HoverActionCard/HoverActionCard";
 export { default as InteractiveMap } from "@app/components/InteractiveMap/InteractiveMap";
+export { default as Menu } from "@app/components/Menu/Menu";
+export { default as MenuLink } from "@app/components/Menu/MenuLink";
 export { default as ModelViewer } from "@app/components/ModelViewer/ModelViewer";
 export { default as Sections } from "@app/components/Sections/Sections";

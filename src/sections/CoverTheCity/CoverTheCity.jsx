@@ -1,6 +1,10 @@
 import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 
-import { COPY_PROPS, COVER_STATS, IMPLEMENTATION_PHASES } from "@app/constants";
+import {
+  COVER_THE_CITY_SECTION,
+  COVER_STATS,
+  IMPLEMENTATION_PHASES,
+} from "@app/constants";
 import { Section } from "@app/containers";
 
 const StatItem = ({ title, value }) => (
@@ -62,12 +66,12 @@ const PhaseItem = ({ done, number, title, description }) => (
 );
 
 const CoverTheCity = () => (
-  <Section {...COPY_PROPS.coverTheCity}>
+  <Section {...COVER_THE_CITY_SECTION}>
     <Stack direction="column" spacing={4}>
       <Grid container spacing={2}>
-        {IMPLEMENTATION_PHASES.map((phase, index) => (
-          <Grid item size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-            <PhaseItem key={index} number={index + 1} {...phase} />
+        {IMPLEMENTATION_PHASES.map((phase, idx) => (
+          <Grid key={idx} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+            <PhaseItem key={idx} number={idx + 1} {...phase} />
           </Grid>
         ))}
       </Grid>
@@ -80,8 +84,8 @@ const CoverTheCity = () => (
         }}
         justifyContent="center"
       >
-        {COVER_STATS.map((stat, index) => (
-          <StatItem key={index} {...stat} />
+        {COVER_STATS.map((stat, idx) => (
+          <StatItem key={idx} {...stat} />
         ))}
       </Grid>
     </Stack>

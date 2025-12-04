@@ -1,10 +1,10 @@
-import { COPY_PROPS } from "@app/constants";
+import { PRIVACY_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
 
 import "@app/sections/Privacy/Privacy.css";
 
 const Privacy = () => (
-  <Section {...COPY_PROPS.privacy}>
+  <Section {...PRIVACY_SECTION}>
     <p>
       We get info about how many people have visited our page, but we don't
       collect any other information.

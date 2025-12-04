@@ -1,5 +1,4 @@
-import { Container, styled, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Container, styled, Typography } from "@mui/material";
 
 const SectionContainer = styled(Container)({
   alignItems: "center",
@@ -8,9 +7,9 @@ const SectionContainer = styled(Container)({
   justifyContent: "flex-start",
 });
 
-const Section = ({ children, title, subtitle }) => (
-  <SectionContainer>
-    <Box my={4}>
+const Section = ({ children, title, subtitle, id }) => (
+  <SectionContainer disableGutters id={id}>
+    <Box my={{ xs: 2, md: 4 }}>
       <Typography variant="sectionTitle">{title}</Typography>
       {subtitle && <Typography variant="h2">{subtitle}</Typography>}
     </Box>
