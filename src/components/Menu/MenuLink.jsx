@@ -25,10 +25,13 @@ const MenuLink = ({ id, title, onClick }) => {
         >
           {title}
         </Typography>
-        <Grow in={isHovered} timeout={500}>
+        <Grow in={isHovered}>
           <Divider
-            fullWidth
-            sx={{ p: 0, height: 5, backgroundColor: theme.palette.accent.main }}
+            sx={{
+              p: 0,
+              height: 10,
+              backgroundColor: theme.palette.accent.main,
+            }}
             component="span"
           />
         </Grow>
