@@ -30,9 +30,8 @@ const Reason = ({ text, idx }) => (
 );
 
 const Problem = () => (
-  <Section id={PROBLEM_SECTION.id}>
+  <Section id={PROBLEM_SECTION.id} title={PROBLEM_SECTION.title}>
     <Grid container spacing={4}>
-      <Typography variant="sectionTitle">{PROBLEM_SECTION.title}</Typography>
       <Grid size={{ xs: 12, md: 6 }}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <img
