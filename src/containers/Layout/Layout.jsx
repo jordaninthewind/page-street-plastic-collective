@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import theme from "@app/theme";
 
-import "@app/containers/Layout.css";
+import "@app/containers/Layout/Layout.css";
 
 const Layout = ({ children }) => {
   const posthog = usePostHog();
