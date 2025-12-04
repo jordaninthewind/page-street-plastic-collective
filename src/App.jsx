@@ -1,5 +1,6 @@
 import posthog from "posthog-js";
 import { PostHogProvider } from "@posthog/react";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 import { Copywrite, Header, Sections } from "@app/components";
 import { Layout, Modal } from "@app/containers";
@@ -17,6 +18,7 @@ const App = () => (
       <Copywrite />
       <Modal />
     </Layout>
+    <SpeedInsights />
   </PostHogProvider>
 );
 
