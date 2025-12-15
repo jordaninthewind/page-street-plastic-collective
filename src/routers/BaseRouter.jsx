@@ -1,12 +1,16 @@
 import { createBrowserRouter } from "react-router";
 
-import App from "@app/App";
+import { Home, Map } from "@app/pages";
 
 const BaseRouter = () => {
   return createBrowserRouter([
     {
       path: "/",
-      element: <App />,
+      element: <Home />,
+    },
+    {
+      path: "/map",
+      element: <Map />,
     },
   ]);
 };

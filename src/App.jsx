@@ -1,9 +1,9 @@
-import posthog from "posthog-js";
 import { PostHogProvider } from "@posthog/react";
-import { SpeedInsights } from "@vercel/speed-insights/react"
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { RouterProvider } from "react-router";
+import posthog from "posthog-js";
 
-import { Copywrite, Header, Sections } from "@app/components";
-import { Layout, Modal } from "@app/containers";
+import BaseRouter from "@app/routers/BaseRouter";
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
@@ -12,12 +12,7 @@ posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
 
 const App = () => (
   <PostHogProvider client={posthog}>
-    <Layout>
-      <Header />
-      <Sections />
-      <Copywrite />
-      <Modal />
-    </Layout>
+    <RouterProvider router={BaseRouter()} />
     <SpeedInsights />
   </PostHogProvider>
 );

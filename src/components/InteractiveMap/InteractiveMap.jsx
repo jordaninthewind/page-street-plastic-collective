@@ -1,6 +1,6 @@
+import { Box } from "@mui/material";
 import mapboxgl from "mapbox-gl";
 import { useEffect } from "react";
-import { Box } from "@mui/material";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
@@ -16,7 +16,7 @@ const InteractiveMap = () => {
     return () => map.remove();
   }, []);
 
-  return <Box id="map" sx={{ width: "100%", height: "100%" }} />;
+  return <Box id="map" sx={{ flex: 1 }} />;
 };
 
 export default InteractiveMap;

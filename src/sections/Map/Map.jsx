@@ -10,10 +10,7 @@ const Map = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const queryParams = new URLSearchParams();
-    queryParams.set("overlay", "map");
-    window.history.pushState({}, "", `?${queryParams.toString()}`);
-    navigate(`/?overlay=map`);
+    navigate(`/map`);
   };
 
   return (

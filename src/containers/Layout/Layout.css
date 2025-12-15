@@ -8,6 +8,10 @@
   border-left: 10px solid rgba(0, 0, 0, 1);
   margin: 0 auto;
   max-width: 1580px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @media (max-width: 768px) {
     padding: 16px 24px;
