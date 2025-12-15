@@ -8,7 +8,8 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "vite"
+    "start": "vite",
+    "version:patch": "npm version patch"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
