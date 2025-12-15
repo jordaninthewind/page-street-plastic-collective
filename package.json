@@ -1,7 +1,7 @@
 {
   "name": "page-street-plastic-collective",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "build": "vite build",
