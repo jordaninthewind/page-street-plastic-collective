@@ -16,7 +16,7 @@ const InteractiveMap = () => {
     return () => map.remove();
   }, []);
 
-  return <Box id="map" sx={{ flex: 1 }} />;
+  return <Box id="map" sx={{ width: "100%", height: "100%", flex: 1 }} />;
 };
 
 export default InteractiveMap;
