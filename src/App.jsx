@@ -10,9 +10,11 @@ posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   defaults: "2025-05-24",
 });
 
+const router = BaseRouter();
+
 const App = () => (
   <PostHogProvider client={posthog}>
-    <RouterProvider router={BaseRouter()} />
+    <RouterProvider router={router} />
     <SpeedInsights />
   </PostHogProvider>
 );
