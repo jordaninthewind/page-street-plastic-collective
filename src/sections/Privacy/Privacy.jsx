@@ -1,6 +1,5 @@
 import { PRIVACY_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
-
 import "@app/sections/Privacy/Privacy.css";
 
 const Privacy = () => (

@@ -1,5 +1,5 @@
 import { Close as CloseIcon } from "@mui/icons-material";
-import { Box, Drawer, IconButton, Fade, Stack } from "@mui/material";
+import { Box, Drawer, Fade, IconButton, Stack } from "@mui/material";
 
 import { MenuLink } from "@app/components";
 import { SECTIONS } from "@app/constants";

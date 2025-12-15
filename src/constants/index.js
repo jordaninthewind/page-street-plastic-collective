@@ -1,5 +1,5 @@
-import PageStreetPlasticCollectiveImage from "@app/assets/pspc.png";
 import DrainVaderImage from "@app/assets/draINvader.png";
+import PageStreetPlasticCollectiveImage from "@app/assets/pspc.png";
 
 export const INTERACTIVE_MAP_SECTION = {
   id: "map",

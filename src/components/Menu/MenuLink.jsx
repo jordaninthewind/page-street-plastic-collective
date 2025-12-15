@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   ButtonBase,
   Divider,
@@ -6,7 +8,6 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
 
 const MenuLink = ({ id, title, onClick }) => {
   const theme = useTheme();

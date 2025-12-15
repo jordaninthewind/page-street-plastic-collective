@@ -1,6 +1,8 @@
-import { Box } from "@mui/material";
 import mapboxgl from "mapbox-gl";
+
 import { useEffect } from "react";
+
+import { Box } from "@mui/material";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 

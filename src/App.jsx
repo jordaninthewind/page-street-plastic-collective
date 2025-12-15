@@ -1,7 +1,7 @@
 import { PostHogProvider } from "@posthog/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { RouterProvider } from "react-router";
 import posthog from "posthog-js";
+import { RouterProvider } from "react-router";
 
 import BaseRouter from "@app/routers/BaseRouter";
 

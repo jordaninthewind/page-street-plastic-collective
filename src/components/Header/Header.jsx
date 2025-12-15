@@ -1,9 +1,9 @@
-import { Menu as MenuIcon } from "@mui/icons-material";
-import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 
-import { Menu } from "@app/components";
+import { Menu as MenuIcon } from "@mui/icons-material";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
 
+import { Menu } from "@app/components";
 import "@app/components/Header/Header.css";
 
 const headerText = "Page Street Plastic Collective";

@@ -1,3 +1,5 @@
+import { usePostHog } from "@posthog/react";
+
 import {
   Box,
   Button,
@@ -7,11 +9,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { usePostHog } from "@posthog/react";
 
 import { SUPPORT_US_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
-
 import "@app/sections/SupportUs/SupportUs.css";
 
 const SupportUs = () => {

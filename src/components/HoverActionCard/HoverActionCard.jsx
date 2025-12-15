@@ -1,5 +1,5 @@
 import { OpenInBrowser } from "@mui/icons-material";
-import { Box, Card, styled, Typography } from "@mui/material";
+import { Box, Card, Typography, styled } from "@mui/material";
 
 const StyledCard = styled(Card)({
   alignItems: "center",

@@ -1,9 +1,9 @@
 import { DashedDivider } from "@app/components";
 import {
+  Contributors,
   CoverTheCity,
   Map,
   Model3D,
-  Contributors,
   Privacy,
   Problem,
   Solution,

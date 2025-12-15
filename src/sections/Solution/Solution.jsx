@@ -2,7 +2,6 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 
 import { SOLUTION_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
-
 import "@app/sections/Solution/Solution.css";
 
 const Solution = () => (

@@ -95,9 +95,9 @@ const MyComponent = () => {
 ```javascript
 import {
   getEnvironmentalImpactColor,
+  getImpactLevelColor,
   getPlasticTypeColor,
   getRecyclingStatusColor,
-  getImpactLevelColor,
 } from "@app/theme";
 
 const MyComponent = () => {

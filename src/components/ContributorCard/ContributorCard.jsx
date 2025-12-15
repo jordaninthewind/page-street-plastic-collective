@@ -3,8 +3,8 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  styled,
   Typography,
+  styled,
 } from "@mui/material";
 
 const StyledCard = styled(Card)({

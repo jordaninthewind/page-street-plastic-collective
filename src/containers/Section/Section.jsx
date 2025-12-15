@@ -1,4 +1,4 @@
-import { Box, Container, styled, Typography } from "@mui/material";
+import { Box, Container, Typography, styled } from "@mui/material";
 
 const SectionContainer = styled(Container)({
   alignItems: "center",

@@ -1,6 +1,7 @@
+import { useNavigate, useSearchParams } from "react-router";
+
 import CloseIcon from "@mui/icons-material/Close";
 import { Dialog, IconButton } from "@mui/material";
-import { useNavigate, useSearchParams } from "react-router";
 
 import { InteractiveMap, ModelViewer } from "@app/components";
 import { SupportUs } from "@app/sections";

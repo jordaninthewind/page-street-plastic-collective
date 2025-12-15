@@ -3,7 +3,6 @@ import { Grid } from "@mui/material";
 import { ContributorCard } from "@app/components";
 import { CONTRIBUTORS, CONTRIBUTORS_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
-
 import "@app/sections/Contributors/Contributors.css";
 
 const Contributors = () => (

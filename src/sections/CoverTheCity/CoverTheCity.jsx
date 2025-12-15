@@ -1,8 +1,8 @@
 import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 
 import {
-  COVER_THE_CITY_SECTION,
   COVER_STATS,
+  COVER_THE_CITY_SECTION,
   IMPLEMENTATION_PHASES,
 } from "@app/constants";
 import { Section } from "@app/containers";

@@ -1,6 +1,7 @@
 import { usePostHog } from "@posthog/react";
-import { useEffect } from "react";
 import { StlViewer } from "react-stl-viewer";
+
+import { useEffect } from "react";
 
 const ModelViewer = () => {
   const posthog = usePostHog();

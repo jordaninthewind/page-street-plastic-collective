@@ -1,11 +1,12 @@
-import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
-import { Analytics } from "@vercel/analytics/react";
 import { usePostHog } from "@posthog/react";
+import { Analytics } from "@vercel/analytics/react";
+
 import { useEffect } from "react";
 
-import theme from "@app/theme";
+import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
 
 import "@app/containers/Layout/Layout.css";
+import theme from "@app/theme";
 
 const Layout = ({ children }) => {
   const posthog = usePostHog();
