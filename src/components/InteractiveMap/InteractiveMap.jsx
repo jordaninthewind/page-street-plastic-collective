@@ -60,7 +60,7 @@ const InteractiveMap = () => {
         })
         .on("click", (event) => {
           handleClick(event);
-        })
+        });
     }
   }, [map, handleClick]);
 
