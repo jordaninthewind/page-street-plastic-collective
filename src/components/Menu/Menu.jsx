@@ -1,3 +1,5 @@
+import { useLocation, useNavigate } from "react-router";
+
 import { Close as CloseIcon } from "@mui/icons-material";
 import { Box, Drawer, Fade, IconButton, Stack } from "@mui/material";
 
@@ -5,11 +7,34 @@ import { MenuLink } from "@app/components";
 import { SECTIONS } from "@app/constants";
 
 const Menu = ({ open, handleClose }) => {
-  const handleNavigate = (id) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleSectionNavigate = (id) => {
     document.getElementById(id).scrollIntoView({ behavior: "smooth" });
 
     handleClose();
   };
+
+  const handleHomeNavigate = () => {
+    navigate(`/`);
+
+    handleClose();
+  };
+
+  const homeMenuItems = SECTIONS.map((section, idx) => (
+    <MenuLink key={idx} {...section} onClick={handleSectionNavigate} />
+  ));
+
+  const mapMenuItems = (
+    <>
+      <MenuLink
+        id="map"
+        title="🔙 Back to Info Page"
+        onClick={handleHomeNavigate}
+      />
+    </>
+  );
 
   return (
     <Drawer
@@ -55,9 +80,8 @@ const Menu = ({ open, handleClose }) => {
         </IconButton>
         <Fade timeout={1200} in={open} mountOnEnter unmountOnExit>
           <Stack direction="column" spacing={2}>
-            {SECTIONS.map((section, idx) => (
-              <MenuLink key={idx} {...section} onClick={handleNavigate} />
-            ))}
+            {pathname === "/" && homeMenuItems}
+            {pathname === "/map" && mapMenuItems}
           </Stack>
         </Fade>
       </Box>
