@@ -1,6 +1,8 @@
 import DrainVaderImage from "@app/assets/draINvader.png";
 import PageStreetPlasticCollectiveImage from "@app/assets/pspc.png";
 
+export const MAP_CENTER = [-122.4347310677153, 37.77261132114993];
+
 export const INTERACTIVE_MAP_SECTION = {
   id: "map",
   title: "Interactive Map",
