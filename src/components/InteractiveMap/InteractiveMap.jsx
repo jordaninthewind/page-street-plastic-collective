@@ -14,7 +14,7 @@ const InteractiveMap = () => {
 
   const [existingDrainCovers, setExistingDrainCovers] = useState([]);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const map = useMemo(() => {
     if (mapContainerRef.current) {
@@ -70,11 +70,12 @@ const InteractiveMap = () => {
   }, [map, handleClick]);
 
   return (
-    <Box
-      id="map"
-      sx={{ width: "100%", height: "100%", flex: 1 }}
-      ref={mapContainerRef}
-    >
+    <>
+      <Box
+        id="map"
+        sx={{ width: "100%", height: "100%", flex: 1 }}
+        ref={mapContainerRef}
+      />
       {loading && (
         <CircularProgress
           color="accent"
@@ -96,7 +97,7 @@ const InteractiveMap = () => {
           {error.message}
         </Snackbar>
       )}
-    </Box>
+    </>
   );
 };
 
