@@ -1,6 +1,6 @@
 import mapboxgl from "mapbox-gl";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 
@@ -14,7 +14,7 @@ const InteractiveMap = () => {
 
   const [existingDrainCovers, setExistingDrainCovers] = useState([]);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const map = useMemo(() => {
     if (mapContainerRef.current) {
@@ -27,9 +27,14 @@ const InteractiveMap = () => {
     }
   }, [mapContainerRef]);
 
-  const handleClick = ({ lngLat: { lng, lat } }) => {
-    addMarkerToMap(map, [lng, lat]);
-  };
+  const handleClick = useCallback(
+    ({ lngLat: { lng, lat } }) => {
+      if (map) {
+        addMarkerToMap(map, [lng, lat]);
+      }
+    },
+    [map]
+  );
 
   useEffect(() => {
     const fetchDrainCovers = async () => {
@@ -47,7 +52,7 @@ const InteractiveMap = () => {
         addMarkerToMap(map, [cover.longitude, cover.latitude])
       );
     }
-  }, [map, existingDrainCovers, addMarkerToMap]);
+  }, [map, existingDrainCovers]);
 
   useEffect(() => {
     if (map) {
