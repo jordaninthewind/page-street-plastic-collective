@@ -1,6 +1,6 @@
 import mapboxgl from "mapbox-gl";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 
@@ -12,18 +12,21 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 const InteractiveMap = () => {
   const mapContainerRef = useRef(null);
 
-  const [existingDrainCovers, setExistingDrainCovers] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [map, setMap] = useState(null);
+  const [existingDrainCovers, setExistingDrainCovers] = useState([]);
 
-  const map = useMemo(() => {
+  useEffect(() => {
     if (mapContainerRef.current) {
-      return new mapboxgl.Map({
-        container: mapContainerRef.current,
-        style: "mapbox://styles/mapbox/streets-v11",
-        center: MAP_CENTER,
-        zoom: 15,
-      });
+      setMap(
+        new mapboxgl.Map({
+          container: mapContainerRef.current,
+          style: "mapbox://styles/mapbox/streets-v11",
+          center: MAP_CENTER,
+          zoom: 15,
+        })
+      );
     }
   }, [mapContainerRef]);
 
