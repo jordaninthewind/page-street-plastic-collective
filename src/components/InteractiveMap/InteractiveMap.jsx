@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 
 import { MAP_CENTER } from "@app/constants";
-import { addMarkerToMap, getDrainCovers } from "@app/utils";
+import { addMarkerToMap, getCoversFromSupabase } from "@app/utils";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
@@ -41,7 +41,7 @@ const InteractiveMap = () => {
 
   useEffect(() => {
     const fetchDrainCovers = async () => {
-      const data = await getDrainCovers();
+      const data = await getCoversFromSupabase();
 
       setExistingDrainCovers(data || []);
     };

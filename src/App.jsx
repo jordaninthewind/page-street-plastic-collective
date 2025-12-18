@@ -3,6 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import posthog from "posthog-js";
 import { RouterProvider } from "react-router";
 
+import { ErrorBoundary } from "@app/components";
 import BaseRouter from "@app/routers/BaseRouter";
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
@@ -13,10 +14,12 @@ posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
 const router = BaseRouter();
 
 const App = () => (
-  <PostHogProvider client={posthog}>
-    <RouterProvider router={router} />
-    <SpeedInsights />
-  </PostHogProvider>
+  <ErrorBoundary>
+    <PostHogProvider client={posthog}>
+      <RouterProvider router={router} />
+      <SpeedInsights />
+    </PostHogProvider>
+  </ErrorBoundary>
 );
 
 export default App;
