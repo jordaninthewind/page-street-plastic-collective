@@ -9,7 +9,6 @@ import {
 
 const StyledCard = styled(Card)({
   cursor: "pointer",
-  maxWidth: "500px",
   width: "100%",
   "&:hover": {
     transform: "translateY(-10px)",
