@@ -1,7 +1,15 @@
 import { useNavigate } from "react-router";
 
 import DownloadIcon from "@mui/icons-material/Download";
-import { Box, Button, List, ListItem, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  List,
+  ListItem,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 
 import { GradientButton } from "@app/components";
 import { MODEL_3D_SECTION } from "@app/constants";
@@ -9,12 +17,28 @@ import { Section } from "@app/containers";
 import "@app/sections/Model3D/Model3D.css";
 
 const Model3D = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const onViewClick = () => navigate("/?overlay=model");
 
   return (
     <Section {...MODEL_3D_SECTION}>
+      <Box
+        mb={2}
+        sx={{
+          backgroundColor: theme.palette.background.paper,
+          border: `2px solid ${theme.palette.primary.main}`,
+          borderRadius: "8px",
+          p: 2,
+          maxWidth: "fit-content",
+        }}
+      >
+        <Typography variant="h4" sx={{ textAlign: "center" }}>
+          12/19/2025: Updated V5 Model! This should be a little stronger and
+          take a little less plastic!
+        </Typography>
+      </Box>
       <Stack
         direction="row"
         spacing={2}
@@ -28,7 +52,7 @@ const Model3D = () => {
             size="large"
             color="primary"
           >
-            View V4 Model
+            View V5 Model
           </Button>
           <GradientButton
             href={import.meta.env.VITE_3D_MODEL_URL}

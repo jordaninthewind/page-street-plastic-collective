@@ -5,7 +5,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 
 import { MAP_CENTER } from "@app/constants";
-import { addMarkerToMap, getCoversFromSupabase } from "@app/utils";
+import {
+  addMarkerToMapRemote,
+  addMarkerToMapState,
+  getCoversFromSupabase,
+} from "@app/utils";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
@@ -31,9 +35,10 @@ const InteractiveMap = () => {
   }, [mapContainerRef]);
 
   const handleClick = useCallback(
-    ({ lngLat: { lng, lat } }) => {
+    ({ lngLat }) => {
       if (map) {
-        addMarkerToMap(map, [lng, lat]);
+        addMarkerToMapRemote(lngLat);
+        addMarkerToMapState(map, lngLat);
       }
     },
     [map]
@@ -51,8 +56,8 @@ const InteractiveMap = () => {
 
   useEffect(() => {
     if (map && existingDrainCovers.length > 0) {
-      existingDrainCovers.forEach((cover) =>
-        addMarkerToMap(map, [cover.longitude, cover.latitude])
+      existingDrainCovers.forEach(({ lng, lat }) =>
+        addMarkerToMapState(map, { lng, lat })
       );
     }
   }, [map, existingDrainCovers]);
