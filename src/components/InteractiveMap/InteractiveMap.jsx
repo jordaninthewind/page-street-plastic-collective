@@ -35,7 +35,9 @@ const InteractiveMap = () => {
   }, [mapContainerRef]);
 
   const handleClick = useCallback(
-    ({ lngLat }) => {
+    (event) => {
+      const { lngLat } = event;
+
       if (map) {
         addMarkerToMapRemote(lngLat);
         addMarkerToMapState(map, lngLat);
@@ -56,8 +58,8 @@ const InteractiveMap = () => {
 
   useEffect(() => {
     if (map && existingDrainCovers.length > 0) {
-      existingDrainCovers.forEach(({ lng, lat }) =>
-        addMarkerToMapState(map, { lng, lat })
+      existingDrainCovers.forEach(({ lng, lat, state }) =>
+        addMarkerToMapState(map, { lng, lat }, state)
       );
     }
   }, [map, existingDrainCovers]);

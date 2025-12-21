@@ -1,5 +1,3 @@
-import GeoJSON from "geojson";
-
 import supabase from "@app/utils/supabase/supabaseClient";
 
 export const getCoversFromSupabase = async () => {

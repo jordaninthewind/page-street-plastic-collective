@@ -3,6 +3,12 @@ import PageStreetPlasticCollectiveImage from "@app/assets/pspc.png";
 
 export const MAP_CENTER = [-122.4347310677153, 37.77261132114993];
 
+export const MARKER_TYPES = {
+  COVERED: { name: "covered", color: "green" },
+  MISSING: { name: "missing", color: "blue" },
+  TEMPORARY: { name: "temporary", color: "red" },
+};
+
 export const INTERACTIVE_MAP_SECTION = {
   id: "map",
   title: "Interactive Map",
