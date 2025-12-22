@@ -1,26 +1,40 @@
-import { useNavigate, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
+
+import { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { Dialog, IconButton } from "@mui/material";
 
-import { InteractiveMap, ModelViewer } from "@app/components";
+import { MarkerEditor, ModelViewer } from "@app/components";
 import { SupportUs } from "@app/sections";
 
 const Modal = () => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [overlay, setOverlay] = useState(null);
 
-  const overlay = searchParams.get("overlay");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleClose = () => navigate("/");
+  useEffect(() => {
+    const overlay = searchParams.get("overlay");
+
+    if (overlay) {
+      setOverlay(overlay);
+    } else {
+      setOverlay(null);
+    }
+
+    return () => {
+      setOverlay(null);
+    };
+  }, [searchParams, overlay]);
+
+  const handleClose = () => setSearchParams({});
 
   return (
     <Dialog
       open={!!overlay}
       onClose={handleClose}
       scroll="body"
-      maxWidth="lg"
-      fullScreen
+      maxWidth="md"
       slotProps={{
         backdrop: {
           sx: {
@@ -29,11 +43,9 @@ const Modal = () => {
         },
       }}
       sx={{
-        maxWidth: "90vw",
-        maxHeight: "90vh",
+        maxWidth: "100vw",
+        maxHeight: "100vh",
         margin: "auto",
-        borderRadius: "20px",
-        border: "12px solid #FFF",
       }}
     >
       <IconButton
@@ -42,7 +54,7 @@ const Modal = () => {
       >
         <CloseIcon />
       </IconButton>
-      {overlay === "map" && <InteractiveMap />}
+      {overlay === "marker" && <MarkerEditor />}
       {overlay === "model" && <ModelViewer />}
       {overlay === "support-us" && <SupportUs />}
     </Dialog>

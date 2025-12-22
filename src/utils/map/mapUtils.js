@@ -1,23 +1,7 @@
-import mapboxgl from "mapbox-gl";
+import { createMarker } from "@app/utils/map/markerUtils";
 
-const MARKER_TYPES = {
-  TEMPORARY: "temporary",
-  MISSING: "missing",
-  COVERED: "covered",
-};
-
-const addMarkerToMapState = (map, lngLat, type = MARKER_TYPES.TEMPORARY) => {
-  const marker = new mapboxgl.Marker({
-    color:
-      type === MARKER_TYPES.TEMPORARY
-        ? "red"
-        : type === MARKER_TYPES.MISSING
-          ? "blue"
-          : "green",
-  })
-    .setLngLat(lngLat)
-    .addTo(map);
-  return marker;
+const addMarkerToMapState = (map, marker, onClick = () => {}) => {
+  createMarker(marker, onClick).addTo(map);
 };
 
 export { addMarkerToMapState };

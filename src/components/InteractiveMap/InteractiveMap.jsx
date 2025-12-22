@@ -1,49 +1,56 @@
 import mapboxgl from "mapbox-gl";
+import { useSearchParams } from "react-router";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 
 import { MAP_CENTER } from "@app/constants";
-import {
-  addMarkerToMapRemote,
-  addMarkerToMapState,
-  getCoversFromSupabase,
-} from "@app/utils";
+import { addMarkerToMapState, getCoversFromSupabase } from "@app/utils";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const InteractiveMap = () => {
+  const [_, setSearchParams] = useSearchParams();
+
   const mapContainerRef = useRef(null);
 
   const [error, setError] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [map, setMap] = useState(null);
   const [existingDrainCovers, setExistingDrainCovers] = useState([]);
 
   useEffect(() => {
-    if (mapContainerRef.current) {
-      setMap(
-        new mapboxgl.Map({
-          container: mapContainerRef.current,
-          style: "mapbox://styles/mapbox/streets-v11",
-          center: MAP_CENTER,
-          zoom: 15,
-        })
-      );
-    }
+    const map = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: MAP_CENTER,
+      zoom: 15,
+    });
+
+    setMap(map);
   }, [mapContainerRef]);
 
-  const handleClick = useCallback(
-    (event) => {
-      const { lngLat } = event;
+  const handleMarkerClick = useCallback(
+    (marker) => {
+      setSearchParams({
+        overlay: "marker",
+        id: marker.id,
+        lat: marker.lng,
+        lng: marker.lat,
+      });
+    },
+    [setSearchParams]
+  );
 
-      if (map) {
-        addMarkerToMapRemote(lngLat);
-        addMarkerToMapState(map, lngLat);
+  const handleMapClick = useCallback(
+    ({ lngLat: { lat, lng }, originalEvent: { srcElement } }) => {
+      if (map && srcElement.tagName === "CANVAS") {
+        setSearchParams({ overlay: "marker", lat: lat, lng: lng });
       }
     },
-    [map]
+    [map, setSearchParams]
   );
 
   useEffect(() => {
@@ -58,11 +65,11 @@ const InteractiveMap = () => {
 
   useEffect(() => {
     if (map && existingDrainCovers.length > 0) {
-      existingDrainCovers.forEach(({ lng, lat, state }) =>
-        addMarkerToMapState(map, { lng, lat }, state)
+      existingDrainCovers.forEach((marker) =>
+        addMarkerToMapState(map, marker, handleMarkerClick)
       );
     }
-  }, [map, existingDrainCovers]);
+  }, [map, existingDrainCovers, handleMarkerClick]);
 
   useEffect(() => {
     if (map) {
@@ -74,10 +81,10 @@ const InteractiveMap = () => {
           setError(error);
         })
         .on("click", (event) => {
-          handleClick(event);
+          handleMapClick(event);
         });
     }
-  }, [map, handleClick]);
+  }, [map, handleMapClick]);
 
   return (
     <>
