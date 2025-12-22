@@ -4,9 +4,9 @@ import PageStreetPlasticCollectiveImage from "@app/assets/pspc.png";
 export const MAP_CENTER = [-122.4347310677153, 37.77261132114993];
 
 export const MARKER_TYPES = {
-  COVERED: { name: "covered", color: "green" },
-  MISSING: { name: "missing", color: "blue" },
-  TEMPORARY: { name: "temporary", color: "red" },
+  covered: { color: "green" },
+  missing: { color: "blue" },
+  temporary: { color: "red" },
 };
 
 export const INTERACTIVE_MAP_SECTION = {

@@ -1,15 +1,15 @@
-const SUPABASE_URL = import.meta.env.VITE_REACT_APP_SAVE_ENDPOINT_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_REACT_APP_AUTHORIZATION_TOKEN;
+import supabase from "@app/services/supabase/supabaseClient";
+import {
+  addMarkerToMapRemote,
+  getCoversFromSupabase,
+  getSingleCoverFromSupabase,
+  updateMarkerRemote,
+} from "@app/services/supabase/supabaseUtils";
 
-export const saveMessage = async (message) => {
-  const response = await fetch(SUPABASE_URL, {
-    method: "POST",
-    body: JSON.stringify(message),
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-    },
-  });
-
-  return response.json();
+export {
+  supabase,
+  addMarkerToMapRemote,
+  getCoversFromSupabase,
+  updateMarkerRemote,
+  getSingleCoverFromSupabase,
 };
