@@ -1,27 +1,36 @@
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "react-router";
 
 import { useState } from "react";
 
-import { Button, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { LocationPin } from "@mui/icons-material";
+import {
+  Button,
+  IconButton,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 
-import { addMarkerToMapRemote } from "@app/utils/supabase/supabaseUtils";
+import { addMarkerToMapRemote } from "@app/services";
+import { formatDecimal } from "@app/utils";
 
 const AddDrainCover = ({ lat, lng }) => {
+  const [_, setSearchParams] = useSearchParams();
+
   const [saving, setSaving] = useState(false);
 
   const { register, handleSubmit, reset } = useForm();
 
-  const formatDecimal = (float, length = 3) => {
-    if (!float) return "";
-
-    const [integer, decimal] = float.toString().split(".");
-    return `${integer}.${decimal.slice(0, length)}`;
-  };
-
   const onSubmit = async (data) => {
     try {
       setSaving(true);
-      await addMarkerToMapRemote({ lng, lat, ...data });
+
+      const { id } = await addMarkerToMapRemote({ lng, lat, ...data });
+
+      setSearchParams({ overlay: "marker", id });
     } catch (error) {
       console.error(error);
     } finally {
@@ -30,11 +39,41 @@ const AddDrainCover = ({ lat, lng }) => {
     }
   };
 
+  const handleLocationClick = () =>
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        setSearchParams({
+          overlay: "marker",
+          lat: coords.latitude,
+          lng: coords.longitude,
+        });
+      },
+      (error) => {
+        console.error(error);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography variant="body1" sx={{ mb: 2 }}>
-        Location: {formatDecimal(lat)}, {formatDecimal(lng)}
-      </Typography>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+        sx={{ mb: 2, width: "100%" }}
+      >
+        <Typography variant="body1">
+          Location: {formatDecimal(lat)}, {formatDecimal(lng)}
+        </Typography>
+        <IconButton onClick={handleLocationClick}>
+          <LocationPin />
+        </IconButton>
+      </Stack>
       <TextField
         label="Address"
         fullWidth
@@ -56,7 +95,7 @@ const AddDrainCover = ({ lat, lng }) => {
       <Select
         fullWidth
         sx={{ mb: 2 }}
-        {...register("type")}
+        {...register("cover_type")}
         required
         defaultValue="standard-square"
       >
@@ -65,10 +104,10 @@ const AddDrainCover = ({ lat, lng }) => {
         <MenuItem value="oversize-square">Oversize - Square</MenuItem>
       </Select>
       <TextField
-        label="Name"
+        label="Requested By"
         fullWidth
         sx={{ mb: 2 }}
-        {...register("name")}
+        {...register("requested_by")}
         required
         placeholder="Emperor Norton II of San Francisco"
       />
@@ -77,9 +116,18 @@ const AddDrainCover = ({ lat, lng }) => {
         type="email"
         fullWidth
         sx={{ mb: 2 }}
-        {...register("emailAddress")}
+        {...register("email")}
         required
         placeholder="example@example.com"
+      />
+      <TextField
+        label="Anything else you want to add?"
+        fullWidth
+        multiline
+        rows={4}
+        sx={{ mb: 2 }}
+        {...register("description")}
+        placeholder="Anything else you want to add?"
       />
       <Button
         type="submit"

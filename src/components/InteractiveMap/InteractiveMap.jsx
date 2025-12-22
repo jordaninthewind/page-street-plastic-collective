@@ -6,7 +6,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 
 import { MAP_CENTER } from "@app/constants";
-import { addMarkerToMapState, getCoversFromSupabase } from "@app/utils";
+import { getCoversFromSupabase } from "@app/services";
+import { addMarkerToMapState } from "@app/utils";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
 import { MarkerInfo } from "@app/components";
-import { getSingleCoverFromSupabase } from "@app/utils/supabase/supabaseUtils";
+import { getSingleCoverFromSupabase } from "@app/services";
 
 const MarkerEditor = () => {
   const [searchParams] = useSearchParams();
