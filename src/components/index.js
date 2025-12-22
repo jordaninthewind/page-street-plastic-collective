@@ -1,3 +1,4 @@
+export { default as AddDrainCover } from "@app/components/AddDrainCover/AddDrainCover";
 export { default as ContributorCard } from "@app/components/ContributorCard/ContributorCard";
 export { default as Copywrite } from "@app/components/Copywrite/Copywrite";
 export { default as DashedDivider } from "@app/components/DashedDivider/DashedDivider";

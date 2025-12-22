@@ -1,15 +1,15 @@
-import supabase from "@app/services/supabase/supabaseClient";
 import {
   addMarkerToMapRemote,
   getCoversFromSupabase,
   getSingleCoverFromSupabase,
+  supabase,
   updateMarkerRemote,
-} from "@app/services/supabase/supabaseUtils";
+} from "@app/services/supabase/supabaseService";
 
 export {
-  supabase,
   addMarkerToMapRemote,
   getCoversFromSupabase,
-  updateMarkerRemote,
   getSingleCoverFromSupabase,
+  supabase,
+  updateMarkerRemote,
 };

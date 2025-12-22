@@ -1,5 +1,11 @@
+import { createClient } from "@supabase/supabase-js";
+
 import { formatEntry } from "@app/helpers";
-import { supabase } from "@app/services";
+
+export const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 export const getSingleCoverFromSupabase = async (id) => {
   try {
