@@ -80,7 +80,7 @@ const AddDrainCover = () => {
 
       setSearchParams({});
     } catch ({ message }) {
-      enqueueSnackbar(message, { severity: "error" });
+      enqueueSnackbar(message, { variant: "error" });
     } finally {
       setSaving(false);
       reset();
