@@ -3,6 +3,9 @@ import { Box, Typography } from "@mui/material";
 const MarkerInfo = ({ cover }) => {
   return (
     <Box>
+      <Typography variant="h2" sx={{ mb: 2 }}>
+        Drain Cover Information
+      </Typography>
       <Typography variant="h6">Requested By: {cover.requested_by}</Typography>
       <Typography variant="body1">Description: {cover.description}</Typography>
       <Typography variant="body1">State: {cover.state}</Typography>

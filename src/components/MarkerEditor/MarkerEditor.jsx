@@ -27,6 +27,7 @@ const MarkerEditor = () => {
         if (!id) return;
 
         const data = await getSingleCoverFromSupabase(id);
+
         setCover(data);
       } catch (error) {
         setError(error.message);
@@ -39,10 +40,7 @@ const MarkerEditor = () => {
   }, [id]);
 
   return (
-    <Box sx={{ p: 3, minWidth: 350, maxWidth: 460 }}>
-      <Typography variant="h5" sx={{ mb: 2 }}>
-        {id ? `Latest Drain Cover Information` : "Request a Drain Cover"}
-      </Typography>
+    <Box sx={{ p: 2, minWidth: "fit-content" }}>
       {loading ? (
         <CircularProgress />
       ) : error ? (

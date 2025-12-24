@@ -45,6 +45,8 @@ const AddDrainCover = () => {
   const lat = searchParams.get("lat");
 
   useEffect(() => {
+    if (!lng || !lat) return;
+  
     const debouncedFetchSearchResults = debounce(async () => {
       try {
         setLoadingSearchResults(true);
