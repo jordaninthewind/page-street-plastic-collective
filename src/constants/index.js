@@ -1,6 +1,8 @@
 import DrainVaderImage from "@app/assets/draINvader.png";
 import PageStreetPlasticCollectiveImage from "@app/assets/pspc.png";
 
+export const PROJECT_NAME = "Page Street Plastic Collective";
+
 export const MAP_CENTER = [-122.4347310677153, 37.77261132114993];
 
 export const MARKER_TYPES = {

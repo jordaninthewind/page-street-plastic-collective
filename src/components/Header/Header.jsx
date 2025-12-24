@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 
-import { Menu as MenuIcon } from "@mui/icons-material";
+import { Home, Map } from "@mui/icons-material";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 
-import { Menu } from "@app/components";
 import "@app/components/Header/Header.css";
-
-const headerText = "Page Street Plastic Collective";
+import { PROJECT_NAME } from "@app/constants";
 
 const Header = () => {
-  const letters = headerText.split("").map((letter, index) => (
+  const navigate = useNavigate();
+
+  const { pathname } = useLocation();
+
+  const letters = PROJECT_NAME.split("").map((letter, index) => (
     <span
       key={index}
       className="header-letter"
@@ -19,29 +21,29 @@ const Header = () => {
     </span>
   ));
 
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => setOpen(false);
-
   return (
-    <>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ minWidth: "100%" }}
-      >
-        <Typography variant="sectionTitle" className="header">
-          {letters}
-        </Typography>
-        <Box>
-          <IconButton sx={{ zIndex: 1000 }} onClick={() => setOpen(true)}>
-            <MenuIcon sx={{ height: 60, width: 60 }} color="accent" />
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      sx={{ minWidth: "100%" }}
+    >
+      <Typography variant="sectionTitle" className="header">
+        {letters}
+      </Typography>
+      <Box>
+        {pathname === "/" && (
+          <IconButton sx={{ zIndex: 1000 }} onClick={() => navigate("/map")}>
+            <Map sx={{ height: 60, width: 60 }} color="accent" />
           </IconButton>
-        </Box>
-      </Stack>
-      <Menu open={open} handleClose={handleClose} />
-    </>
+        )}
+        {pathname === "/map" && (
+          <IconButton sx={{ zIndex: 1000 }} onClick={() => navigate("/")}>
+            <Home sx={{ height: 60, width: 60 }} color="accent" />
+          </IconButton>
+        )}
+      </Box>
+    </Stack>
   );
 };
 
