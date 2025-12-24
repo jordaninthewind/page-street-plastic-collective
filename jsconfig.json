@@ -6,7 +6,11 @@
     "jsx": "react",
     "allowImportingTsExtensions": true,
     "strictNullChecks": true,
-    "strictFunctionTypes": true
+    "strictFunctionTypes": true,
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": ["./src/*"]
+    }
   },
   "exclude": ["node_modules", "**/node_modules/*"]
 }
