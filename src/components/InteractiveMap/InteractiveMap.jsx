@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
+import { useSnackbar } from "notistack";
 
 import { MAP_CENTER } from "@app/constants";
 import { getCoversFromSupabase } from "@app/services";
@@ -14,9 +15,9 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 const InteractiveMap = () => {
   const [_, setSearchParams] = useSearchParams();
 
-  const mapContainerRef = useRef(null);
+  const { enqueueSnackbar } = useSnackbar();
 
-  const [error, setError] = useState(null);
+  const mapContainerRef = useRef(null);
 
   const [loading, setLoading] = useState(true);
   const [map, setMap] = useState(null);
@@ -25,13 +26,45 @@ const InteractiveMap = () => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/jordankline/cmjkd59ot002t01sn0v1q5igw",
       center: MAP_CENTER,
       zoom: 15,
     });
 
     setMap(map);
   }, [mapContainerRef]);
+
+
+  const addPageStreetHighlightLayer = useCallback(() => {
+    if (map) {
+      map.addSource('page-street-highlight', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              [-122.45370156687358, 37.77011360610052],
+              [-122.42083449962726, 37.77429666244831]
+            ],
+          },
+          properties: {
+            name: 'Page Street',
+          }
+        }
+      });
+
+      map.addLayer({
+        id: 'page-street-line',
+        type: 'line',
+        source: 'page-street-highlight',
+        paint: {
+          'line-color': 'rgba(194,90,60, .2)',
+          'line-width': 6,
+        }
+      });
+    }
+  }, [map]);
 
   const handleMarkerClick = useCallback(
     (marker) => {
@@ -47,6 +80,7 @@ const InteractiveMap = () => {
 
   const handleMapClick = useCallback(
     ({ lngLat: { lat, lng }, originalEvent: { srcElement } }) => {
+      console.log('[lng, lat]', [lng, lat]);
       if (map && srcElement.tagName === "CANVAS") {
         setSearchParams({ overlay: "marker", lat: lat, lng: lng });
       }
@@ -77,9 +111,10 @@ const InteractiveMap = () => {
       map
         .on("load", () => {
           setLoading(false);
+          addPageStreetHighlightLayer();
         })
-        .on("error", (error) => {
-          setError(error);
+        .on("error", ({ message }) => {
+          enqueueSnackbar(message, { variant: "error" });
         })
         .on("click", (event) => {
           handleMapClick(event);
@@ -89,11 +124,7 @@ const InteractiveMap = () => {
 
   return (
     <>
-      <Box
-        id="map"
-        sx={{ width: "100%", height: "100%", flex: 1 }}
-        ref={mapContainerRef}
-      />
+      <Box id="map" sx={{ width: "100%", height: "100%", flex: 1 }} ref={mapContainerRef} />
       {loading && (
         <CircularProgress
           color="accent"
@@ -105,15 +136,6 @@ const InteractiveMap = () => {
             transform: "translate(-50%, -50%)",
           }}
         />
-      )}
-      {error && (
-        <Snackbar
-          open={!!error}
-          autoHideDuration={3000}
-          onClose={() => setError(null)}
-        >
-          {error.message}
-        </Snackbar>
       )}
     </>
   );
