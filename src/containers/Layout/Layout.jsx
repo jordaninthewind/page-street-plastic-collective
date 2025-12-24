@@ -1,5 +1,6 @@
 import { usePostHog } from "@posthog/react";
 import { Analytics } from "@vercel/analytics/react";
+import { SnackbarProvider } from "notistack";
 
 import { useEffect } from "react";
 
@@ -21,11 +22,13 @@ const Layout = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Stack direction="column" className="layout">
-        {children}
-      </Stack>
-      <Analytics />
+      <SnackbarProvider>
+        <CssBaseline />
+        <Stack direction="column" className="layout">
+          {children}
+        </Stack>
+        <Analytics />
+      </SnackbarProvider>
     </ThemeProvider>
   );
 };
