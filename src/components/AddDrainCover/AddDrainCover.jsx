@@ -195,12 +195,12 @@ const AddDrainCover = () => {
         <Select
           fullWidth
           sx={{ mb: 2 }}
-          {...register("state")}
+          {...register("covered")}
           required
-          defaultValue="missing"
+          defaultValue="false"
         >
-          <MenuItem value="missing">Missing</MenuItem>
-          <MenuItem value="covered">Covered</MenuItem>
+          <MenuItem value="false">Missing</MenuItem>
+          <MenuItem value="true">Covered</MenuItem>
         </Select>
         <InputLabel>Cover Type</InputLabel>
         <Select
@@ -238,7 +238,7 @@ const AddDrainCover = () => {
           rows={4}
           sx={{ mb: 2 }}
           {...register("description")}
-          placeholder="Anything else you want to add?"
+          placeholder="Give some details if you want!"
         />
         <Button
           type="submit"
@@ -247,11 +247,10 @@ const AddDrainCover = () => {
           disabled={
             saving ||
             !watch("address") ||
-            !watch("state") ||
+            !watch("covered") ||
             !watch("cover_type") ||
             !watch("requested_by") ||
-            !watch("email") ||
-            !watch("description")
+            !watch("email")
           }
           fullWidth
         >
