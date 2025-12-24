@@ -46,7 +46,7 @@ const AddDrainCover = () => {
 
   useEffect(() => {
     if (!lng || !lat) return;
-  
+
     const debouncedFetchSearchResults = debounce(async () => {
       try {
         setLoadingSearchResults(true);

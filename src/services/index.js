@@ -1,3 +1,4 @@
+import { searchNearbyAddresses } from "@app/services/map/MapDataService";
 import {
   addMarkerToMapRemote,
   getCoversFromSupabase,
@@ -10,6 +11,7 @@ export {
   addMarkerToMapRemote,
   getCoversFromSupabase,
   getSingleCoverFromSupabase,
+  searchNearbyAddresses,
   supabase,
   updateMarkerRemote,
 };
