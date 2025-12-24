@@ -11,6 +11,33 @@ export const MARKER_TYPES = {
   temporary: { color: "red" },
 };
 
+export const PAGE_STREET_HIGHLIGHT_SOURCE = {
+  type: "geojson",
+  data: {
+    type: "Feature",
+    geometry: {
+      type: "LineString",
+      coordinates: [
+        [-122.45370156687358, 37.77011360610052],
+        [-122.42083449962726, 37.77429666244831],
+      ],
+    },
+    properties: {
+      name: "Page Street",
+    },
+  },
+};
+
+export const PAGE_STREET_HIGHLIGHT_LAYER = {
+  id: "page-street-line",
+  type: "line",
+  source: "page-street-highlight",
+  paint: {
+    "line-color": "rgba(194,90,60, .2)",
+    "line-width": 6,
+  },
+};
+
 export const INTERACTIVE_MAP_SECTION = {
   id: "map",
   title: "Interactive Map",

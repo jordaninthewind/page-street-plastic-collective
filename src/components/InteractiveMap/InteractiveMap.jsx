@@ -1,12 +1,16 @@
 import mapboxgl from "mapbox-gl";
+import { useSnackbar } from "notistack";
 import { useSearchParams } from "react-router";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
-import { useSnackbar } from "notistack";
 
-import { MAP_CENTER } from "@app/constants";
+import {
+  MAP_CENTER,
+  PAGE_STREET_HIGHLIGHT_LAYER,
+  PAGE_STREET_HIGHLIGHT_SOURCE,
+} from "@app/constants";
 import { getCoversFromSupabase } from "@app/services";
 import { addMarkerToMapState } from "@app/utils";
 
@@ -34,59 +38,36 @@ const InteractiveMap = () => {
     setMap(map);
   }, [mapContainerRef]);
 
-
   const addPageStreetHighlightLayer = useCallback(() => {
     if (map) {
-      map.addSource('page-street-highlight', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          geometry: {
-            type: 'LineString',
-            coordinates: [
-              [-122.45370156687358, 37.77011360610052],
-              [-122.42083449962726, 37.77429666244831]
-            ],
-          },
-          properties: {
-            name: 'Page Street',
-          }
-        }
-      });
-
-      map.addLayer({
-        id: 'page-street-line',
-        type: 'line',
-        source: 'page-street-highlight',
-        paint: {
-          'line-color': 'rgba(194,90,60, .2)',
-          'line-width': 6,
-        }
-      });
+      map.addSource("page-street-highlight", PAGE_STREET_HIGHLIGHT_SOURCE);
+      map.addLayer(PAGE_STREET_HIGHLIGHT_LAYER);
     }
   }, [map]);
 
   const handleMarkerClick = useCallback(
-    (marker) => {
-      setSearchParams({
-        overlay: "marker",
-        id: marker.id,
-        lat: marker.lng,
-        lng: marker.lat,
-      });
+    ({ id }) => {
+      setSearchParams({ overlay: "marker", id });
     },
     [setSearchParams]
   );
 
   const handleMapClick = useCallback(
     ({ lngLat: { lat, lng }, originalEvent: { srcElement } }) => {
-      console.log('[lng, lat]', [lng, lat]);
-      if (map && srcElement.tagName === "CANVAS") {
+      if (srcElement.tagName === "CANVAS") {
         setSearchParams({ overlay: "marker", lat: lat, lng: lng });
       }
     },
-    [map, setSearchParams]
+    [setSearchParams]
   );
+
+  const addDrainCoversToMap = useCallback(() => {
+    if (map) {
+      existingDrainCovers.forEach((marker) =>
+        addMarkerToMapState(map, marker, handleMarkerClick)
+      );
+    }
+  }, [map, existingDrainCovers, handleMarkerClick]);
 
   useEffect(() => {
     const fetchDrainCovers = async () => {
@@ -99,32 +80,33 @@ const InteractiveMap = () => {
   }, []);
 
   useEffect(() => {
-    if (map && existingDrainCovers.length > 0) {
-      existingDrainCovers.forEach((marker) =>
-        addMarkerToMapState(map, marker, handleMarkerClick)
-      );
-    }
-  }, [map, existingDrainCovers, handleMarkerClick]);
-
-  useEffect(() => {
-    if (map) {
-      map
-        .on("load", () => {
-          setLoading(false);
-          addPageStreetHighlightLayer();
-        })
-        .on("error", ({ message }) => {
-          enqueueSnackbar(message, { variant: "error" });
-        })
-        .on("click", (event) => {
-          handleMapClick(event);
-        });
-    }
-  }, [map, handleMapClick]);
+    map
+      ?.on("load", () => {
+        addPageStreetHighlightLayer();
+        addDrainCoversToMap();
+        setLoading(false);
+      })
+      ?.on("error", ({ message }) => {
+        enqueueSnackbar(message, { variant: "error" });
+      })
+      ?.on("click", (event) => {
+        handleMapClick(event);
+      });
+  }, [
+    map,
+    handleMapClick,
+    addPageStreetHighlightLayer,
+    addDrainCoversToMap,
+    enqueueSnackbar,
+  ]);
 
   return (
     <>
-      <Box id="map" sx={{ width: "100%", height: "100%", flex: 1 }} ref={mapContainerRef} />
+      <Box
+        id="map"
+        sx={{ width: "100%", height: "100%", flex: 1 }}
+        ref={mapContainerRef}
+      />
       {loading && (
         <CircularProgress
           color="accent"
