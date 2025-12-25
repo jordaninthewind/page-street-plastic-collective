@@ -27,14 +27,16 @@ const InteractiveMap = () => {
   const { markers, loading, error, fetchMarkers } = useMapStore();
 
   useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: "mapbox://styles/jordankline/cmjkd59ot002t01sn0v1q5igw",
-      center: MAP_CENTER,
-      zoom: 15,
-    });
+    if (!map) {
+      const newMap = new mapboxgl.Map({
+        container: mapContainerRef.current,
+        style: "mapbox://styles/jordankline/cmjkd59ot002t01sn0v1q5igw",
+        center: MAP_CENTER,
+        zoom: 15,
+      });
 
-    setMap(map);
+      setMap(newMap);
+    }
   }, [mapContainerRef]);
 
   const addPageStreetHighlightLayer = useCallback(() => {
