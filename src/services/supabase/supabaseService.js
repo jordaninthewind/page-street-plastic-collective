@@ -32,15 +32,14 @@ export const getCoversFromSupabase = async () => {
 
 export const addMarkerToMapRemote = async (fields) => {
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("drain_covers")
       .insert(formatEntry(fields));
 
     if (error) {
       throw error;
     }
-
-    return data[0];
+    return;
   } catch (error) {
     console.error(error);
   }

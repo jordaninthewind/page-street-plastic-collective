@@ -11,7 +11,7 @@ import {
   PAGE_STREET_HIGHLIGHT_LAYER,
   PAGE_STREET_HIGHLIGHT_SOURCE,
 } from "@app/constants";
-import { getCoversFromSupabase } from "@app/services";
+import { useMapStore } from "@app/stores";
 import { addMarkerToMapState } from "@app/utils";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
@@ -23,9 +23,8 @@ const InteractiveMap = () => {
 
   const mapContainerRef = useRef(null);
 
-  const [loading, setLoading] = useState(true);
   const [map, setMap] = useState(null);
-  const [existingDrainCovers, setExistingDrainCovers] = useState([]);
+  const { markers, loading, error, fetchMarkers } = useMapStore();
 
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -62,29 +61,32 @@ const InteractiveMap = () => {
   );
 
   const addDrainCoversToMap = useCallback(() => {
-    if (map) {
-      existingDrainCovers.forEach((marker) =>
-        addMarkerToMapState(map, marker, handleMarkerClick)
-      );
-    }
-  }, [map, existingDrainCovers, handleMarkerClick]);
+    markers.forEach((marker) =>
+      addMarkerToMapState(map, marker, handleMarkerClick)
+    );
+  }, [map, markers, handleMarkerClick]);
 
   useEffect(() => {
-    const fetchDrainCovers = async () => {
-      const data = await getCoversFromSupabase();
+    fetchMarkers();
+  }, [fetchMarkers]);
 
-      setExistingDrainCovers(data || []);
-    };
+  useEffect(() => {
+    if (error) {
+      enqueueSnackbar(error, { variant: "error" });
+    }
+  }, [error, enqueueSnackbar]);
 
-    fetchDrainCovers();
-  }, []);
+  useEffect(() => {
+    if (map && markers.length > 0) {
+      addDrainCoversToMap();
+    }
+  }, [map, markers, addDrainCoversToMap]);
 
   useEffect(() => {
     map
       ?.on("load", () => {
         addPageStreetHighlightLayer();
         addDrainCoversToMap();
-        setLoading(false);
       })
       ?.on("error", ({ message }) => {
         enqueueSnackbar(message, { variant: "error" });
