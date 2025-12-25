@@ -4,17 +4,16 @@ import CoverLogo from "@app/assets/cover-logo.svg";
 import { MARKER_TYPES } from "@app/constants";
 
 export const createMarker = (marker, onClick = () => {}) => {
-  const { id, lng, lat, state = "temporary" } = marker;
+  const { id, lng, lat, covered = false } = marker;
 
   const el = document.createElement("div");
 
   const style = {
-    backgroundColor: MARKER_TYPES[state].color,
+    backgroundColor: MARKER_TYPES[covered ? "covered" : "missing"].color,
     cursor: "pointer",
-    zIndex: 1000,
-    width: "80px",
-    height: "80px",
-    padding: "10px",
+    width: "40px",
+    height: "40px",
+    padding: "2px",
     objectFit: "contain",
     borderRadius: "50%",
   };

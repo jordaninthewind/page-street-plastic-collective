@@ -18,7 +18,7 @@ export const PAGE_STREET_HIGHLIGHT_SOURCE = {
       type: "LineString",
       coordinates: [
         [-122.45370156687358, 37.77011360610052],
-        [-122.42083449962726, 37.77429666244831]
+        [-122.42083449962726, 37.77429666244831],
       ],
     },
     properties: {
