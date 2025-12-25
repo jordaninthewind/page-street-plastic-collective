@@ -36,11 +36,13 @@ const Problem = () => (
           <img
             src="uncovered-sewer-cap-type-1.jpg"
             alt="Uncovered sewer cap example"
+            loading="lazy"
             style={{ width: "100%", height: "auto" }}
           />
           <img
             src="uncovered-sewer-cap-type-1-a.jpg"
             alt="Uncovered sewer cap example"
+            loading="lazy"
             style={{ width: "100%", height: "auto" }}
           />
         </Box>

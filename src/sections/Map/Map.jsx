@@ -22,6 +22,7 @@ const Map = () => {
             src={PageStreetMap}
             alt="Page Street Map"
             width="100%"
+            loading="lazy"
             style={{ borderRadius: "10px" }}
           />
         </HoverActionCard>

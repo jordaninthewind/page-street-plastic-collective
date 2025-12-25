@@ -13,6 +13,7 @@ const Solution = () => (
             src="cover-logo.svg"
             style={{ maxWidth: "100%", width: "auto", height: "auto" }}
             alt="Cover logo"
+            loading="lazy"
           />
           <Typography variant="sectionTitle">
             {SOLUTION_SECTION.title}
@@ -29,6 +30,7 @@ const Solution = () => (
             src="sewer-cover-type-1.jpg"
             style={{ maxWidth: "100%", width: "auto", height: "auto" }}
             alt="Printed sewer cover"
+            loading="lazy"
           />
         </Box>
       </Grid>

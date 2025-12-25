@@ -2,13 +2,14 @@ import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Clear, ErrorOutline, LocationPin } from "@mui/icons-material";
-import { Box, Grid } from "@mui/material";
 import {
+  Box,
   Button,
   CircularProgress,
+  Grid,
   IconButton,
   InputAdornment,
   InputLabel,
@@ -19,57 +20,44 @@ import {
   Typography,
 } from "@mui/material";
 
-import { addMarkerToMapRemote, searchNearbyAddresses } from "@app/services";
+import { useMapStore } from "@app/stores";
 import { formatDecimal } from "@app/utils";
-
-const debounce = (func, delay) => {
-  let timeout;
-  return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), delay);
-  };
-};
 
 const AddDrainCover = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { register, handleSubmit, reset, watch, setValue } = useForm();
-  const { enqueueSnackbar } = useSnackbar();
 
-  const [loadingSearchResults, setLoadingSearchResults] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
-  const [addressSearchError, setAddressSearchError] = useState(null);
+  const {
+    addMarker,
+    searchNearbyAddresses,
+    searchLoading,
+    searchError,
+    searchResults,
+    saving,
+    loading,
+    error,
+  } = useMapStore();
+  const { enqueueSnackbar } = useSnackbar();
 
   const lng = searchParams.get("lng");
   const lat = searchParams.get("lat");
 
   useEffect(() => {
+    if (error) {
+      enqueueSnackbar(error, { variant: "error" });
+    }
+  }, [error, enqueueSnackbar]);
+
+  useEffect(() => {
     if (!lng || !lat) return;
 
-    const debouncedFetchSearchResults = debounce(async () => {
-      try {
-        setLoadingSearchResults(true);
-
-        const { results, error } = await searchNearbyAddresses(lng, lat);
-
-        setSearchResults(results || []);
-        setAddressSearchError(error || null);
-      } catch (error) {
-        setAddressSearchError(error.message);
-      } finally {
-        setLoadingSearchResults(false);
-      }
-    }, 500);
-
-    debouncedFetchSearchResults();
-  }, [lng, lat]);
+    searchNearbyAddresses(lng, lat);
+  }, [lng, lat, searchNearbyAddresses]);
 
   const onSubmit = async (data) => {
     try {
-      setSaving(true);
-
-      await addMarkerToMapRemote({ lng, lat, ...data });
+      await addMarker({ lng, lat, ...data });
 
       enqueueSnackbar(
         "We received your request and will update the map and (try to) send you an email when it's been added!",
@@ -79,11 +67,9 @@ const AddDrainCover = () => {
       );
 
       setSearchParams({});
+      reset();
     } catch ({ message }) {
       enqueueSnackbar(message, { variant: "error" });
-    } finally {
-      setSaving(false);
-      reset();
     }
   };
 
@@ -136,13 +122,13 @@ const AddDrainCover = () => {
           <InputLabel sx={{ mb: 2 }}>
             <Typography variant="h5">Nearby Addresses</Typography>
           </InputLabel>
-          {loadingSearchResults ? (
+          {searchLoading ? (
             <CircularProgress size={20} />
-          ) : addressSearchError ? (
+          ) : searchError ? (
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <ErrorOutline color="error" />
               <Typography variant="body1" color="error">
-                {addressSearchError}
+                {searchError}
               </Typography>
             </Box>
           ) : searchResults.length > 0 ? (
@@ -166,10 +152,13 @@ const AddDrainCover = () => {
               ))}
             </Grid>
           ) : (
-            <Typography variant="body1">
-              {" "}
-              <ErrorOutline /> No nearby addresses found
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <ErrorOutline />
+              <Typography variant="body1">
+                {" "}
+                No nearby addresses found
+              </Typography>
+            </Box>
           )}
         </Stack>
         <InputLabel>Address</InputLabel>
@@ -195,12 +184,12 @@ const AddDrainCover = () => {
         <Select
           fullWidth
           sx={{ mb: 2 }}
-          {...register("state")}
+          {...register("covered")}
           required
-          defaultValue="missing"
+          defaultValue="false"
         >
-          <MenuItem value="missing">Missing</MenuItem>
-          <MenuItem value="covered">Covered</MenuItem>
+          <MenuItem value="false">Missing</MenuItem>
+          <MenuItem value="true">Covered</MenuItem>
         </Select>
         <InputLabel>Cover Type</InputLabel>
         <Select
@@ -238,20 +227,20 @@ const AddDrainCover = () => {
           rows={4}
           sx={{ mb: 2 }}
           {...register("description")}
-          placeholder="Anything else you want to add?"
+          placeholder="Give some details if you want!"
         />
         <Button
           type="submit"
           variant="contained"
           color="primary"
           disabled={
+            loading ||
             saving ||
             !watch("address") ||
-            !watch("state") ||
+            !watch("covered") ||
             !watch("cover_type") ||
             !watch("requested_by") ||
-            !watch("email") ||
-            !watch("description")
+            !watch("email")
           }
           fullWidth
         >
