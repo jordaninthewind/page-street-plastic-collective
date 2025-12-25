@@ -6,9 +6,8 @@ export const PROJECT_NAME = "Page Street Plastic Collective";
 export const MAP_CENTER = [-122.4347310677153, 37.77261132114993];
 
 export const MARKER_TYPES = {
-  covered: { color: "green" },
-  missing: { color: "blue" },
-  temporary: { color: "red" },
+  covered: { color: "#9C27B0" },
+  missing: { color: "rgba(194,90,60, 1)" },
 };
 
 export const PAGE_STREET_HIGHLIGHT_SOURCE = {
@@ -19,7 +18,7 @@ export const PAGE_STREET_HIGHLIGHT_SOURCE = {
       type: "LineString",
       coordinates: [
         [-122.45370156687358, 37.77011360610052],
-        [-122.42083449962726, 37.77429666244831],
+        [-122.42083449962726, 37.77429666244831]
       ],
     },
     properties: {

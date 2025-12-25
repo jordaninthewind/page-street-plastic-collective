@@ -21,7 +21,7 @@ const ContributorCard = ({ name, description, image, link }) => (
     <CardActionArea
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <CardMedia component="img" image={image} alt={name} />
+      <CardMedia component="img" image={image} alt={name} loading="lazy" />
       <CardContent>
         <Typography variant="h3" sx={{ textAlign: "center" }}>
           {name}
