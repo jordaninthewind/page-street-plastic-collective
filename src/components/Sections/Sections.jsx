@@ -1,3 +1,5 @@
+import { Box } from "@mui/material";
+
 import { DashedDivider } from "@app/components";
 import {
   Contributors,
@@ -8,9 +10,11 @@ import {
   Problem,
   Solution,
   SupportUs,
+  Update,
 } from "@app/sections";
 
 const sections = [
+  Update,
   Problem,
   Solution,
   Model3D,
@@ -22,10 +26,10 @@ const sections = [
 ];
 
 const ComposedSection = (Section, idx) => (
-  <div id={Section.id} key={idx}>
+  <Box key={idx} id={Section.id}>
     <DashedDivider />
     <Section />
-  </div>
+  </Box>
 );
 
 const Sections = () => sections.map(ComposedSection);

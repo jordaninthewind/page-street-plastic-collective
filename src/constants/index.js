@@ -37,6 +37,13 @@ export const PAGE_STREET_HIGHLIGHT_LAYER = {
   },
 };
 
+export const UPDATE_SECTION = {
+  id: "update",
+  title: "Update",
+  subtitle:
+    "As of 12/26/2025, you can now request a drain cover in the interactive map!",
+};
+
 export const INTERACTIVE_MAP_SECTION = {
   id: "map",
   title: "Interactive Map",

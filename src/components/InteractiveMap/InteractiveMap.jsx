@@ -37,7 +37,7 @@ const InteractiveMap = () => {
 
       setMap(newMap);
     }
-  }, [mapContainerRef]);
+  }, [map, mapContainerRef]);
 
   const addPageStreetHighlightLayer = useCallback(() => {
     if (map) {

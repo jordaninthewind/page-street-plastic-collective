@@ -6,7 +6,9 @@ export { default as ErrorBoundary } from "@app/components/ErrorBoundary/ErrorBou
 export { default as GradientButton } from "@app/components/GradientButton/GradientButton";
 export { default as Header } from "@app/components/Header/Header";
 export { default as HoverActionCard } from "@app/components/HoverActionCard/HoverActionCard";
+export { default as InfoBlock } from "@app/components/InfoBlock/InfoBlock";
 export { default as InteractiveMap } from "@app/components/InteractiveMap/InteractiveMap";
+export { default as MapControlsAndFilters } from "@app/components/MapControlsAndFilters/MapControlsAndFilters";
 export { default as MarkerEditor } from "@app/components/MarkerEditor/MarkerEditor";
 export { default as MarkerInfo } from "@app/components/MarkerInfo/MarkerInfo";
 export { default as Menu } from "@app/components/Menu/Menu";
