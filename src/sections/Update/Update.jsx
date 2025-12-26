@@ -14,7 +14,7 @@ const Update = () => (
       <Box mb={2}>
         <Typography variant="h2">
           Check out the <Link to="/map">interactive map</Link> to let us know if
-          you needa drain cover
+          you need a drain cover
         </Typography>
       </Box>
       <InfoBlock>{UPDATE_SECTION.subtitle}</InfoBlock>
