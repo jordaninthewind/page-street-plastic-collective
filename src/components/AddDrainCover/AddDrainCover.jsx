@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router";
 
 import { useEffect } from "react";
 
-import { Clear, ErrorOutline, LocationPin } from "@mui/icons-material";
+import { Clear, ErrorOutline, Info, LocationPin } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ import {
   Select,
   Stack,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
@@ -180,28 +181,25 @@ const AddDrainCover = () => {
             },
           }}
         />
-        <InputLabel>Covered / Missing</InputLabel>
-        <Select
-          fullWidth
-          sx={{ mb: 2 }}
-          {...register("covered")}
-          required
-          defaultValue="false"
-        >
-          <MenuItem value="false">Missing</MenuItem>
-          <MenuItem value="true">Covered</MenuItem>
-        </Select>
-        <InputLabel>Cover Type</InputLabel>
+        <InputLabel sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          Cover Type
+          <Tooltip title="We are currently only offering square covers. We will be adding round and oversize covers soon!">
+            <Info />
+          </Tooltip>
+        </InputLabel>
         <Select
           fullWidth
           sx={{ mb: 2 }}
           {...register("cover_type")}
-          required
           defaultValue="standard-square"
         >
           <MenuItem value="standard-square">Standard - Square</MenuItem>
-          <MenuItem value="standard-round">Standard - Round</MenuItem>
-          <MenuItem value="oversize-square">Oversize - Square</MenuItem>
+          <MenuItem value="standard-round" disabled>
+            Standard - Round
+          </MenuItem>
+          <MenuItem value="oversize-square" disabled>
+            Oversize - Square
+          </MenuItem>
         </Select>
         <TextField
           label="Requested By"
@@ -237,8 +235,6 @@ const AddDrainCover = () => {
             loading ||
             saving ||
             !watch("address") ||
-            !watch("covered") ||
-            !watch("cover_type") ||
             !watch("requested_by") ||
             !watch("email")
           }

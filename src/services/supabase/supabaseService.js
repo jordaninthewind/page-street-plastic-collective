@@ -20,15 +20,8 @@ export const getSingleCoverFromSupabase = async (id) => {
   }
 };
 
-export const getCoversFromSupabase = async () => {
-  try {
-    const { data } = await supabase.from("drain_covers").select("*");
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const getCoversFromSupabase = async () =>
+  await supabase.from("drain_covers").select("*");
 
 export const addMarkerToMapRemote = async (fields) => {
   try {

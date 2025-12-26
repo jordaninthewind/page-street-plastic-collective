@@ -46,7 +46,13 @@ const useMapStore = create((set, get) => ({
     try {
       set({ loading: true, error: null });
 
-      const markers = await getCoversFromSupabase();
+      const { data, error } = await getCoversFromSupabase();
+
+      if (error) {
+        throw error;
+      }
+
+      const markers = data;
 
       set({ markers });
     } catch (error) {
