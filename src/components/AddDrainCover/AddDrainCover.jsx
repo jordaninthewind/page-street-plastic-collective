@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 
 import { useMapStore } from "@app/stores";
-import { formatDecimal } from "@app/utils";
+import { formatDecimal, validateEmail } from "@app/utils";
 
 const AddDrainCover = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -236,7 +236,7 @@ const AddDrainCover = () => {
             saving ||
             !watch("address") ||
             !watch("requested_by") ||
-            !watch("email")
+            !validateEmail(watch("email"))
           }
           fullWidth
         >
