@@ -32,6 +32,7 @@ export const addMarkerToMapRemote = async (fields) => {
     if (error) {
       throw error;
     }
+
     return;
   } catch (error) {
     console.error(error);
