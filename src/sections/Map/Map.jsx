@@ -10,9 +10,7 @@ import { Section } from "@app/containers";
 const Map = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/map`);
-  };
+  const handleClick = () => navigate(`/map`);
 
   return (
     <Section {...INTERACTIVE_MAP_SECTION}>

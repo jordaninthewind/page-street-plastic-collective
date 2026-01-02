@@ -15,10 +15,10 @@ import {
 
 const sections = [
   Update,
+  Map,
   Problem,
   Solution,
   Model3D,
-  Map,
   Contributors,
   CoverTheCity,
   SupportUs,
