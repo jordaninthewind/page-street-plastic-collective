@@ -1,18 +1,16 @@
+import "./Marker.css";
 import mapboxgl from "mapbox-gl";
 import { createPortal } from "react-dom";
 
 import React, { useEffect, useRef } from "react";
 
-import { useTheme } from "@mui/material/styles";
-
 import CoverLogo from "@app/assets/cover-logo.svg";
+import { isStale } from "@app/utils";
 
 const Marker = ({ map, marker, onClick }) => {
-  const { palette } = useTheme();
-  const { id, lng, lat, covered = false } = marker;
-
   const markerRef = useRef(null);
   const contentRef = useRef(document.createElement("div"));
+  const { id, lng, lat, covered, updated_at } = marker;
 
   useEffect(() => {
     markerRef.current = new mapboxgl.Marker(contentRef.current)
@@ -28,24 +26,10 @@ const Marker = ({ map, marker, onClick }) => {
     <>
       {createPortal(
         <div
+          className={`marker ${covered ? "marker-covered" : "marker-missing"} ${isStale(updated_at) ? "marker-stale" : ""}`}
           onClick={() => onClick(marker)}
-          style={{
-            backgroundColor: covered
-              ? palette.primary.main
-              : palette.secondary.main,
-            cursor: "pointer",
-            width: "40px",
-            height: "40px",
-            padding: "2px",
-            objectFit: "contain",
-            borderRadius: "50%",
-          }}
         >
-          <img
-            src={CoverLogo}
-            alt={`Marker ${id}`}
-            style={{ width: "100%", height: "100%" }}
-          />
+          <img src={CoverLogo} alt={`Marker ${id}`} className="marker-image" />
         </div>,
         contentRef.current
       )}
