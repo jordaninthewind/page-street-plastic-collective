@@ -1,30 +1,29 @@
 import mapboxgl from "mapbox-gl";
 import { useSnackbar } from "notistack";
-import { useSearchParams } from "react-router";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 
+import { MapControlsAndFilters, Marker } from "@app/components";
 import {
   MAP_CENTER,
   PAGE_STREET_HIGHLIGHT_LAYER,
   PAGE_STREET_HIGHLIGHT_SOURCE,
 } from "@app/constants";
+import { useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
-import { addMarkerToMapState } from "@app/utils";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const InteractiveMap = () => {
-  const [_, setSearchParams] = useSearchParams();
-
-  const { enqueueSnackbar } = useSnackbar();
-
   const mapContainerRef = useRef(null);
 
-  const [map, setMap] = useState(null);
+  const { filter, setSearchParams } = useSearchParamState();
   const { markers, loading, error, fetchMarkers } = useMapStore();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
     if (!map) {
@@ -32,8 +31,19 @@ const InteractiveMap = () => {
         container: mapContainerRef.current,
         style: "mapbox://styles/jordankline/cmjkd59ot002t01sn0v1q5igw",
         center: MAP_CENTER,
-        zoom: 15,
+        zoom: 14,
       });
+
+      newMap.addControl(
+        new mapboxgl.NavigationControl({
+          showCompass: true,
+          showZoom: false,
+          showRotate: false,
+          showPitch: false,
+          showAltitude: false,
+          showAltitudeControl: false,
+        })
+      );
 
       setMap(newMap);
     }
@@ -62,12 +72,6 @@ const InteractiveMap = () => {
     [setSearchParams]
   );
 
-  const addDrainCoversToMap = useCallback(() => {
-    markers.forEach((marker) =>
-      addMarkerToMapState(map, marker, handleMarkerClick)
-    );
-  }, [map, markers, handleMarkerClick]);
-
   useEffect(() => {
     fetchMarkers();
   }, [fetchMarkers]);
@@ -79,16 +83,9 @@ const InteractiveMap = () => {
   }, [error, enqueueSnackbar]);
 
   useEffect(() => {
-    if (map && markers.length > 0) {
-      addDrainCoversToMap();
-    }
-  }, [map, markers, addDrainCoversToMap]);
-
-  useEffect(() => {
     map
       ?.on("load", () => {
         addPageStreetHighlightLayer();
-        addDrainCoversToMap();
       })
       ?.on("error", ({ message }) => {
         enqueueSnackbar(message, { variant: "error" });
@@ -96,13 +93,7 @@ const InteractiveMap = () => {
       ?.on("click", (event) => {
         handleMapClick(event);
       });
-  }, [
-    map,
-    handleMapClick,
-    addPageStreetHighlightLayer,
-    addDrainCoversToMap,
-    enqueueSnackbar,
-  ]);
+  }, [map, handleMapClick, addPageStreetHighlightLayer, enqueueSnackbar]);
 
   return (
     <>
@@ -111,7 +102,7 @@ const InteractiveMap = () => {
         sx={{ width: "100%", height: "100%", flex: 1 }}
         ref={mapContainerRef}
       />
-      {loading && (
+      {loading ? (
         <CircularProgress
           color="accent"
           size={70}
@@ -122,6 +113,29 @@ const InteractiveMap = () => {
             transform: "translate(-50%, -50%)",
           }}
         />
+      ) : (
+        <>
+          {map &&
+            markers?.map((marker) => {
+              if (filter === "covered" && !marker.covered) {
+                return null;
+              }
+
+              if (filter === "missing" && marker.covered) {
+                return null;
+              }
+
+              return (
+                <Marker
+                  key={marker.id}
+                  map={map}
+                  marker={marker}
+                  onClick={handleMarkerClick}
+                />
+              );
+            })}
+          {markers.length > 0 && <MapControlsAndFilters />}
+        </>
       )}
     </>
   );

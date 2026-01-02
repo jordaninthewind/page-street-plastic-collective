@@ -9,6 +9,7 @@ export { default as HoverActionCard } from "@app/components/HoverActionCard/Hove
 export { default as InfoBlock } from "@app/components/InfoBlock/InfoBlock";
 export { default as InteractiveMap } from "@app/components/InteractiveMap/InteractiveMap";
 export { default as MapControlsAndFilters } from "@app/components/MapControlsAndFilters/MapControlsAndFilters";
+export { default as Marker } from "@app/components/Marker/Marker";
 export { default as MarkerEditor } from "@app/components/MarkerEditor/MarkerEditor";
 export { default as MarkerInfo } from "@app/components/MarkerInfo/MarkerInfo";
 export { default as Menu } from "@app/components/Menu/Menu";

@@ -52,9 +52,7 @@ const useMapStore = create((set, get) => ({
         throw error;
       }
 
-      const markers = data;
-
-      set({ markers });
+      set({ markers: data });
     } catch (error) {
       set({ error: error.message });
     } finally {
