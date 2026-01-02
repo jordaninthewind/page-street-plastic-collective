@@ -32,7 +32,6 @@ const InteractiveMap = () => {
         container: mapContainerRef.current,
         style: "mapbox://styles/jordankline/cmjkd59ot002t01sn0v1q5igw",
         center: MAP_CENTER,
-        zoom: 14,
         maxBounds: MAP_BOUNDS,
       });
 

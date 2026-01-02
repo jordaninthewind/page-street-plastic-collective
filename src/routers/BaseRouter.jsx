@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { Navigate, createBrowserRouter } from "react-router";
 
 import { Layout } from "@app/containers";
 import { Home, Map } from "@app/pages";
@@ -15,6 +15,10 @@ const BaseRouter = () => {
         {
           path: "/map",
           element: <Map />,
+        },
+        {
+          path: "*",
+          element: <Navigate to="/" />,
         },
       ],
     },
