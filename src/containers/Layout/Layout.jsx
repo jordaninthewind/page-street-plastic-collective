@@ -24,7 +24,7 @@ const Layout = () => {
   }, [posthog]);
 
   return (
-    <PostHogErrorBoundary fallback={<ErrorFallback />}>
+    <PostHogErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
       <ThemeProvider theme={theme}>
         <SnackbarProvider>
           <CssBaseline />
