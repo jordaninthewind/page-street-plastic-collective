@@ -7,6 +7,7 @@ import { Box, CircularProgress } from "@mui/material";
 
 import { MapControlsAndFilters, Marker } from "@app/components";
 import {
+  MAP_BOUNDS,
   MAP_CENTER,
   PAGE_STREET_HIGHLIGHT_LAYER,
   PAGE_STREET_HIGHLIGHT_SOURCE,
@@ -32,18 +33,10 @@ const InteractiveMap = () => {
         style: "mapbox://styles/jordankline/cmjkd59ot002t01sn0v1q5igw",
         center: MAP_CENTER,
         zoom: 14,
+        maxBounds: MAP_BOUNDS,
       });
 
-      newMap.addControl(
-        new mapboxgl.NavigationControl({
-          showCompass: true,
-          showZoom: false,
-          showRotate: false,
-          showPitch: false,
-          showAltitude: false,
-          showAltitudeControl: false,
-        })
-      );
+      newMap.addControl(new mapboxgl.NavigationControl());
 
       setMap(newMap);
     }
@@ -66,7 +59,7 @@ const InteractiveMap = () => {
   const handleMapClick = useCallback(
     ({ lngLat: { lat, lng }, originalEvent: { srcElement } }) => {
       if (srcElement.tagName === "CANVAS") {
-        setSearchParams({ overlay: "marker", lat: lat, lng: lng });
+        setSearchParams({ overlay: "marker", lat, lng });
       }
     },
     [setSearchParams]

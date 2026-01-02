@@ -1,16 +1,22 @@
 import { createBrowserRouter } from "react-router";
 
+import { Layout } from "@app/containers";
 import { Home, Map } from "@app/pages";
 
 const BaseRouter = () => {
   return createBrowserRouter([
     {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/map",
-      element: <Map />,
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/map",
+          element: <Map />,
+        },
+      ],
     },
   ]);
 };
