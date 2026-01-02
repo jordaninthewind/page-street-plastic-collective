@@ -1,9 +1,9 @@
-import { PostHogProvider } from "@posthog/react";
+import { PostHogErrorBoundary, PostHogProvider } from "@posthog/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import posthog from "posthog-js";
 import { RouterProvider } from "react-router";
 
-import { ErrorBoundary } from "@app/components";
+import { ErrorFallback } from "@app/components";
 import BaseRouter from "@app/routers/BaseRouter";
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
@@ -14,12 +14,12 @@ posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
 const router = BaseRouter();
 
 const App = () => (
-  <ErrorBoundary>
-    <PostHogProvider client={posthog}>
+  <PostHogProvider client={posthog}>
+    <PostHogErrorBoundary fallback={<ErrorFallback />}>
       <RouterProvider router={router} />
       <SpeedInsights />
-    </PostHogProvider>
-  </ErrorBoundary>
+    </PostHogErrorBoundary>
+  </PostHogProvider>
 );
 
 export default App;
