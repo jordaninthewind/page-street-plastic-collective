@@ -1,8 +1,7 @@
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
-import { useSearchParams } from "react-router";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { Clear, ErrorOutline, Info, LocationPin } from "@mui/icons-material";
 import {
@@ -21,11 +20,12 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
 import { formatDecimal, validateEmail } from "@app/utils";
 
 const AddDrainCover = () => {
-  const [searchParams, setParams] = useSearchParams();
+  const { id, lng, lat, setParams } = useSearchParamState();
 
   const { register, handleSubmit, reset, watch, setValue } = useForm();
 
@@ -39,10 +39,10 @@ const AddDrainCover = () => {
     loading,
     error,
   } = useMapStore();
+
   const { enqueueSnackbar } = useSnackbar();
 
-  const lng = searchParams.get("lng");
-  const lat = searchParams.get("lat");
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -51,10 +51,10 @@ const AddDrainCover = () => {
   }, [error, enqueueSnackbar]);
 
   useEffect(() => {
-    if (!lng || !lat) return;
+    if (!id && (!lng || !lat)) return;
 
     searchNearbyAddresses(lng, lat);
-  }, [lng, lat, searchNearbyAddresses]);
+  }, [id, lng, lat, searchNearbyAddresses]);
 
   const onSubmit = async (data) => {
     try {
@@ -93,11 +93,26 @@ const AddDrainCover = () => {
       }
     );
 
-  return (
+  if (!id && !lat && !lng) return null;
+
+  return !showForm ? (
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => setShowForm(true)}
+    >
+      Request a printed drain cover at this location
+    </Button>
+  ) : (
     <>
-      <Typography variant="h2" sx={{ mb: 2 }}>
-        Request a printed drain cover
-      </Typography>
+      <Stack>
+        <Typography variant="h2" sx={{ mb: 2 }}>
+          Request a printed drain cover
+        </Typography>
+        <IconButton onClick={() => setShowForm(false)}>
+          <Close />
+        </IconButton>
+      </Stack>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack
           direction="row"

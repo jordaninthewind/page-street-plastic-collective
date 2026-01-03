@@ -1,15 +1,15 @@
+import { useCallback } from "react";
+
 import { MenuItem, Select } from "@mui/material";
 
 import { useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
 
-const MapSearch = () => {
+const AddressSearch = () => {
   const { markers } = useMapStore();
   const { setParams } = useSearchParamState();
 
-  const handleMarkerClick = (id) => {
-    setParams({ overlay: "marker", id });
-  };
+  const handleMarkerClick = useCallback((id) => setParams({ id }), [setParams]);
 
   return (
     <Select fullWidth>
@@ -29,4 +29,4 @@ const MapSearch = () => {
   );
 };
 
-export default MapSearch;
+export default AddressSearch;

@@ -1,5 +1,4 @@
 import mapboxgl from "mapbox-gl";
-import { useSnackbar } from "notistack";
 import { useSearchParams } from "react-router";
 
 import { useEffect, useRef, useState } from "react";
@@ -7,12 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import {
-  MAP_BOUNDS,
-  MAP_CENTER,
-  PAGE_STREET_HIGHLIGHT_LAYER,
-  PAGE_STREET_HIGHLIGHT_SOURCE,
-} from "@app/constants";
+import { MAP_BOUNDS, MAP_CENTER } from "@app/constants";
 
 export const useSearchParamState = () => {
   const [searchParams, setParams] = useSearchParams();
@@ -39,8 +33,9 @@ export const useSearchParamState = () => {
 
 export const useMap = () => {
   const [map, setMap] = useState(null);
+
   const mapContainerRef = useRef(null);
-  const { enqueueSnackbar } = useSnackbar();
+
   useEffect(() => {
     if (!map) {
       const newMap = new mapboxgl.Map({
@@ -53,21 +48,6 @@ export const useMap = () => {
       setMap(newMap);
     }
   }, [map]);
-
-  useEffect(() => {
-    if (map) {
-      map
-        .once("load", () => {
-          map.addSource("page-street-highlight", PAGE_STREET_HIGHLIGHT_SOURCE);
-          map.addLayer(PAGE_STREET_HIGHLIGHT_LAYER);
-          map.addControl(new mapboxgl.NavigationControl());
-        })
-        ?.on("error", ({ message }) => {
-          enqueueSnackbar(message, { variant: "error" });
-        });
-    }
-  }, [map, enqueueSnackbar]);
-
   return { map, mapContainerRef };
 };
 

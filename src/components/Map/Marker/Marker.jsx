@@ -12,8 +12,10 @@ import { isStale } from "@app/utils";
 const Marker = ({ map, marker }) => {
   const markerRef = useRef(null);
   const contentRef = useRef(document.createElement("div"));
-  const { id, lng, lat, covered, updated_at } = marker;
+
   const { filter, setParams } = useSearchParamState();
+
+  const { id, lng, lat, covered, updated_at: updatedAt } = marker;
 
   useEffect(() => {
     markerRef.current = new mapboxgl.Marker(contentRef.current)
@@ -25,10 +27,7 @@ const Marker = ({ map, marker }) => {
     };
   }, [map, lng, lat]);
 
-  const handleClick = useCallback(
-    () => setParams({ id, filter }),
-    [setParams, id, filter]
-  );
+  const handleClick = useCallback(() => setParams({ id }), [setParams, id]);
 
   if ((filter === "covered" && !covered) || (filter === "missing" && covered)) {
     return null;
@@ -36,7 +35,7 @@ const Marker = ({ map, marker }) => {
 
   return createPortal(
     <div
-      className={`marker ${covered ? "marker-covered" : "marker-missing"} ${isStale(updated_at) ? "marker-stale" : ""}`}
+      className={`marker ${covered ? "marker-covered" : "marker-missing"} ${isStale(updatedAt) ? "marker-stale" : ""}`}
       onClick={handleClick}
     >
       <img src={CoverLogo} alt={`Marker ${id}`} className="marker-image" />

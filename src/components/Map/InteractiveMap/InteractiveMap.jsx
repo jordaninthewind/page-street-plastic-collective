@@ -1,48 +1,56 @@
 import mapboxgl from "mapbox-gl";
 import { useSnackbar } from "notistack";
 
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 
 import { Box } from "@mui/material";
 
 import { Marker } from "@app/components";
+import {
+  PAGE_STREET_HIGHLIGHT_LAYER,
+  PAGE_STREET_HIGHLIGHT_SOURCE,
+} from "@app/constants";
 import { useMap, useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const InteractiveMap = () => {
-  const { setParams } = useSearchParamState();
-  const { markers, error, fetchMarkers } = useMapStore();
+  const { lat, lng, setParams } = useSearchParamState();
   const { map, mapContainerRef } = useMap();
-  const { enqueueSnackbar } = useSnackbar();
+  const { markers, fetchMarkers } = useMapStore();
 
-  const handleMapClick = useCallback(
-    ({ lngLat: { lat, lng }, originalEvent: { srcElement } }) => {
-      if (srcElement.tagName === "CANVAS") {
-        setParams({ lat, lng });
-      }
-    },
-    [setParams]
-  );
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     fetchMarkers();
   }, [fetchMarkers]);
 
   useEffect(() => {
-    if (error) {
-      enqueueSnackbar(error, { variant: "error" });
-    }
-  }, [error, enqueueSnackbar]);
+    map
+      ?.once("load", () => {
+        map.addSource("page-street-highlight", PAGE_STREET_HIGHLIGHT_SOURCE);
+        map.addLayer(PAGE_STREET_HIGHLIGHT_LAYER);
+        map.addControl(new mapboxgl.NavigationControl());
+      })
+      ?.on("click", (event) => {
+        if (event.originalEvent.srcElement.tagName === "CANVAS") {
+          setParams({ id: "", lat: event.lngLat.lat, lng: event.lngLat.lng });
+        }
+      })
+      ?.on("error", ({ message }) => {
+        enqueueSnackbar(message, { variant: "error" });
+      });
+  }, [map, enqueueSnackbar, setParams]);
 
   useEffect(() => {
-    if (map) {
-      map?.on("click", (event) => {
-        handleMapClick(event);
+    if (map && lng && lat) {
+      map.flyTo({
+        center: [lng, lat],
+        zoom: 15,
       });
     }
-  }, [map, handleMapClick, enqueueSnackbar]);
+  }, [map, lng, lat]);
 
   return (
     <>
@@ -54,6 +62,7 @@ const InteractiveMap = () => {
       {markers.map((marker) => (
         <Marker key={marker.id} map={map} marker={marker} />
       ))}
+      {/* TODO: Temporary Marker */}
     </>
   );
 };

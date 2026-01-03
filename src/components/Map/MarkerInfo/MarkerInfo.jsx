@@ -1,20 +1,66 @@
-import { Box, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
-const MarkerInfo = ({ cover }) => {
+import { Stack, Typography } from "@mui/material";
+
+import { useSearchParamState } from "@app/hooks";
+import { getSingleCoverFromSupabase } from "@app/services";
+import { isStale } from "@app/utils";
+
+const MarkerInfo = () => {
+  const { id } = useSearchParamState();
+
+  const [marker, setMarker] = useState(null);
+
+  useEffect(() => {
+    if (id) {
+      const fetchMarker = async () => {
+        const marker = await getSingleCoverFromSupabase(id);
+
+        setMarker(marker);
+      };
+
+      fetchMarker();
+    }
+  }, [id]);
+
+  if (!marker) return null;
+
+  const {
+    address,
+    covered,
+    requested_by: requestedBy,
+    created_at: createdAt,
+    updated_at: updatedAt,
+  } = marker;
+
   return (
-    <Box>
-      <Typography variant="h2" sx={{ mb: 2 }}>
-        Drain Cover Information
+    <Stack
+      flexDirection="column"
+      justifyContent="flex-start"
+      alignItems="center"
+      spacing={2}
+      sx={{ mb: 2 }}
+    >
+      <Typography variant="h3" sx={{ mb: 2 }}>
+        The drain at
       </Typography>
-      <Typography variant="h6">Requested By: {cover.requested_by}</Typography>
-      <Typography variant="body1">Description: {cover.description}</Typography>
-      <Typography variant="body1">State: {cover.state}</Typography>
-      <Typography variant="body1">Cover Type: {cover.cover_type}</Typography>
-      <Typography variant="body1">Address: {cover.address}</Typography>
-      <Typography variant="body1">Location: {cover.location}</Typography>
-      <Typography variant="body1">Created At: {cover.created_at}</Typography>
-      <Typography variant="body1">Updated At: {cover.updated_at}</Typography>
-    </Box>
+      <Typography variant="h2" sx={{ mb: 2 }}>
+        {address}, SF, CA
+      </Typography>
+      <Typography variant="h3" sx={{ mb: 2 }}>
+        is {covered ? "covered ✅" : "missing ❌"}
+      </Typography>
+      <Typography variant="body1">
+        As of {new Date(updatedAt).toLocaleString()}
+      </Typography>
+      <Typography variant="body1">
+        This info is {isStale(updatedAt) ? "stale" : "fresh"}
+      </Typography>
+      <Typography variant="h6">Requested By: {requestedBy}</Typography>
+      <Typography variant="body1">
+        First reported: {new Date(createdAt).toLocaleString()}
+      </Typography>
+    </Stack>
   );
 };
 
