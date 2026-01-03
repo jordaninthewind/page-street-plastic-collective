@@ -5,10 +5,10 @@ import { useMapStore } from "@app/stores";
 
 const MapSearch = () => {
   const { markers } = useMapStore();
-  const { setSearchParams } = useSearchParamState();
+  const { setParams } = useSearchParamState();
 
   const handleMarkerClick = (id) => {
-    setSearchParams({ overlay: "marker", id });
+    setParams({ overlay: "marker", id });
   };
 
   return (

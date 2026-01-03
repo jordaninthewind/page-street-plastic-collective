@@ -25,7 +25,7 @@ import { useMapStore } from "@app/stores";
 import { formatDecimal, validateEmail } from "@app/utils";
 
 const AddDrainCover = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setParams] = useSearchParams();
 
   const { register, handleSubmit, reset, watch, setValue } = useForm();
 
@@ -67,7 +67,7 @@ const AddDrainCover = () => {
         }
       );
 
-      setSearchParams({});
+      setParams({});
       reset();
     } catch ({ message }) {
       enqueueSnackbar(message, { variant: "error" });
@@ -77,7 +77,7 @@ const AddDrainCover = () => {
   const handleLocationClick = () =>
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
-        setSearchParams({
+        setParams({
           overlay: "marker",
           lat: coords.latitude,
           lng: coords.longitude,
@@ -248,7 +248,7 @@ const AddDrainCover = () => {
         color="primary"
         sx={{ mt: 2 }}
         disabled={saving}
-        onClick={() => setSearchParams({})}
+        onClick={() => setParams({})}
         fullWidth
       >
         Cancel

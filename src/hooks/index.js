@@ -1,4 +1,5 @@
 import mapboxgl from "mapbox-gl";
+import { useSnackbar } from "notistack";
 import { useSearchParams } from "react-router";
 
 import { useEffect, useRef, useState } from "react";
@@ -14,18 +15,24 @@ import {
 } from "@app/constants";
 
 export const useSearchParamState = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setParams] = useSearchParams();
 
+  const id = searchParams.get("id");
   const filter = searchParams.get("filter");
+  const lat = searchParams.get("lat");
+  const lng = searchParams.get("lng");
 
   const clearFilter = () => {
-    setSearchParams({});
+    setParams({});
   };
 
   return {
+    id,
+    lat,
+    lng,
     filter,
-    setSearchParams,
-    setFilter: (value) => setSearchParams({ filter: value }),
+    setParams,
+    setFilter: (value) => setParams({ filter: value }),
     clearFilter,
   };
 };
@@ -33,7 +40,7 @@ export const useSearchParamState = () => {
 export const useMap = () => {
   const [map, setMap] = useState(null);
   const mapContainerRef = useRef(null);
-
+  const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     if (!map) {
       const newMap = new mapboxgl.Map({
@@ -49,13 +56,17 @@ export const useMap = () => {
 
   useEffect(() => {
     if (map) {
-      map.once("load", () => {
-        map.addSource("page-street-highlight", PAGE_STREET_HIGHLIGHT_SOURCE);
-        map.addLayer(PAGE_STREET_HIGHLIGHT_LAYER);
-        map.addControl(new mapboxgl.NavigationControl());
-      });
+      map
+        .once("load", () => {
+          map.addSource("page-street-highlight", PAGE_STREET_HIGHLIGHT_SOURCE);
+          map.addLayer(PAGE_STREET_HIGHLIGHT_LAYER);
+          map.addControl(new mapboxgl.NavigationControl());
+        })
+        ?.on("error", ({ message }) => {
+          enqueueSnackbar(message, { variant: "error" });
+        });
     }
-  }, [map]);
+  }, [map, enqueueSnackbar]);
 
   return { map, mapContainerRef };
 };

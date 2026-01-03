@@ -13,7 +13,7 @@ const Modal = () => {
 
   const [overlay, setOverlay] = useState(null);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setParams] = useSearchParams();
 
   useEffect(() => {
     const overlay = searchParams.get("overlay");
@@ -29,7 +29,7 @@ const Modal = () => {
     };
   }, [searchParams, overlay]);
 
-  const handleClose = () => setSearchParams({});
+  const handleClose = () => setParams({});
 
   return (
     <Dialog
