@@ -1,52 +1,21 @@
 import mapboxgl from "mapbox-gl";
 import { useSnackbar } from "notistack";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 
-import { MapControlsAndFilters, Marker } from "@app/components";
-import {
-  MAP_BOUNDS,
-  MAP_CENTER,
-  PAGE_STREET_HIGHLIGHT_LAYER,
-  PAGE_STREET_HIGHLIGHT_SOURCE,
-} from "@app/constants";
-import { useSearchParamState } from "@app/hooks";
+import { Marker } from "@app/components";
+import { useMap, useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const InteractiveMap = () => {
-  const mapContainerRef = useRef(null);
-
   const { filter, setSearchParams } = useSearchParamState();
   const { markers, loading, error, fetchMarkers } = useMapStore();
+  const { map, mapContainerRef } = useMap();
   const { enqueueSnackbar } = useSnackbar();
-
-  const [map, setMap] = useState(null);
-
-  useEffect(() => {
-    if (!map) {
-      const newMap = new mapboxgl.Map({
-        container: mapContainerRef.current,
-        style: "mapbox://styles/jordankline/cmjkd59ot002t01sn0v1q5igw",
-        center: MAP_CENTER,
-        maxBounds: MAP_BOUNDS,
-      });
-
-      newMap.addControl(new mapboxgl.NavigationControl());
-
-      setMap(newMap);
-    }
-  }, [map, mapContainerRef]);
-
-  const addPageStreetHighlightLayer = useCallback(() => {
-    if (map) {
-      map.addSource("page-street-highlight", PAGE_STREET_HIGHLIGHT_SOURCE);
-      map.addLayer(PAGE_STREET_HIGHLIGHT_LAYER);
-    }
-  }, [map]);
 
   const handleMarkerClick = useCallback(
     ({ id }) => {
@@ -75,17 +44,19 @@ const InteractiveMap = () => {
   }, [error, enqueueSnackbar]);
 
   useEffect(() => {
-    map
-      ?.on("load", () => {
-        addPageStreetHighlightLayer();
-      })
-      ?.on("error", ({ message }) => {
-        enqueueSnackbar(message, { variant: "error" });
-      })
-      ?.on("click", (event) => {
-        handleMapClick(event);
-      });
-  }, [map, handleMapClick, addPageStreetHighlightLayer, enqueueSnackbar]);
+    if (map) {
+      map
+        ?.on("load", () => {
+          // addPageStreetHighlightLayer();
+        })
+        ?.on("error", ({ message }) => {
+          enqueueSnackbar(message, { variant: "error" });
+        })
+        ?.on("click", (event) => {
+          handleMapClick(event);
+        });
+    }
+  }, [map, handleMapClick, enqueueSnackbar]);
 
   return (
     <>
@@ -126,7 +97,6 @@ const InteractiveMap = () => {
                 />
               );
             })}
-          {markers.length > 0 && <MapControlsAndFilters />}
         </>
       )}
     </>

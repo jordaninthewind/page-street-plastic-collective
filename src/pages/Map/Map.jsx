@@ -1,8 +1,9 @@
-import { Header, InteractiveMap } from "@app/components";
+import { Header, InteractiveMap, MapNavigation } from "@app/components";
 
 const Map = () => (
   <>
     <Header />
+    <MapNavigation />
     <InteractiveMap />
   </>
 );

@@ -4,7 +4,7 @@ import { Button, ButtonGroup, CircularProgress, Grow } from "@mui/material";
 import { useIsMobile, useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
 
-const MapControlsAndFilters = () => {
+const MapFilters = () => {
   const { filter, setFilter, clearFilter } = useSearchParamState();
   const { markers, loading } = useMapStore();
   const { isMobile } = useIsMobile();
@@ -46,4 +46,4 @@ const MapControlsAndFilters = () => {
   );
 };
 
-export default MapControlsAndFilters;
+export default MapFilters;
