@@ -1,9 +1,9 @@
+import "./Header.css";
 import { useLocation, useNavigate } from "react-router";
 
 import { Home, Map } from "@mui/icons-material";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 
-import "@app/components/Header/Header.css";
 import { PROJECT_NAME } from "@app/constants";
 
 const Header = () => {
