@@ -2,7 +2,6 @@ import { Divider, styled } from "@mui/material";
 
 const DashedDivider = styled(Divider)({
   border: "3px dashed #000",
-  mb: 2,
   width: "100%",
 });
 

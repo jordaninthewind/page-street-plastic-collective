@@ -28,7 +28,9 @@ const sections = [
 const ComposedSection = (Section, idx) => (
   <Box key={idx} id={Section.id}>
     <DashedDivider />
-    <Section />
+    <Box px={1}>
+      <Section />
+    </Box>
   </Box>
 );
 

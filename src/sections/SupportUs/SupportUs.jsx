@@ -1,22 +1,16 @@
 import { usePostHog } from "@posthog/react";
 
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Link, Stack } from "@mui/material";
 
+import { CardSection } from "@app/components";
 import { SUPPORT_US_SECTION } from "@app/constants";
 import { Section } from "@app/containers";
+import { useIsMobile } from "@app/hooks";
 import "@app/sections/SupportUs/SupportUs.css";
 
 const SupportUs = () => {
   const posthog = usePostHog();
-
+  const { isMobile } = useIsMobile();
   const handleShareClick = () => {
     navigator
       .share({
@@ -32,22 +26,19 @@ const SupportUs = () => {
   return (
     <Section {...SUPPORT_US_SECTION}>
       <Stack
-        direction="column"
-        spacing={3}
-        width="100%"
+        direction={isMobile ? "column" : "row"}
+        spacing={2}
         justifyContent="center"
-        alignItems="center"
+        alignItems="flex-start"
       >
-        <Grid size={{ xs: 12, md: 6 }} width="100%">
-          <Card
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              p: 2,
-            }}
+        {/* Join our community and help us make a difference! */}
+        <CardSection
+          title="Join our community and help us make a difference!"
+          subtitle="Our only cost is the PLA filament and the time it takes to print the covers. So feel free to support however able!"
+        >
+          <Box
+            sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}
           >
-            <h3>Join our community and help us make a difference!</h3>
             <a
               href="https://buymeacoffee.com/pagestreetplastic"
               target="_blank"
@@ -56,47 +47,41 @@ const SupportUs = () => {
               <img
                 src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
                 alt="Buy Me a Coffee"
-                style={{ height: "40px" }}
+                style={{ height: "50px" }}
               />
             </a>
-            <p>
-              Our only cost is the PLA filament and the time it takes to print
-              the covers. So feel free to support however able!
-            </p>
-            <p>
-              I'll find a way to link directly to filament purchases that can be
-              sent directly to us, soon!
-            </p>
-          </Card>
-        </Grid>
-        <Grid size={{ xs: 12 }} width="100%">
-          <Card width="100%">
-            <CardContent>
-              <Typography
-                variant="h5"
-                component="h3"
-                gutterBottom
-                align="center"
-              >
-                📢 Spread the Word
-              </Typography>
-              <Typography variant="body1" color="text.secondary" align="center">
-                Help us reach more people by sharing our mission with your
-                friends, family, and social networks.
-              </Typography>
-              <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={handleShareClick}
-                  sx={{ minWidth: "120px" }}
-                >
-                  Share This Page
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
+          </Box>
+        </CardSection>
+
+        {/* Spread the Word */}
+        <CardSection
+          title="📢 Spread the Word"
+          subtitle="Help us reach more people by sharing our mission with your friends, family, and social networks."
+        >
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleShareClick}
+            fullWidth
+          >
+            Share This Page
+          </Button>
+        </CardSection>
+
+        {/* Contact Us */}
+        <CardSection
+          title="💬 Contact"
+          subtitle="Have questions or feedback? Email us directly."
+        >
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
+            <Link
+              href="mailto:hi@pagestreetplasticcollective.com"
+              color="primary"
+            >
+              hi@pagestreetplasticcollective.com
+            </Link>
+          </Box>
+        </CardSection>
       </Stack>
     </Section>
   );

@@ -1,3 +1,4 @@
+export { default as CardSection } from "@app/components/Common/CardSection/CardSection";
 export { default as ContributorCard } from "@app/components/Common/ContributorCard/ContributorCard";
 export { default as Copywrite } from "@app/components/Common/Copywrite/Copywrite";
 export { default as DashedDivider } from "@app/components/Common/DashedDivider/DashedDivider";
