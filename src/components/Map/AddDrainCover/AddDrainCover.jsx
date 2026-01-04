@@ -82,7 +82,6 @@ const AddDrainCover = () => {
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         setParams({
-          overlay: "marker",
           lat: coords.latitude,
           lng: coords.longitude,
         });
