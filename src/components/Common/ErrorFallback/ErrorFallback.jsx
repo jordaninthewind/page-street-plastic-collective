@@ -1,4 +1,8 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
+
+import FallbackImage from "@app/assets/fallback-image.png";
+
+const env = import.meta.env.VITE_ENVIRONMENT;
 
 const ErrorFallback = ({
   error = "An unexpected error occurred",
@@ -11,28 +15,40 @@ const ErrorFallback = ({
     flexDirection="column"
     alignItems="center"
     justifyContent="center"
-    minHeight="200px"
+    minHeight="100vh"
     p={3}
-    sx={{
-      backgroundColor: "#f5f5f5",
-      borderRadius: 2,
-      border: "1px solid #e0e0e0",
-    }}
+    sx={{ backgroundColor: "#fefefe" }}
   >
     <Typography variant="h5" color="error" gutterBottom>
-      Something went wrong
+      Let's try that again..
     </Typography>
+    <img
+      src={FallbackImage}
+      alt="Fallback"
+      style={{ width: "70%", height: "100%" }}
+    />
     <Typography
       variant="body1"
       color="text.secondary"
       align="center"
       sx={{ mb: 2 }}
     >
-      An unexpected error occurred. Please try refreshing the page or contact
-      support if the problem persists.
+      An unexpected error occurred. Please try refreshing the page or{" "}
+      <Link href="mailto:support@page-street-plastic-collective.com">
+        contact us
+      </Link>{" "}
+      if the problem persists. support if the problem persists.
     </Typography>
+    <Button
+      variant="outlined"
+      color="primary"
+      onClick={() => resetErrorBoundary?.() || window.location.reload()}
+      sx={{ m: 4 }}
+    >
+      Refresh the page
+    </Button>
 
-    {error && (
+    {env === "development" && error && (
       <Box
         sx={{
           mt: 2,
@@ -65,7 +81,7 @@ const ErrorFallback = ({
       </Box>
     )}
 
-    {componentStack && (
+    {env === "development" && componentStack && (
       <Box
         sx={{
           mt: 2,
@@ -89,7 +105,7 @@ const ErrorFallback = ({
       </Box>
     )}
 
-    {eventId && (
+    {env === "development" && eventId && (
       <Box
         sx={{
           mt: 2,
@@ -111,15 +127,6 @@ const ErrorFallback = ({
         </Typography>
       </Box>
     )}
-
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={() => resetErrorBoundary?.() || window.location.reload()}
-      sx={{ mt: 2 }}
-    >
-      Try Again
-    </Button>
   </Box>
 );
 
