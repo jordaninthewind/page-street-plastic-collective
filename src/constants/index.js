@@ -96,8 +96,6 @@ export const SOLUTION_SECTION = {
 export const SUPPORT_US_SECTION = {
   id: "support-us",
   title: "Support Us",
-  subtitle:
-    "Help us make a difference in our community! The only cost is our plastic filament and the time it takes to print the covers.",
 };
 
 export const PRIVACY_SECTION = {

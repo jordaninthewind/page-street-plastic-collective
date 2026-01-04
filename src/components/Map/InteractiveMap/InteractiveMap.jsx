@@ -11,12 +11,13 @@ import {
   PAGE_STREET_HIGHLIGHT_LAYER,
   PAGE_STREET_HIGHLIGHT_SOURCE,
 } from "@app/constants";
-import { useMap, useSearchParamState } from "@app/hooks";
+import { useIsMobile, useMap, useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const InteractiveMap = () => {
+  const { isMobile } = useIsMobile();
   const { map, mapContainerRef } = useMap();
   const { markers, fetchMarkers } = useMapStore();
 
@@ -69,7 +70,11 @@ const InteractiveMap = () => {
     <>
       <Box
         id="map"
-        sx={{ width: "100%", minWidth: "50%", minHeight: "100%" }}
+        sx={{
+          width: "100%",
+          minWidth: isMobile ? "100%" : "50%",
+          minHeight: isMobile ? "30vh" : "100%",
+        }}
         ref={mapContainerRef}
       />
       {markers.map((marker, idx) => (
