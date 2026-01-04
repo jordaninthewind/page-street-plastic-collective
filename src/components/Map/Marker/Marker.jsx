@@ -2,7 +2,6 @@ import "./Marker.css";
 import mapboxgl from "mapbox-gl";
 import { createPortal } from "react-dom";
 
-import { useCallback } from "react";
 import { useEffect, useRef } from "react";
 
 import CoverLogo from "@app/assets/cover-logo.svg";
@@ -13,9 +12,14 @@ const Marker = ({ map, marker }) => {
   const markerRef = useRef(null);
   const contentRef = useRef(document.createElement("div"));
 
-  const { filter, setParams } = useSearchParamState();
+  const { filter, setParams, id: selectedId } = useSearchParamState();
 
   const { id, lng, lat, covered, updated_at: updatedAt } = marker;
+
+  const state = covered ? "marker-covered" : "marker-missing";
+  const temporary = !id ? "marker-temporary" : "";
+  const isStaleMarker = isStale(updatedAt) ? "marker-stale" : "";
+  const isSelected = selectedId === id ? "marker-selected" : "";
 
   useEffect(() => {
     markerRef.current = new mapboxgl.Marker(contentRef.current)
@@ -27,7 +31,11 @@ const Marker = ({ map, marker }) => {
     };
   }, [map, lng, lat]);
 
-  const handleClick = useCallback(() => setParams({ id }), [setParams, id]);
+  const handleClick = () => {
+    if (id && lat && lng) {
+      setParams({ id, lat, lng });
+    }
+  };
 
   if ((filter === "covered" && !covered) || (filter === "missing" && covered)) {
     return null;
@@ -35,7 +43,7 @@ const Marker = ({ map, marker }) => {
 
   return createPortal(
     <div
-      className={`marker ${covered ? "marker-covered" : "marker-missing"} ${isStale(updatedAt) ? "marker-stale" : ""}`}
+      className={`marker ${temporary || state} ${isStaleMarker} ${isSelected}`}
       onClick={handleClick}
     >
       <img src={CoverLogo} alt={`Marker ${id}`} className="marker-image" />

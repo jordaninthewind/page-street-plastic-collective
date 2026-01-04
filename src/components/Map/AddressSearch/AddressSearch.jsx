@@ -1,5 +1,3 @@
-import { useCallback } from "react";
-
 import { MenuItem, Select } from "@mui/material";
 
 import { useSearchParamState } from "@app/hooks";
@@ -7,22 +5,21 @@ import { useMapStore } from "@app/stores";
 
 const AddressSearch = () => {
   const { markers } = useMapStore();
-  const { setParams } = useSearchParamState();
 
-  const handleMarkerClick = useCallback((id) => setParams({ id }), [setParams]);
+  const { setParams } = useSearchParamState();
 
   return (
     <Select fullWidth>
       <MenuItem value="" disabled>
         Select a marker to navigate and show info
       </MenuItem>
-      {markers?.map((marker) => (
+      {markers?.map(({ id, lat, lng, address }) => (
         <MenuItem
-          key={marker.id}
-          onClick={() => handleMarkerClick(marker.id)}
-          value={marker.id}
+          key={id}
+          onClick={() => setParams({ id, lat, lng })}
+          value={id}
         >
-          {marker.address}
+          {address}
         </MenuItem>
       ))}
     </Select>

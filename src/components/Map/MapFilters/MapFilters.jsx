@@ -1,5 +1,4 @@
-import { Close } from "@mui/icons-material";
-import { Button, ButtonGroup, CircularProgress, Grow } from "@mui/material";
+import { Button, ButtonGroup, CircularProgress } from "@mui/material";
 
 import { useIsMobile, useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
@@ -35,13 +34,12 @@ const MapFilters = () => {
       >
         Missing ({markers.filter((marker) => !marker.covered).length})
       </Button>
-      {filter && (
-        <Grow in={!!filter} timeout={1000} unmountOnExit>
-          <Button onClick={clearFilter} sx={{ maxWidth: "fit-content" }}>
-            <Close sx={{ fontSize: 16 }} />
-          </Button>
-        </Grow>
-      )}
+      <Button
+        onClick={clearFilter}
+        sx={{ maxWidth: "fit-content", color: "accent.main" }}
+      >
+        Reset map
+      </Button>
     </ButtonGroup>
   );
 };

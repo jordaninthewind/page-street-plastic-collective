@@ -1,12 +1,13 @@
 import mapboxgl from "mapbox-gl";
 import { useSnackbar } from "notistack";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { Box } from "@mui/material";
 
 import { Marker } from "@app/components";
 import {
+  MAP_CENTER,
   PAGE_STREET_HIGHLIGHT_LAYER,
   PAGE_STREET_HIGHLIGHT_SOURCE,
 } from "@app/constants";
@@ -16,11 +17,18 @@ import { useMapStore } from "@app/stores";
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const InteractiveMap = () => {
-  const { lat, lng, setParams } = useSearchParamState();
   const { map, mapContainerRef } = useMap();
   const { markers, fetchMarkers } = useMapStore();
 
+  const { id, lat, lng, setParams } = useSearchParamState();
+
   const { enqueueSnackbar } = useSnackbar();
+
+  const [temporaryMarker, setTemporaryMarker] = useState(null);
+
+  useEffect(() => {
+    setTemporaryMarker(!id && lng && lat ? { id: null, lng, lat } : null);
+  }, [id, lat, lng]);
 
   useEffect(() => {
     fetchMarkers();
@@ -49,6 +57,11 @@ const InteractiveMap = () => {
         center: [lng, lat],
         zoom: 15,
       });
+    } else if (map && !lng && !lat) {
+      map.flyTo({
+        center: MAP_CENTER,
+        zoom: 12,
+      });
     }
   }, [map, lng, lat]);
 
@@ -59,10 +72,10 @@ const InteractiveMap = () => {
         sx={{ width: "100%", minWidth: "50%", minHeight: "100%" }}
         ref={mapContainerRef}
       />
-      {markers.map((marker) => (
-        <Marker key={marker.id} map={map} marker={marker} />
+      {markers.map((marker, idx) => (
+        <Marker key={idx} map={map} marker={marker} />
       ))}
-      {/* TODO: Temporary Marker */}
+      {temporaryMarker && <Marker map={map} marker={temporaryMarker} />}
     </>
   );
 };

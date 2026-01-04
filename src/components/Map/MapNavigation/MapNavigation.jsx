@@ -31,14 +31,9 @@ const MapNavigation = () => {
         width: "100%",
       }}
     >
-      {baseState ? (
-        <>
-          <Explainer />
-          <AddressSearch />
-          <MapFilters />
-        </>
-      )
-        : null}
+      <MapFilters />
+      <AddressSearch />
+      {baseState ? <Explainer /> : null}
       {existingMarkerState ? <MarkerInfo /> : null}
       {newMarkerState ? <AddDrainCover /> : null}
     </Stack>

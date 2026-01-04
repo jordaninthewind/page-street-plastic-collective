@@ -1,9 +1,15 @@
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { Clear, ErrorOutline, Info, LocationPin } from "@mui/icons-material";
+import {
+  Clear,
+  Close,
+  ErrorOutline,
+  Info,
+  LocationPin,
+} from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -42,8 +48,6 @@ const AddDrainCover = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const [showForm, setShowForm] = useState(false);
-
   useEffect(() => {
     if (error) {
       enqueueSnackbar(error, { variant: "error" });
@@ -51,7 +55,7 @@ const AddDrainCover = () => {
   }, [error, enqueueSnackbar]);
 
   useEffect(() => {
-    if (!id && (!lng || !lat)) return;
+    if (!lng || !lat) return;
 
     searchNearbyAddresses(lng, lat);
   }, [id, lng, lat, searchNearbyAddresses]);
@@ -95,21 +99,17 @@ const AddDrainCover = () => {
 
   if (!id && !lat && !lng) return null;
 
-  return !showForm ? (
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={() => setShowForm(true)}
-    >
-      Request a printed drain cover at this location
-    </Button>
-  ) : (
+  return (
     <>
-      <Stack>
-        <Typography variant="h2" sx={{ mb: 2 }}>
-          Request a printed drain cover
-        </Typography>
-        <IconButton onClick={() => setShowForm(false)}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+        sx={{ mb: 2, width: "100%" }}
+      >
+        <Typography variant="h4">Missing a cover here?</Typography>
+        <IconButton onClick={() => setParams({})}>
           <Close />
         </IconButton>
       </Stack>

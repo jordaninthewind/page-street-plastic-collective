@@ -11,7 +11,7 @@ import { MAP_BOUNDS, MAP_CENTER } from "@app/constants";
 export const useSearchParamState = () => {
   const [searchParams, setParams] = useSearchParams();
 
-  const id = searchParams.get("id");
+  const id = Number(searchParams.get("id"));
   const filter = searchParams.get("filter");
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");

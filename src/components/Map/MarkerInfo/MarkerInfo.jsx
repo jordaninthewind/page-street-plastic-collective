@@ -20,18 +20,12 @@ const MarkerInfo = () => {
       };
 
       fetchMarker();
+    } else {
+      setMarker(null);
     }
   }, [id]);
 
   if (!marker) return null;
-
-  const {
-    address,
-    covered,
-    requested_by: requestedBy,
-    created_at: createdAt,
-    updated_at: updatedAt,
-  } = marker;
 
   return (
     <Stack
@@ -45,20 +39,20 @@ const MarkerInfo = () => {
         The drain at
       </Typography>
       <Typography variant="h2" sx={{ mb: 2 }}>
-        {address}, SF, CA
+        {marker.address}, SF, CA
       </Typography>
       <Typography variant="h3" sx={{ mb: 2 }}>
-        is {covered ? "covered ✅" : "missing ❌"}
+        is {marker.covered ? "covered ✅" : "missing ❌"}
       </Typography>
       <Typography variant="body1">
-        As of {new Date(updatedAt).toLocaleString()}
+        As of {new Date(marker.updated_at).toLocaleString()}
       </Typography>
       <Typography variant="body1">
-        This info is {isStale(updatedAt) ? "stale" : "fresh"}
+        This info is {isStale(marker.updated_at) ? "stale" : "fresh"}
       </Typography>
-      <Typography variant="h6">Requested By: {requestedBy}</Typography>
+      <Typography variant="h6">Requested By: {marker.requested_by}</Typography>
       <Typography variant="body1">
-        First reported: {new Date(createdAt).toLocaleString()}
+        First reported: {new Date(marker.created_at).toLocaleString()}
       </Typography>
     </Stack>
   );
