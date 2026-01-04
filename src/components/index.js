@@ -12,6 +12,7 @@ export { default as ModelViewer } from "@app/components/Home/ModelViewer/ModelVi
 export { default as Sections } from "@app/components/Home/Sections/Sections";
 export { default as AddDrainCover } from "@app/components/Map/AddDrainCover/AddDrainCover";
 export { default as AddressSearch } from "@app/components/Map/AddressSearch/AddressSearch";
+export { default as Explainer } from "@app/components/Map/Explainer/Explainer";
 export { default as InteractiveMap } from "@app/components/Map/InteractiveMap/InteractiveMap";
 export { default as MapFilters } from "@app/components/Map/MapFilters/MapFilters";
 export { default as MapNavigation } from "@app/components/Map/MapNavigation/MapNavigation";
