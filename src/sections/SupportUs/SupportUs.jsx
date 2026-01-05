@@ -11,16 +11,15 @@ import "@app/sections/SupportUs/SupportUs.css";
 const SupportUs = () => {
   const posthog = usePostHog();
   const { isMobile } = useIsMobile();
-  const handleShareClick = () => {
-    navigator
-      .share({
-        title: "Page Street Plastic Collective",
-        text: "Join us in cleaning up our community!",
-        url: window.location.href,
-      })
-      .then(() => {
-        posthog.capture("support_share_clicked");
-      });
+
+  const handleShareClick = async () => {
+    posthog.capture("support_share_clicked");
+
+    await navigator.share({
+      title: "Page Street Plastic Collective",
+      text: "Join us in cleaning up our community!",
+      url: window.location.href,
+    });
   };
 
   return (

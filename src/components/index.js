@@ -9,8 +9,8 @@ export { default as HoverActionCard } from "@app/components/Common/HoverActionCa
 export { default as InfoBlock } from "@app/components/Common/InfoBlock/InfoBlock";
 export { default as Menu } from "@app/components/Common/Menu/Menu";
 export { default as MenuLink } from "@app/components/Common/Menu/MenuLink";
+export { default as ScrollToTop } from "@app/components/Common/ScrollToTop/ScrollToTop";
 export { default as ModelViewer } from "@app/components/Home/ModelViewer/ModelViewer";
-export { default as Sections } from "@app/components/Home/Sections/Sections";
 export { default as AddDrainCover } from "@app/components/Map/AddDrainCover/AddDrainCover";
 export { default as AddressSearch } from "@app/components/Map/AddressSearch/AddressSearch";
 export { default as Explainer } from "@app/components/Map/Explainer/Explainer";

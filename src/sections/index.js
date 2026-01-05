@@ -6,4 +6,4 @@ export { default as Privacy } from "@app/sections/Privacy/Privacy";
 export { default as Problem } from "@app/sections/Problem/Problem";
 export { default as Solution } from "@app/sections/Solution/Solution";
 export { default as SupportUs } from "@app/sections/SupportUs/SupportUs";
-export { default as Update } from "@app/sections/Update/Update";
+export { default as Hero } from "@app/sections/Hero/Hero";

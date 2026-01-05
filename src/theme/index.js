@@ -1,50 +1,42 @@
 import { createTheme } from "@mui/material/styles";
 
-// Color palette inspired by nature and sustainability
 const colors = {
-  // Primary colors - purple
   primary: {
     main: "#9C27B0", // Lavender
     light: "#E91E63", // Light pink
     dark: "#6A1B9A", // Dark purple
     contrastText: "#FFFFFF",
   },
-  // Secondary colors - pink
   secondary: {
     main: "rgba(194,90,60, 1)",
     light: "#E91E63", // Light pink
     dark: "#6A1B9A", // Dark purple
     contrastText: "#FFFFFF",
   },
-  // Success colors - green
   success: {
     main: "#388E3C", // Success green
     light: "#66BB6A",
     dark: "#1B5E20",
     contrastText: "#FFFFFF",
   },
-  // Warning colors - orange
   warning: {
     main: "#F57C00", // Orange for awareness
     light: "#FFB74D",
     dark: "#E65100",
     contrastText: "#FFFFFF",
   },
-  // Error colors - red
   error: {
     main: "#D32F2F", // Red for urgent issues
     light: "#EF5350",
     dark: "#C62828",
     contrastText: "#FFFFFF",
   },
-  // Info colors - blue
   info: {
     main: "#0288D1", // Info blue
     light: "#29B6F6",
     dark: "#01579B",
     contrastText: "#FFFFFF",
   },
-  // Neutral colors - grey
   grey: {
     50: "#FAFAFA",
     100: "#F5F5F5",
@@ -60,12 +52,10 @@ const colors = {
   accent: {
     main: "rgba(194,90,60, 1)",
   },
-  // Background colors - white
   background: {
-    default: "#FAFAFA",
+    default: "rgba(248, 246, 236, 1)",
     paper: "#FFFFFF",
   },
-  // Text colors - black
   text: {
     primary: "#212121",
     secondary: "#757575",
