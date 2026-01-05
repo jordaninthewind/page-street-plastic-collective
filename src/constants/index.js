@@ -83,7 +83,7 @@ export const PROBLEM_SECTION = {
   id: "problem",
   title: "A Frustrating Problem",
   subtitle:
-    "In San Francisco, homeowners are required to cover the drain pipes in front of their homes with grates to prevent litter from entering the pipes. These covers are made of steel and they a frequently stolen. Historically, they were made of brass.",
+    "In SF, homeowners are required to cover the drain pipes on their sidewalks with grates. These covers are made of steel and they a frequently stolen.",
 };
 
 export const SOLUTION_SECTION = {

@@ -16,11 +16,6 @@ const Model3D = () => {
 
   return (
     <Section {...MODEL_3D_SECTION}>
-      <InfoBlock>
-        {" "}
-        12/19/2025: Updated V5 Model! This should be a little stronger and take
-        a little less plastic!
-      </InfoBlock>
       <Stack
         direction="row"
         spacing={2}

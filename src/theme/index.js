@@ -67,7 +67,7 @@ const colors = {
 const typography = {
   fontFamily: '"Open Sans", sans-serif',
   sectionTitle: {
-    fontSize: "4.75rem",
+    fontSize: { xs: 34, sm: 42, md: 54 },
     fontWeight: 700,
     lineHeight: 1.2,
     letterSpacing: "-0.02em",

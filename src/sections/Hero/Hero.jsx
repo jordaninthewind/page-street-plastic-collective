@@ -23,7 +23,7 @@ const Hero = () => {
       >
         <Box>
           <Typography
-            variant="h2"
+            variant="h1"
             sx={{
               fontWeight: 700,
               lineHeight: 1.05,

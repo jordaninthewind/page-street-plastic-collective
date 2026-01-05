@@ -3,13 +3,14 @@ import { useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
-import { Dialog, IconButton, useMediaQuery } from "@mui/material";
+import { Dialog, IconButton } from "@mui/material";
 
 import { MarkerEditor, ModelViewer } from "@app/components";
+import { useIsMobile } from "@app/hooks";
 import { SupportUs } from "@app/sections";
 
 const Modal = () => {
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const { isMobile } = useIsMobile();
 
   const [overlay, setOverlay] = useState(null);
 
@@ -41,6 +42,16 @@ const Modal = () => {
         backdrop: {
           sx: {
             backgroundColor: "rgba(0, 0, 255, 0.5)",
+          },
+        },
+        paper: {
+          sx: {
+            borderRadius: "20px",
+            height: "80vh",
+            maxHeight: "80vh",
+            maxWidth: "80vw",
+            overflow: "hidden",
+            width: "80vw",
           },
         },
       }}
