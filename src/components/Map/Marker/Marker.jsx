@@ -18,7 +18,7 @@ const Marker = ({ map, marker }) => {
 
   const state = covered ? "marker-covered" : "marker-missing";
   const temporary = !id ? "marker-temporary" : "";
-  const isStaleMarker = isStale(updatedAt) ? "marker-stale" : "";
+  const isStaleMarker = isStale(new Date(updatedAt)) ? "marker-stale" : "";
   const isSelected = selectedId === id ? "marker-selected" : "";
 
   useEffect(() => {
