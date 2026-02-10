@@ -18,6 +18,7 @@ const PAGE_STREET_BOUNDS = [
 export const MARKER_TYPES = {
   covered: { color: "#9C27B0" },
   missing: { color: "rgba(194,90,60, 1)" },
+  temporary: { color: "rgba(60,194,90, 1)" },
 };
 
 export const PAGE_STREET_HIGHLIGHT_SOURCE = {

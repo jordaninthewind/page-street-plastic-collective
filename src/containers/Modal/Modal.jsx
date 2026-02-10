@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Dialog, IconButton } from "@mui/material";
 
-import { MarkerEditor, ModelViewer } from "@app/components";
+import { ModelViewer } from "@app/components";
 import { useIsMobile } from "@app/hooks";
 import { SupportUs } from "@app/sections";
 
@@ -37,6 +37,10 @@ const Modal = () => {
       open={!!overlay}
       onClose={handleClose}
       scroll="body"
+      maxWidth="fit-content"
+      maxHeight="fit-content"
+      minWidth="fit-content"
+      minHeight="fit-content"
       fullScreen={isMobile}
       slotProps={{
         backdrop: {
@@ -47,11 +51,7 @@ const Modal = () => {
         paper: {
           sx: {
             borderRadius: "20px",
-            height: "80vh",
-            maxHeight: "80vh",
-            maxWidth: "80vw",
             overflow: "hidden",
-            width: "80vw",
           },
         },
       }}
@@ -62,7 +62,6 @@ const Modal = () => {
       >
         <CloseIcon />
       </IconButton>
-      {overlay === "marker" && <MarkerEditor />}
       {overlay === "model" && <ModelViewer />}
       {overlay === "support-us" && <SupportUs />}
     </Dialog>

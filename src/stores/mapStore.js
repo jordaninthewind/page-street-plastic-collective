@@ -34,6 +34,7 @@ const useMapStore = create((set, get) => ({
       }
 
       set({ searchResults: results });
+
       return results;
     } catch (error) {
       set({ searchError: error.message });

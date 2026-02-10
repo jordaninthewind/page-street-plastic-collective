@@ -32,8 +32,7 @@ const Hero = () => {
               mb: 2,
             }}
           >
-            Replacing stolen drain covers with open-source, community-made
-            solutions.
+            Replacing stolen drain covers with open-source, 3d-printable ones.
           </Typography>
 
           <Typography
@@ -81,6 +80,18 @@ const Hero = () => {
               }}
             >
               Print a Cover →
+            </Button>
+
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={() => navigate("/?overlay=support-us")}
+              sx={{
+                borderRadius: 2,
+                fontWeight: 700,
+              }}
+            >
+              Support Us →
             </Button>
           </Box>
         </Box>

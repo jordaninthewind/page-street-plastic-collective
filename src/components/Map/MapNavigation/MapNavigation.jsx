@@ -4,6 +4,7 @@ import {
   AddDrainCover,
   AddressSearch,
   Explainer,
+  Legend,
   MapFilters,
   MarkerInfo,
 } from "@app/components";
@@ -36,6 +37,7 @@ const MapNavigation = () => {
       {newMarkerState ? <AddDrainCover /> : null}
       <AddressSearch />
       <MapFilters />
+      <Legend />
     </Stack>
   );
 };

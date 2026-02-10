@@ -15,6 +15,7 @@ export { default as AddDrainCover } from "@app/components/Map/AddDrainCover/AddD
 export { default as AddressSearch } from "@app/components/Map/AddressSearch/AddressSearch";
 export { default as Explainer } from "@app/components/Map/Explainer/Explainer";
 export { default as InteractiveMap } from "@app/components/Map/InteractiveMap/InteractiveMap";
+export { default as Legend } from "@app/components/Map/Legend/Legend";
 export { default as MapFilters } from "@app/components/Map/MapFilters/MapFilters";
 export { default as MapNavigation } from "@app/components/Map/MapNavigation/MapNavigation";
 export { default as Marker } from "@app/components/Map/Marker/Marker";

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import { DashedDivider, Header, ScrollToTop } from "@app/components";
+import { DashedDivider, ScrollToTop } from "@app/components";
 import {
   Contributors,
   CoverTheCity,
@@ -27,11 +27,10 @@ const sections = [
 
 const Home = () => (
   <>
-    <Header />
     {sections.map((Section, idx) => (
       <Box key={idx} id={Section.id}>
-        <DashedDivider />
         <Section />
+        <DashedDivider />
       </Box>
     ))}
     <ScrollToTop />

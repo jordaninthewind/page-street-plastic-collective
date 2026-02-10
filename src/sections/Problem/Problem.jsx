@@ -37,13 +37,13 @@ const Problem = () => (
             src="uncovered-sewer-cap-type-1.jpg"
             alt="Uncovered sewer cap example"
             loading="lazy"
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "auto", borderRadius: 20 }}
           />
           <img
             src="uncovered-sewer-cap-type-1-a.jpg"
             alt="Uncovered sewer cap example"
             loading="lazy"
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "auto", borderRadius: 20 }}
           />
         </Box>
       </Grid>
