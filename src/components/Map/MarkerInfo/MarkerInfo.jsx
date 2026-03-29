@@ -123,7 +123,7 @@ const MarkerInfo = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [id]);
 
   const handleUpdateMarkerState = async (updatedCovered) => {
     try {

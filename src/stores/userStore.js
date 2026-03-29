@@ -8,17 +8,14 @@ import {
 
 const useUserStore = create((set) => ({
   user: null,
+  loading: false,
+  error: null,
   clearUser: () => set({ user: null }),
 
   logInUser: async (email, password) => {
     try {
-      set({ loading: true });
-      const { data, error } = await logInUserRemote(email, password);
-
-      if (error) {
-        throw error;
-      }
-
+      set({ loading: true, error: null });
+      const data = await logInUserRemote(email, password);
       set({ user: data.user });
     } catch (error) {
       set({ error: error.message });
@@ -29,14 +26,8 @@ const useUserStore = create((set) => ({
 
   logOutUser: async () => {
     try {
-      set({ loading: true });
-
-      const { error } = await logOutUserRemote();
-
-      if (error) {
-        throw error;
-      }
-
+      set({ loading: true, error: null });
+      await logOutUserRemote();
       set({ user: null });
     } catch (error) {
       set({ error: error.message });
@@ -45,16 +36,15 @@ const useUserStore = create((set) => ({
     }
   },
 
-  signUpUser: async (email, password) => {
+  signUpUser: async (email, password, name) => {
     try {
-      set({ loading: true });
-      const { data, error } = await signUpUserRemote(email, password);
-      if (error) {
-        throw error;
-      }
+      set({ loading: true, error: null });
+      const data = await signUpUserRemote(email, password, name);
       set({ user: data.user });
     } catch (error) {
       set({ error: error.message });
+    } finally {
+      set({ loading: false });
     }
   },
 }));

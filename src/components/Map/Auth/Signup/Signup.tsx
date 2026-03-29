@@ -35,16 +35,17 @@ const Signup = () => {
 
   const { signUpUser, loading } = useUserStore();
 
-  const handleSignUp = async () => {
-    await signUpUser(register("email"), register("password"), register("name"));
+  const handleSignUp = async (data: yup.InferType<typeof validationSchema>) => {
+    await signUpUser(data.email, data.password, data.name);
   };
 
   return (
     <Stack
       sx={{ width: "100%", minWidth: "100%" }}
       spacing={2}
-      component="form"
       alignItems="center"
+      onSubmit={handleSubmit(handleSignUp)}
+      component="form"
     >
       <Typography variant="h2" sx={{ fontWeight: "bold" }}>
         Signup
@@ -53,45 +54,36 @@ const Signup = () => {
         Make an account to start adding drain covers to the map and leave
         comments on other covers.
       </Typography>
-      <Stack
-        spacing={2}
-        direction="column"
-        width="100%"
-        onSubmit={handleSubmit(handleSignUp)}
-        component="form"
-      >
-        <TextField
-          fullWidth
-          label="Name"
-          type="text"
-          {...register("name")}
-          error={!!errors.name}
-          helperText={errors.name?.message}
-        />
-        <TextField
-          fullWidth
-          label="Email"
-          type="email"
-          {...register("email")}
-          error={!!errors.email}
-          helperText={errors.email?.message}
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          type="password"
-          {...register("password")}
-          error={!!errors.password}
-          helperText={errors.password?.message}
-        />
-      </Stack>
+      <TextField
+        fullWidth
+        label="Name"
+        type="text"
+        {...register("name")}
+        error={!!errors.name}
+        helperText={errors.name?.message}
+      />
+      <TextField
+        fullWidth
+        label="Email"
+        type="email"
+        {...register("email")}
+        error={!!errors.email}
+        helperText={errors.email?.message}
+      />
+      <TextField
+        fullWidth
+        label="Password"
+        type="password"
+        {...register("password")}
+        error={!!errors.password}
+        helperText={errors.password?.message}
+      />
       <Button
         fullWidth
         variant="contained"
         color="primary"
         type="submit"
         disabled={loading || !isValid}
-        onClick={handleSignUp}
       >
         Signup
       </Button>

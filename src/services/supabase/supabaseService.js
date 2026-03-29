@@ -7,9 +7,13 @@ export const supabase = createClient(
   import.meta.env.VITE_SUPABASE_ANON_KEY
 );
 
-export const signUpUserRemote = async (email, password) => {
+export const signUpUserRemote = async (email, password, name) => {
   try {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { name } },
+    });
 
     if (error) {
       throw error;

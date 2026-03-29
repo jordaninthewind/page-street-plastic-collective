@@ -1,4 +1,4 @@
- import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -33,14 +33,8 @@ const Login = () => {
 
   const { logInUser, loading } = useUserStore();
 
-  const handleLogin = async () => {
-    await logInUser(register("email"), register("password"));
-  };
-
-  const handleFormSubmit = () => {
-    handleSubmit(async () => {
-      await logInUser(register);
-    });
+  const handleLogin = async (data: yup.InferType<typeof validationSchema>) => {
+    await logInUser(data.email, data.password);
   };
 
   return (
@@ -48,7 +42,7 @@ const Login = () => {
       spacing={2}
       direction="column"
       width="100%"
-      onSubmit={handleFormSubmit}
+      onSubmit={handleSubmit(handleLogin)}
       component="form"
     >
       <TextField
@@ -73,7 +67,6 @@ const Login = () => {
         color="primary"
         type="submit"
         disabled={loading || !isValid}
-        onClick={handleLogin}
       >
         Login
       </Button>
