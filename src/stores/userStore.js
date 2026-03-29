@@ -4,6 +4,7 @@ import {
   logInUserRemote,
   logOutUserRemote,
   signUpUserRemote,
+  supabase,
 } from "@app/services";
 
 const useUserStore = create((set) => ({
@@ -48,5 +49,9 @@ const useUserStore = create((set) => ({
     }
   },
 }));
+
+supabase.auth.onAuthStateChange((_event, session) => {
+  useUserStore.setState({ user: session?.user ?? null });
+});
 
 export default useUserStore;
