@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router";
 
 import React, { useEffect, useState } from "react";
 
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 import { MarkerInfo } from "@app/components";
 import { getSingleCoverFromSupabase } from "@app/services";
@@ -40,7 +40,16 @@ const MarkerEditor = () => {
   }, [id]);
 
   return (
-    <Box sx={{ p: 2, minWidth: "fit-content" }}>
+    <Box
+      sx={{
+        p: 2,
+        minWidth: "fit-content",
+        minHeight: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       {loading ? (
         <CircularProgress />
       ) : error ? (

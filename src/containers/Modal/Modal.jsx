@@ -25,9 +25,7 @@ const Modal = () => {
       setOverlay(null);
     }
 
-    return () => {
-      setOverlay(null);
-    };
+    return () => setOverlay(null);
   }, [searchParams, overlay]);
 
   const handleClose = () => setParams({});
@@ -39,7 +37,6 @@ const Modal = () => {
       scroll="body"
       maxWidth="fit-content"
       maxHeight="fit-content"
-      minWidth="fit-content"
       minHeight="fit-content"
       fullScreen={isMobile}
       slotProps={{

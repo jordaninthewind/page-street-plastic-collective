@@ -13,11 +13,13 @@ export { default as ScrollToTop } from "@app/components/Common/ScrollToTop/Scrol
 export { default as ModelViewer } from "@app/components/Home/ModelViewer/ModelViewer";
 export { default as AddDrainCover } from "@app/components/Map/AddDrainCover/AddDrainCover";
 export { default as AddressSearch } from "@app/components/Map/AddressSearch/AddressSearch";
-export { default as Explainer } from "@app/components/Map/Explainer/Explainer";
+export { default as MapExplorer } from "@app/components/Map/MapExplorer/MapExplorer";
 export { default as InteractiveMap } from "@app/components/Map/InteractiveMap/InteractiveMap";
 export { default as Legend } from "@app/components/Map/Legend/Legend";
 export { default as MapFilters } from "@app/components/Map/MapFilters/MapFilters";
 export { default as MapNavigation } from "@app/components/Map/MapNavigation/MapNavigation";
 export { default as Marker } from "@app/components/Map/Marker/Marker";
+export { default as MarkerComments } from "@app/components/Map/MarkerComments/MarkerComments";
 export { default as MarkerEditor } from "@app/components/Map/MarkerEditor/MarkerEditor";
 export { default as MarkerInfo } from "@app/components/Map/MarkerInfo/MarkerInfo";
+export { Login, Signup, UserPanel } from "@app/components/Map/Auth";

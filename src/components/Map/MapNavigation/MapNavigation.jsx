@@ -2,11 +2,9 @@ import { Stack } from "@mui/material";
 
 import {
   AddDrainCover,
-  AddressSearch,
-  Explainer,
-  Legend,
-  MapFilters,
+  MapExplorer,
   MarkerInfo,
+  UserPanel,
 } from "@app/components";
 import { useSearchParamState } from "@app/hooks";
 
@@ -20,24 +18,22 @@ const MapNavigation = () => {
   return (
     <Stack
       flexDirection="column"
-      justifyContent="flex-start"
+      justifyContent="space-between"
       alignItems="center"
       spacing={2}
       sx={{
         backgroundColor: "white",
         p: 2,
-        height: "100%",
+        minHeight: "100%",
         maxHeight: "100%",
         maxWidth: "500px",
         width: "100%",
       }}
     >
-      {baseState ? <Explainer /> : null}
+      {baseState ? <MapExplorer /> : null}
       {existingMarkerState ? <MarkerInfo /> : null}
       {newMarkerState ? <AddDrainCover /> : null}
-      <AddressSearch />
-      <MapFilters />
-      <Legend />
+      <UserPanel />
     </Stack>
   );
 };

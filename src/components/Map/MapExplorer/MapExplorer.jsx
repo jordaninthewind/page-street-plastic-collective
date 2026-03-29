@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 
 import CoverLogo from "@app/assets/cover-logo.svg";
+import { AddressSearch, Legend, MapFilters } from "@app/components";
 
-const Explainer = () => (
+const MapExplorer = () => (
   <Stack
     flexDirection="column"
     justifyContent="space-between"
@@ -77,7 +78,10 @@ const Explainer = () => (
         </ListItemText>
       </ListItem>
     </List>
+    <AddressSearch />
+    <MapFilters />
+    <Legend />
   </Stack>
 );
 
-export default Explainer;
+export default MapExplorer;
