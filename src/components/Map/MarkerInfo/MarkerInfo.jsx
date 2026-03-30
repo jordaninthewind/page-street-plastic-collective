@@ -95,10 +95,6 @@ const MarkerInfo = () => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchMarkerAndComments();
-  }, [fetchMarkerAndComments]);
-
   const fetchMarkerAndComments = useCallback(async () => {
     try {
       setLoading(true);
@@ -124,6 +120,10 @@ const MarkerInfo = () => {
       setLoading(false);
     }
   }, [id]);
+
+  useEffect(() => {
+    fetchMarkerAndComments();
+  }, [fetchMarkerAndComments]);
 
   const handleUpdateMarkerState = async (updatedCovered) => {
     try {

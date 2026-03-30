@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-import { Alert, Button, Divider, LinearProgress, Stack } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Divider,
+  LinearProgress,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 import { Login, Signup } from "@app/components";
 import { useUserStore } from "@app/stores";
@@ -35,7 +42,8 @@ const UserInfo = () => {
 
   return (
     <Stack spacing={2} alignItems="center" width="100%">
-      <p>Welcome, {user?.user_metadata.name}</p>
+      <Typography>Hey neighbor!</Typography>
+      <Typography>{user?.email}</Typography>
       <Button variant="contained" color="primary" onClick={handleLogout}>
         Logout
       </Button>
@@ -54,7 +62,7 @@ const UserPanel = () => {
     >
       {loading && <LinearProgress />}
       {error && <Alert severity="error">{error}</Alert>}
-      {!user ? <SignupOrLogin user={user} /> : <UserInfo user={user} />}
+      {!user ? <SignupOrLogin /> : <UserInfo />}
     </Stack>
   );
 };
