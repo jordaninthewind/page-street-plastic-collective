@@ -7,7 +7,7 @@ import { Dialog, IconButton } from "@mui/material";
 
 import { ModelViewer } from "@app/components";
 import { useIsMobile } from "@app/hooks";
-import { SupportUs } from "@app/sections";
+import { SupportUs } from "@app/pages/Home/sections";
 
 const Modal = () => {
   const { isMobile } = useIsMobile();

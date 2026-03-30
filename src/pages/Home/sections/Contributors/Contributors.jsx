@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
 
 import { ContributorCard } from "@app/components";
+import { Section } from "@app/components";
 import { CONTRIBUTORS, CONTRIBUTORS_SECTION } from "@app/constants";
-import { Section } from "@app/containers";
-import "@app/sections/Contributors/Contributors.css";
+import "@app/pages/Home/sections/Contributors/Contributors.css";
 
 const Contributors = () => (
   <Section {...CONTRIBUTORS_SECTION}>

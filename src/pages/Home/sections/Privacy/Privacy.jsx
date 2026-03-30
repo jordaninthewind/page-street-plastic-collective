@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 
 import { CardSection } from "@app/components";
+import { Section } from "@app/components";
 import { PRIVACY_SECTION } from "@app/constants";
-import { Section } from "@app/containers";
-import "@app/sections/Privacy/Privacy.css";
+import "@app/pages/Home/sections/Privacy/Privacy.css";
 
 const Privacy = () => (
   <Section title={PRIVACY_SECTION.title}>

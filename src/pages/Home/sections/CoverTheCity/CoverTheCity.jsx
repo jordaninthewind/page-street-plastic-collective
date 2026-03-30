@@ -1,11 +1,11 @@
 import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 
+import { Section } from "@app/components";
 import {
   COVER_STATS,
   COVER_THE_CITY_SECTION,
   IMPLEMENTATION_PHASES,
 } from "@app/constants";
-import { Section } from "@app/containers";
 
 const StatItem = ({ title, value }) => (
   <Box

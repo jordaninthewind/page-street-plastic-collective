@@ -11,7 +11,7 @@ import {
   Problem,
   Solution,
   SupportUs,
-} from "@app/sections";
+} from "@app/pages/Home/sections";
 
 const sections = [
   Hero,

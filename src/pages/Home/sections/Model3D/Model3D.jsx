@@ -5,9 +5,9 @@ import { Box, Button, List, ListItem, Stack, Typography } from "@mui/material";
 
 import { InfoBlock } from "@app/components";
 import { GradientButton } from "@app/components";
+import { Section } from "@app/components";
 import { MODEL_3D_SECTION } from "@app/constants";
-import { Section } from "@app/containers";
-import "@app/sections/Model3D/Model3D.css";
+import "@app/pages/Home/sections/Model3D/Model3D.css";
 
 const Model3D = () => {
   const navigate = useNavigate();

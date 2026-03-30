@@ -4,8 +4,8 @@ import { Container } from "@mui/material";
 
 import PageStreetMap from "@app/assets/page-street-map.png";
 import { HoverActionCard } from "@app/components";
+import { Section } from "@app/components";
 import { INTERACTIVE_MAP_SECTION } from "@app/constants";
-import { Section } from "@app/containers";
 
 const Map = () => {
   const navigate = useNavigate();

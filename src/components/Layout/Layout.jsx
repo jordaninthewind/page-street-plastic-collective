@@ -7,9 +7,8 @@ import { useEffect } from "react";
 
 import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
 
-import { Copywrite, ErrorFallback, Header } from "@app/components";
-import { Modal } from "@app/containers";
-import "@app/containers/Layout/Layout.css";
+import { Copywrite, ErrorFallback, Header, Modal } from "@app/components";
+import "@app/components/Layout/Layout.css";
 import theme from "@app/theme";
 
 const Layout = () => {

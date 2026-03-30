@@ -3,10 +3,10 @@ import { usePostHog } from "@posthog/react";
 import { Box, Button, Link, Stack } from "@mui/material";
 
 import { CardSection } from "@app/components";
+import { Section } from "@app/components";
 import { SUPPORT_US_SECTION } from "@app/constants";
-import { Section } from "@app/containers";
 import { useIsMobile } from "@app/hooks";
-import "@app/sections/SupportUs/SupportUs.css";
+import "@app/pages/Home/sections/SupportUs/SupportUs.css";
 
 const SupportUs = () => {
   const posthog = usePostHog();

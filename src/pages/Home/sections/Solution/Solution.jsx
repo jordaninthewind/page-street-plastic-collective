@@ -1,8 +1,8 @@
 import { Box, Divider, Grid, Typography } from "@mui/material";
 
+import { Section } from "@app/components";
 import { SOLUTION_SECTION } from "@app/constants";
-import { Section } from "@app/containers";
-import "@app/sections/Solution/Solution.css";
+import "@app/pages/Home/sections/Solution/Solution.css";
 
 const Solution = () => (
   <Section id={SOLUTION_SECTION.id}>
