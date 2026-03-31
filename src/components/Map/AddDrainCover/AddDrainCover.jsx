@@ -3,13 +3,7 @@ import { useForm } from "react-hook-form";
 
 import { useEffect } from "react";
 
-import {
-  Clear,
-  Close,
-  ErrorOutline,
-  Info,
-  LocationPin,
-} from "@mui/icons-material";
+import { Clear, Close, ErrorOutline, LocationPin } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -22,7 +16,6 @@ import {
   Select,
   Stack,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
 
@@ -99,7 +92,7 @@ const AddDrainCover = () => {
   if (!id && !lat && !lng) return null;
 
   return (
-    <>
+    <Stack>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -197,9 +190,6 @@ const AddDrainCover = () => {
         />
         <InputLabel sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           Cover Type
-          <Tooltip title="We are currently only offering square covers. We will be adding round and oversize covers soon!">
-            <Info />
-          </Tooltip>
         </InputLabel>
         <Select
           fullWidth
@@ -208,12 +198,8 @@ const AddDrainCover = () => {
           defaultValue="standard-square"
         >
           <MenuItem value="standard-square">Standard - Square</MenuItem>
-          <MenuItem value="standard-round" disabled>
-            Standard - Round
-          </MenuItem>
-          <MenuItem value="oversize-square" disabled>
-            Oversize - Square
-          </MenuItem>
+          <MenuItem value="standard-round">Standard - Round</MenuItem>
+          <MenuItem value="oversize-square">Oversize - Square</MenuItem>
         </Select>
         <TextField
           label="Requested By"
@@ -267,7 +253,7 @@ const AddDrainCover = () => {
       >
         Cancel
       </Button>
-    </>
+    </Stack>
   );
 };
 

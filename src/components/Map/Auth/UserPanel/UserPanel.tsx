@@ -26,7 +26,12 @@ const SignupOrLogin = () => {
       <p>
         {showSignup ? "Already have an account? " : "Don't have an account? "}
       </p>
-      <Button variant="text" color="primary" onClick={toggleShowSignup}>
+      <Button
+        fullWidth
+        variant="text"
+        color="primary"
+        onClick={toggleShowSignup}
+      >
         {showSignup ? "Login" : "Signup"}
       </Button>
     </Stack>
@@ -44,7 +49,12 @@ const UserInfo = () => {
     <Stack spacing={2} alignItems="center" width="100%">
       <Typography>Hey neighbor!</Typography>
       <Typography>{user?.email}</Typography>
-      <Button variant="contained" color="primary" onClick={handleLogout}>
+      <Button
+        fullWidth
+        variant="contained"
+        color="primary"
+        onClick={handleLogout}
+      >
         Logout
       </Button>
     </Stack>

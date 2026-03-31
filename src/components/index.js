@@ -7,6 +7,7 @@ export { default as GradientButton } from "@app/components/Common/GradientButton
 export { default as Header } from "@app/components/Common/Header/Header";
 export { default as HoverActionCard } from "@app/components/Common/HoverActionCard/HoverActionCard";
 export { default as InfoBlock } from "@app/components/Common/InfoBlock/InfoBlock";
+export { default as ListItemAnimation } from "@app/components/Common/ListItemAnimation/ListItemAnimation";
 export { default as Menu } from "@app/components/Common/Menu/Menu";
 export { default as MenuLink } from "@app/components/Common/Menu/MenuLink";
 export { default as Modal } from "@app/components/Common/Modal/Modal";
@@ -18,7 +19,6 @@ export { default as AddDrainCover } from "@app/components/Map/AddDrainCover/AddD
 export { default as AddressSearch } from "@app/components/Map/AddressSearch/AddressSearch";
 export { Login, Signup, UserPanel } from "@app/components/Map/Auth";
 export { default as InteractiveMap } from "@app/components/Map/InteractiveMap/InteractiveMap";
-export { default as Legend } from "@app/components/Map/Legend/Legend";
 export { default as MapExplorer } from "@app/components/Map/MapExplorer/MapExplorer";
 export { default as MapFilters } from "@app/components/Map/MapFilters/MapFilters";
 export { default as MapNavigation } from "@app/components/Map/MapNavigation/MapNavigation";
