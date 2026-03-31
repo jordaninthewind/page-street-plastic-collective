@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Box } from "@mui/material";
 
-import { Marker } from "@app/components";
+import { Cover } from "@app/components";
 import {
   MAP_CENTER,
   PAGE_STREET_HIGHLIGHT_LAYER,
@@ -19,21 +19,21 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 const InteractiveMap = () => {
   const { isMobile } = useIsMobile();
   const { map, mapContainerRef } = useMap();
-  const { markers, fetchMarkers } = useMapStore();
+  const { markers, fetchCovers } = useMapStore();
 
   const { id, lat, lng, setParams } = useSearchParamState();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const [temporaryMarker, setTemporaryMarker] = useState(null);
+  const [temporaryCover, setTemporaryCover] = useState(null);
 
   useEffect(() => {
-    setTemporaryMarker(!id && lng && lat ? { id: null, lng, lat } : null);
+    setTemporaryCover(!id && lng && lat ? { id: null, lng, lat } : null);
   }, [id, lat, lng]);
 
   useEffect(() => {
-    fetchMarkers();
-  }, [fetchMarkers]);
+    fetchCovers();
+  }, [fetchCovers]);
 
   useEffect(() => {
     map
@@ -78,9 +78,9 @@ const InteractiveMap = () => {
         ref={mapContainerRef}
       />
       {markers.map((marker, idx) => (
-        <Marker key={idx} map={map} marker={marker} />
+        <Cover key={idx} map={map} marker={marker} />
       ))}
-      {temporaryMarker && <Marker map={map} marker={temporaryMarker} />}
+      {temporaryCover && <Cover map={map} marker={temporaryCover} />}
     </>
   );
 };

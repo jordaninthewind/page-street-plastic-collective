@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 import {
-  addMarkerToMapRemote,
+  addCoverToMapRemote,
   getCoversFromSupabase,
   getSingleCoverFromSupabase,
   searchNearbyAddresses,
@@ -22,7 +22,7 @@ const useMapStore = create((set, get) => ({
   setSaving: (saving) => set({ saving }),
   setLoading: (loading) => set({ loading }),
   setError: (error) => set({ error }),
-  setMarkers: (markers) => set({ markers }),
+  setCovers: (markers) => set({ markers }),
 
   searchNearbyAddresses: async (lng, lat) => {
     try {
@@ -43,7 +43,7 @@ const useMapStore = create((set, get) => ({
     }
   },
 
-  fetchMarkers: async () => {
+  fetchCovers: async () => {
     try {
       set({ loading: true, error: null });
 
@@ -61,11 +61,11 @@ const useMapStore = create((set, get) => ({
     }
   },
 
-  addMarker: async (markerData) => {
+  addCover: async (markerData) => {
     try {
       set({ loading: true, error: null });
-      await addMarkerToMapRemote(markerData);
-      get().fetchMarkers();
+      await addCoverToMapRemote(markerData);
+      get().fetchCovers();
     } catch (error) {
       set({ error: error.message });
       throw error;
@@ -74,17 +74,17 @@ const useMapStore = create((set, get) => ({
     }
   },
 
-  invalidateMarkers: async () => {
-    await get().fetchMarkers();
+  invalidateCovers: async () => {
+    await get().fetchCovers();
   },
 
-  invalidateMarker: async (id) => {
+  invalidateCover: async (id) => {
     try {
-      const updatedMarker = await getSingleCoverFromSupabase(id);
-      if (updatedMarker) {
+      const updatedCover = await getSingleCoverFromSupabase(id);
+      if (updatedCover) {
         set((state) => ({
           markers: state.markers.map((marker) =>
-            marker.id === id ? updatedMarker : marker
+            marker.id === id ? updatedCover : marker
           ),
         }));
       }

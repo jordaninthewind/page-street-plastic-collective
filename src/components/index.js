@@ -22,7 +22,7 @@ export { default as InteractiveMap } from "@app/components/Map/InteractiveMap/In
 export { default as MapExplorer } from "@app/components/Map/MapExplorer/MapExplorer";
 export { default as MapFilters } from "@app/components/Map/MapFilters/MapFilters";
 export { default as MapNavigation } from "@app/components/Map/MapNavigation/MapNavigation";
-export { default as Marker } from "@app/components/Map/Marker/Marker";
-export { default as MarkerComments } from "@app/components/Map/MarkerComments/MarkerComments";
-export { default as MarkerEditor } from "@app/components/Map/MarkerEditor/MarkerEditor";
-export { default as MarkerInfo } from "@app/components/Map/MarkerInfo/MarkerInfo";
+export { default as Cover } from "@app/components/Map/Cover/Cover";
+export { default as CoverComments } from "@app/components/Map/CoverComments/CoverComments";
+export { default as CoverEditor } from "@app/components/Map/CoverEditor/CoverEditor";
+export { default as CoverInfo } from "@app/components/Map/CoverInfo/CoverInfo";

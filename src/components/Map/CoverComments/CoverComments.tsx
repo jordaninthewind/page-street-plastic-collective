@@ -153,11 +153,11 @@ const CommentList = ({ comments }: { comments: Comment[] }) => (
   </Stack>
 );
 
-const MarkerComments = ({ comments }: { comments: Comment[] }) => (
+const CoverComments = ({ comments }: { comments: Comment[] }) => (
   <Stack sx={{ width: "100%" }}>
     <AddComment />
     <CommentList comments={comments} />
   </Stack>
 );
 
-export default MarkerComments;
+export default CoverComments;

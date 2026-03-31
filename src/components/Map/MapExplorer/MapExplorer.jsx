@@ -42,9 +42,7 @@ const MapExplorer = () => (
   >
     <Stack flexDirection="row" alignItems="center" sx={{ mb: 2 }}>
       <Info sx={{ fontSize: 30, mr: 1 }} />
-      <Typography variant="h6">
-        Use this map to request a drain cover
-      </Typography>
+      <Typography variant="">Use this map to request a drain cover</Typography>
     </Stack>
     <AddressSearch />
     <MapFilters />

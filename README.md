@@ -190,6 +190,12 @@ The app follows a linear section-based layout:
 - TypeScript-like strict checking in `jsconfig.json`
 - Consistent code formatting and linting rules
 
+### Naming Conventions
+We have to use some consistent language in order to make sure naming works seamlessly:
+
+- A location on a map that represents a drain cover is called a 'cover', not a marker.
+
+
 ## Key Features
 
 ### Interactive 3D Model

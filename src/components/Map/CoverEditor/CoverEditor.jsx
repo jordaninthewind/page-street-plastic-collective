@@ -5,10 +5,10 @@ import React, { useEffect, useState } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 
-import { MarkerInfo } from "@app/components";
+import { CoverInfo } from "@app/components";
 import { getSingleCoverFromSupabase } from "@app/services";
 
-const MarkerEditor = () => {
+const CoverEditor = () => {
   const [searchParams] = useSearchParams();
 
   const id = searchParams.get("id");
@@ -57,7 +57,7 @@ const MarkerEditor = () => {
           {error}
         </Alert>
       ) : cover ? (
-        <MarkerInfo cover={cover} />
+        <CoverInfo cover={cover} />
       ) : (
         <AddDrainCover lat={lat} lng={lng} />
       )}
@@ -65,4 +65,4 @@ const MarkerEditor = () => {
   );
 };
 
-export default MarkerEditor;
+export default CoverEditor;

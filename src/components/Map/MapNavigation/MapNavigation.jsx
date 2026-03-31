@@ -3,7 +3,7 @@ import { Stack } from "@mui/material";
 import {
   AddDrainCover,
   MapExplorer,
-  MarkerInfo,
+  CoverInfo,
   UserPanel,
 } from "@app/components";
 import { useSearchParamState } from "@app/hooks";
@@ -12,8 +12,8 @@ const MapNavigation = () => {
   const { id, lat, lng } = useSearchParamState();
 
   const baseState = !id && !lat && !lng;
-  const existingMarkerState = id && lat && lng;
-  const newMarkerState = !id && lat && lng;
+  const existingCoverState = id && lat && lng;
+  const newCoverState = !id && lat && lng;
 
   return (
     <Stack
@@ -31,8 +31,8 @@ const MapNavigation = () => {
       }}
     >
       {baseState ? <MapExplorer /> : null}
-      {existingMarkerState ? <MarkerInfo /> : null}
-      {newMarkerState ? <AddDrainCover /> : null}
+      {existingCoverState ? <CoverInfo /> : null}
+      {newCoverState ? <AddDrainCover /> : null}
       <UserPanel />
     </Stack>
   );

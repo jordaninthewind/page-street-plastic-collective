@@ -1,4 +1,4 @@
-import "./Marker.css";
+import "./Cover.css";
 import mapboxgl from "mapbox-gl";
 import { createPortal } from "react-dom";
 
@@ -8,7 +8,7 @@ import CoverLogo from "@app/assets/cover-logo.svg";
 import { useSearchParamState } from "@app/hooks";
 import { isStale } from "@app/utils";
 
-const Marker = ({ map, marker }) => {
+const Cover = ({ map, marker }) => {
   const markerRef = useRef(null);
   const contentRef = useRef(document.createElement("div"));
 
@@ -18,7 +18,7 @@ const Marker = ({ map, marker }) => {
 
   const state = covered ? "marker-covered" : "marker-missing";
   const temporary = !id ? "marker-temporary" : "";
-  const isStaleMarker = isStale(new Date(updatedAt)) ? "marker-stale" : "";
+  const isStaleCover = isStale(new Date(updatedAt)) ? "marker-stale" : "";
   const isSelected = selectedId === id ? "marker-selected" : "";
 
   useEffect(() => {
@@ -43,13 +43,13 @@ const Marker = ({ map, marker }) => {
 
   return createPortal(
     <div
-      className={`marker ${temporary || state} ${isStaleMarker} ${isSelected}`}
+      className={`marker ${temporary || state} ${isStaleCover} ${isSelected}`}
       onClick={handleClick}
     >
-      <img src={CoverLogo} alt={`Marker ${id}`} className="marker-image" />
+      <img src={CoverLogo} alt={`Cover ${id}`} className="marker-image" />
     </div>,
     contentRef.current
   );
 };
 
-export default Marker;
+export default Cover;

@@ -1,24 +1,26 @@
 import { searchNearbyAddresses } from "@app/services/map/MapDataService";
 import {
   addCommentToSupabase,
-  addMarkerToMapRemote,
+  addCoverToMapRemote,
   getCommentsFromSupabase,
   getCoversFromSupabase,
+  getEventsFromSupabase,
   getSingleCoverFromSupabase,
   logInUserRemote,
   logOutUserRemote,
   recordEventInSupabase,
   signUpUserRemote,
   supabase,
-  updateMarkerRemote,
-  updateMarkerStateInSupabase,
+  updateCoverRemote,
+  updateCoverStateInSupabase,
 } from "@app/services/supabase/supabaseService";
 
 export {
   addCommentToSupabase,
-  addMarkerToMapRemote,
+  addCoverToMapRemote,
   getCommentsFromSupabase,
   getCoversFromSupabase,
+  getEventsFromSupabase,
   getSingleCoverFromSupabase,
   logInUserRemote,
   logOutUserRemote,
@@ -26,6 +28,6 @@ export {
   searchNearbyAddresses,
   signUpUserRemote,
   supabase,
-  updateMarkerRemote,
-  updateMarkerStateInSupabase,
+  updateCoverRemote,
+  updateCoverStateInSupabase,
 };

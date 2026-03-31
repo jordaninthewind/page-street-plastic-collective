@@ -111,7 +111,7 @@ export const addCommentToSupabase = async (comment) => {
   }
 };
 
-export const updateMarkerStateInSupabase = async ({ id, covered }) => {
+export const updateCoverStateInSupabase = async ({ id, covered }) => {
   try {
     const { error } = await supabase
       .from("drain_covers")
@@ -134,7 +134,7 @@ export const getCoversFromSupabase = async () =>
   await supabase.from("drain_covers").select("*");
 
 // Add a marker to the map
-export const addMarkerToMapRemote = async (fields) => {
+export const addCoverToMapRemote = async (fields) => {
   try {
     const { error } = await supabase
       .from("drain_covers")
@@ -151,7 +151,7 @@ export const addMarkerToMapRemote = async (fields) => {
 };
 
 // Update a marker in the database
-export const updateMarkerRemote = async ({ id, state }) => {
+export const updateCoverRemote = async ({ id, state }) => {
   try {
     const { error } = await supabase
       .from("drain_covers")
@@ -173,7 +173,7 @@ export const getEventsFromSupabase = async (id) => {
     const { data, error } = await supabase
       .from("events")
       .select("*")
-      .where("cover_id", "eq", id);
+      .eq("cover_id", id);
 
     if (error) {
       throw error;

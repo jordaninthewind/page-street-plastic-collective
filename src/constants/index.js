@@ -21,6 +21,12 @@ export const MARKER_TYPES = {
   temporary: { color: "rgba(60,194,90, 1)" },
 };
 
+export const COVER_TYPES = [
+  { value: "standard-square", label: "Square" },
+  { value: "standard-round", label: "Round" },
+  { value: "oversize-square", label: "Non-standard" },
+];
+
 export const PAGE_STREET_HIGHLIGHT_SOURCE = {
   type: "geojson",
   data: {

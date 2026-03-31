@@ -7,18 +7,18 @@ import { Clear, Close, ErrorOutline, LocationPin } from "@mui/icons-material";
 import {
   Box,
   Button,
+  Chip,
   CircularProgress,
   Grid,
   IconButton,
   InputAdornment,
   InputLabel,
-  MenuItem,
-  Select,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 
+import { COVER_TYPES } from "@app/constants";
 import { useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
 import { formatDecimal, validateEmail } from "@app/utils";
@@ -26,10 +26,12 @@ import { formatDecimal, validateEmail } from "@app/utils";
 const AddDrainCover = () => {
   const { id, lng, lat, setParams } = useSearchParamState();
 
-  const { register, handleSubmit, reset, watch, setValue } = useForm();
+  const { register, handleSubmit, reset, watch, setValue } = useForm({
+    defaultValues: { cover_type: "standard-square" },
+  });
 
   const {
-    addMarker,
+    addCover,
     searchNearbyAddresses,
     searchLoading,
     searchError,
@@ -55,7 +57,7 @@ const AddDrainCover = () => {
 
   const onSubmit = async (data) => {
     try {
-      await addMarker({ lng, lat, ...data });
+      await addCover({ lng, lat, ...data });
 
       enqueueSnackbar(
         "We received your request and will update the map and (try to) send you an email when it's been added!",
@@ -188,19 +190,21 @@ const AddDrainCover = () => {
             },
           }}
         />
-        <InputLabel sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <InputLabel sx={{ display: "flex", alignItems: "center", mb: 1 }}>
           Cover Type
         </InputLabel>
-        <Select
-          fullWidth
-          sx={{ mb: 2 }}
-          {...register("cover_type")}
-          defaultValue="standard-square"
-        >
-          <MenuItem value="standard-square">Standard - Square</MenuItem>
-          <MenuItem value="standard-round">Standard - Round</MenuItem>
-          <MenuItem value="oversize-square">Oversize - Square</MenuItem>
-        </Select>
+        <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: "wrap" }}>
+          {COVER_TYPES.map(({ value, label }) => (
+            <Chip
+              key={value}
+              label={label}
+              onClick={() => setValue("cover_type", value)}
+              color={watch("cover_type") === value ? "primary" : "default"}
+              variant={watch("cover_type") === value ? "filled" : "outlined"}
+            />
+          ))}
+        </Stack>
+        <input type="hidden" {...register("cover_type")} />
         <TextField
           label="Requested By"
           fullWidth
