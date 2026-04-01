@@ -19,7 +19,7 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 const InteractiveMap = () => {
   const { isMobile } = useIsMobile();
   const { map, mapContainerRef } = useMap();
-  const { markers, fetchCovers } = useMapStore();
+  const { markers: covers, fetchCovers } = useMapStore();
 
   const { id, lat, lng, setParams } = useSearchParamState();
 
@@ -77,10 +77,10 @@ const InteractiveMap = () => {
         }}
         ref={mapContainerRef}
       />
-      {markers.map((marker, idx) => (
-        <Cover key={idx} map={map} marker={marker} />
+      {covers.map((cover, idx) => (
+        <Cover key={idx} map={map} cover={cover} />
       ))}
-      {temporaryCover && <Cover map={map} marker={temporaryCover} />}
+      {temporaryCover && <Cover map={map} cover={temporaryCover} />}
     </>
   );
 };

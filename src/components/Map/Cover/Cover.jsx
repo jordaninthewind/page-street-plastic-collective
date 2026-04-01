@@ -8,26 +8,26 @@ import CoverLogo from "@app/assets/cover-logo.svg";
 import { useSearchParamState } from "@app/hooks";
 import { isStale } from "@app/utils";
 
-const Cover = ({ map, marker }) => {
-  const markerRef = useRef(null);
+const Cover = ({ map, cover }) => {
+  const coverRef = useRef(null);
   const contentRef = useRef(document.createElement("div"));
 
   const { filter, setParams, id: selectedId } = useSearchParamState();
 
-  const { id, lng, lat, covered, updated_at: updatedAt } = marker;
+  const { id, lng, lat, covered, updated_at: updatedAt } = cover;
 
-  const state = covered ? "marker-covered" : "marker-missing";
-  const temporary = !id ? "marker-temporary" : "";
-  const isStaleCover = isStale(new Date(updatedAt)) ? "marker-stale" : "";
-  const isSelected = selectedId === id ? "marker-selected" : "";
+  const state = covered ? "cover-covered" : "cover-missing";
+  const temporary = !id ? "cover-temporary" : "";
+  const isStaleCover = isStale(new Date(updatedAt)) ? "cover-stale" : "";
+  const isSelected = selectedId === id ? "cover-selected" : "";
 
   useEffect(() => {
-    markerRef.current = new mapboxgl.Marker(contentRef.current)
+    coverRef.current = new mapboxgl.Marker(contentRef.current)
       .setLngLat([lng, lat])
       .addTo(map);
 
     return () => {
-      markerRef.current.remove();
+      coverRef.current.remove();
     };
   }, [map, lng, lat]);
 
@@ -43,10 +43,10 @@ const Cover = ({ map, marker }) => {
 
   return createPortal(
     <div
-      className={`marker ${temporary || state} ${isStaleCover} ${isSelected}`}
+      className={`cover ${temporary || state} ${isStaleCover} ${isSelected}`}
       onClick={handleClick}
     >
-      <img src={CoverLogo} alt={`Cover ${id}`} className="marker-image" />
+      <img src={CoverLogo} alt={`Cover ${id}`} className="cover-image" />
     </div>,
     contentRef.current
   );

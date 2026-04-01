@@ -8,13 +8,13 @@ const colors = {
     contrastText: "#FFFFFF",
   },
   secondary: {
-    main: "rgba(194,90,60, 1)",
+    main: "#D32F2F", // Red for urgent issues
     light: "#E91E63", // Light pink
     dark: "#6A1B9A", // Dark purple
     contrastText: "#FFFFFF",
   },
   success: {
-    main: "#388E3C", // Success green
+    main: "#4CAF50", // Bright green
     light: "#66BB6A",
     dark: "#1B5E20",
     contrastText: "#FFFFFF",
@@ -50,7 +50,7 @@ const colors = {
     900: "#212121",
   },
   accent: {
-    main: "rgba(194,90,60, 1)",
+    main: "#D32F2F", // Red for urgent issues
   },
   background: {
     default: "rgba(248, 246, 236, 1)",

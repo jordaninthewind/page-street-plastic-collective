@@ -2,8 +2,11 @@ import { useSnackbar } from "notistack";
 
 import { useCallback, useEffect, useState } from "react";
 
-import { Close } from "@mui/icons-material";
+import { Close, ExpandMore } from "@mui/icons-material";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Button,
   ButtonGroup,
   CircularProgress,
@@ -73,7 +76,7 @@ const CoverState = ({ covered, onClick, loading }) => (
       {loading ? <CircularProgress size={20} /> : null}
       <Button
         variant={covered ? "contained" : "outlined"}
-        color={"primary"}
+        color={"success"}
         onClick={() => onClick(true)}
         disabled={loading}
       >
@@ -92,13 +95,27 @@ const CoverState = ({ covered, onClick, loading }) => (
 );
 
 const EventHistory = ({ events }) => {
+  const [collapsed, setCollapsed] = useState(true);
+
+  const handleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
+
   return (
-    <div>
-      {events.map((event) => {
-        console.log(event)
-        return <p>{event.toString()}</p>;
-      })}
-    </div>
+    <Accordion onChange={handleCollapse} elevation={0} sx={{ width: "100%", border: "1px solid #e0e0e0", borderRadius: "8px" }}>
+      <AccordionSummary expandIcon={<ExpandMore />}>
+        <Typography variant="h6">History ({events.length})</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        {events.map(({ created_at: createdAt, covered }) => (
+          <Stack key={createdAt} flexDirection="row" justifyContent="space-between" alignItems="flex-end" spacing={2}>
+            <Typography variant="h6">{new Date(createdAt).toLocaleString()}</Typography>
+            <Divider orientation="vertical" flexItem />
+            <Typography variant="h6">{covered ? "Covered ✅" : "Missing ❌"}</Typography>
+          </Stack>
+        ))}
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
@@ -106,8 +123,17 @@ const CoverInfo = () => {
   const { id, setParams } = useSearchParamState();
 
   const { enqueueSnackbar } = useSnackbar();
-  const { cover, setCover, comments, setComments, events, setEvents } =
-    useCoverStore();
+  const {
+    cover,
+    setCover,
+    comments,
+    setComments,
+    events,
+    setEvents,
+    loading: coverLoading,
+    error: coverError,
+    success: coverSuccess,
+  } = useCoverStore();
 
   const [loading, setLoading] = useState(false);
 
@@ -126,7 +152,6 @@ const CoverInfo = () => {
           setCover(markerData);
           setEvents(eventsData);
           setComments(commentsData);
-          console.log(events);
         };
 
         fetchCover();
@@ -155,6 +180,7 @@ const CoverInfo = () => {
         },
       });
       await updateCoverStateInSupabase({ id, covered: updatedCovered });
+      fetchCoverAndComments();
     } catch (error) {
       enqueueSnackbar(error.message, { variant: "error" });
     } finally {
