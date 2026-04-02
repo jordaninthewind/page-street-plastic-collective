@@ -8,7 +8,7 @@ import { useMapStore } from "@app/stores";
 const AddressSearch = () => {
   const { id, setParams } = useSearchParamState();
 
-  const { markers } = useMapStore();
+  const { covers } = useMapStore();
 
   const [selectedId, setSelectedId] = useState(id || "");
 
@@ -16,13 +16,13 @@ const AddressSearch = () => {
     ({ target: { value } }) => {
       setSelectedId(value);
 
-      const marker = markers.find((marker) => marker.id === Number(value));
+      const cover = covers.find((cover) => cover.id === Number(value));
 
-      if (!marker) return;
+      if (!cover) return;
 
-      setParams({ id: marker.id, lat: marker.lat, lng: marker.lng });
+      setParams({ id: cover.id, lat: cover.lat, lng: cover.lng });
     },
-    [markers, setParams]
+    [covers, setParams]
   );
 
   return (
@@ -30,9 +30,9 @@ const AddressSearch = () => {
       <Select fullWidth onChange={handleChange} value={selectedId} displayEmpty>
         <MenuItem value="">
           {" "}
-          Select a marker to navigate and show info{" "}
+          Select a cover to navigate and show info{" "}
         </MenuItem>
-        {markers?.map(({ id, address }) => (
+        {covers?.map(({ id, address }) => (
           <MenuItem key={id} value={id}>
             {address}
           </MenuItem>

@@ -1,8 +1,9 @@
 import { searchNearbyAddresses } from "@app/services/map/MapDataService";
 import {
   addCommentToSupabase,
-  addCoverToMapRemote,
+  createCoverRemote,
   getCommentsFromSupabase,
+  getCoverInfoFromSupabase,
   getCoversFromSupabase,
   getEventsFromSupabase,
   getSingleCoverFromSupabase,
@@ -17,8 +18,9 @@ import {
 
 export {
   addCommentToSupabase,
-  addCoverToMapRemote,
+  createCoverRemote,
   getCommentsFromSupabase,
+  getCoverInfoFromSupabase,
   getCoversFromSupabase,
   getEventsFromSupabase,
   getSingleCoverFromSupabase,
@@ -29,5 +31,6 @@ export {
   signUpUserRemote,
   supabase,
   updateCoverRemote,
-  updateCoverStateInSupabase,
+  updateCoverStateInSupabase
 };
+

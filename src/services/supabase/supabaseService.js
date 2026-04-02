@@ -83,6 +83,8 @@ export const getCommentsFromSupabase = async (id) => {
     const { data, error } = await supabase
       .from("comments")
       .select("*")
+      .limit(10)
+      .order('created_at', { ascending: false })
       .eq("marker_id", id);
 
     if (error) {
@@ -130,11 +132,24 @@ export const updateCoverStateInSupabase = async ({ id, covered }) => {
 };
 
 // Get all covers from the database
-export const getCoversFromSupabase = async () =>
-  await supabase.from("drain_covers").select("*");
+export const getCoversFromSupabase = async () => {
+  try {
+    const { data, error } = await supabase.from("drain_covers").select('id, created_at, covered, lat, lng');
+    console.log("data", data);
+    if (error) {
+      throw error;
+    }
 
-// Add a marker to the map
-export const addCoverToMapRemote = async (fields) => {
+    return data;
+
+  } catch (error) {
+    console.error("Error getting covers from Supabase:", error);
+    throw error;
+  }
+};
+
+// Add a cover to the map
+export const createCoverRemote = async (fields) => {
   try {
     const { error } = await supabase
       .from("drain_covers")
@@ -150,7 +165,7 @@ export const addCoverToMapRemote = async (fields) => {
   }
 };
 
-// Update a marker in the database
+// Update a cover in the database
 export const updateCoverRemote = async ({ id, state }) => {
   try {
     const { error } = await supabase
@@ -182,6 +197,21 @@ export const getEventsFromSupabase = async (id) => {
     return data;
   } catch (error) {
     console.error("Error getting events from Supabase:", error);
+    throw error;
+  }
+};
+
+export const getCoverInfoFromSupabase = async (id) => {
+  try {
+    const [cover, events, comments] = await Promise.all([
+      getSingleCoverFromSupabase(id),
+      getEventsFromSupabase(id),
+      getCommentsFromSupabase(id),
+    ]);
+
+    return { cover, events, comments };
+  } catch (error) {
+    console.error("Error getting cover info from Supabase:", error);
     throw error;
   }
 };

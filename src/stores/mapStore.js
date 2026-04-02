@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
 import {
-  addCoverToMapRemote,
+  createCoverRemote,
   getCoversFromSupabase,
   getSingleCoverFromSupabase,
   searchNearbyAddresses,
 } from "@app/services";
 
 const useMapStore = create((set, get) => ({
-  markers: [],
+  covers: [],
   searchResults: [],
   searchLoading: false,
   searchError: null,
@@ -22,7 +22,6 @@ const useMapStore = create((set, get) => ({
   setSaving: (saving) => set({ saving }),
   setLoading: (loading) => set({ loading }),
   setError: (error) => set({ error }),
-  setCovers: (markers) => set({ markers }),
 
   searchNearbyAddresses: async (lng, lat) => {
     try {
@@ -43,29 +42,13 @@ const useMapStore = create((set, get) => ({
     }
   },
 
-  fetchCovers: async () => {
+  fetchMapAssets: async () => {
     try {
       set({ loading: true, error: null });
 
-      const { data, error } = await getCoversFromSupabase();
+      const data = await getCoversFromSupabase();
 
-      if (error) {
-        throw error;
-      }
-
-      set({ markers: data });
-    } catch (error) {
-      set({ error: error.message });
-    } finally {
-      set({ loading: false });
-    }
-  },
-
-  addCover: async (markerData) => {
-    try {
-      set({ loading: true, error: null });
-      await addCoverToMapRemote(markerData);
-      get().fetchCovers();
+      set({ covers: data });
     } catch (error) {
       set({ error: error.message });
       throw error;
@@ -74,8 +57,20 @@ const useMapStore = create((set, get) => ({
     }
   },
 
-  invalidateCovers: async () => {
-    await get().fetchCovers();
+  addCover: async (data) => {
+    try {
+      set({ loading: true, error: null });
+      await createCoverRemote(data);
+    } catch (error) {
+      set({ error: error.message });
+      throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  invalidateMapAssets: () => {
+    get().fetchMapAssets();
   },
 
   invalidateCover: async (id) => {
@@ -83,13 +78,13 @@ const useMapStore = create((set, get) => ({
       const updatedCover = await getSingleCoverFromSupabase(id);
       if (updatedCover) {
         set((state) => ({
-          markers: state.markers.map((marker) =>
-            marker.id === id ? updatedCover : marker
+          covers: state.covers.map((cover) =>
+            cover.id === id ? updatedCover : cover
           ),
         }));
       }
     } catch (error) {
-      console.error("Failed to invalidate marker:", error);
+      console.error("Failed to invalidate cover:", error);
       set({ error: error.message });
     }
   },

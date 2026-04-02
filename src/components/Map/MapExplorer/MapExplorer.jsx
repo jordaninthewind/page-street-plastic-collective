@@ -11,7 +11,7 @@ const ITEMS = [
   },
   {
     icon: <img src={CoverLogo} alt="Cover Logo" width={30} height={30} />,
-    text: "Click on a marker to see info about the request",
+    text: "Click on a cover to see info about the request",
   },
   {
     icon: (

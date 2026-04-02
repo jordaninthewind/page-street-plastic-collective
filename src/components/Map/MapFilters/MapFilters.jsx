@@ -6,7 +6,7 @@ import { useMapStore } from "@app/stores";
 const MapFilters = () => {
   const { isMobile } = useIsMobile();
   const { filter, setFilter, clearFilter } = useSearchParamState();
-  const { markers, loading } = useMapStore();
+  const { covers, loading } = useMapStore();
 
   if (loading) {
     return <CircularProgress />;
@@ -24,7 +24,7 @@ const MapFilters = () => {
           variant={filter === "covered" ? "contained" : "outlined"}
           size="small"
         >
-          Covered ({markers.filter(({ covered }) => covered).length})
+          Covered ({covers.filter(({ covered }) => covered).length})
         </Button>
         <Button
           onClick={handleChangeFilter}
@@ -33,7 +33,7 @@ const MapFilters = () => {
           variant={filter === "missing" ? "contained" : "outlined"}
           size="small"
         >
-          Missing ({markers.filter(({ covered }) => !covered).length})
+          Missing ({covers.filter(({ covered }) => !covered).length})
         </Button>
       </ButtonGroup>
       <Button

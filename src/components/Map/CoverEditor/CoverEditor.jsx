@@ -17,10 +17,9 @@ const CoverEditor = () => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [cover, setCover] = useState(null);
 
   useEffect(() => {
-    const fetchCover = async () => {
+    const fetchCover = async (id) => {
       try {
         setLoading(true);
 
@@ -56,11 +55,7 @@ const CoverEditor = () => {
         <Alert severity="error" sx={{ mt: 2 }}>
           {error}
         </Alert>
-      ) : cover ? (
-        <CoverInfo cover={cover} />
-      ) : (
-        <AddDrainCover lat={lat} lng={lng} />
-      )}
+      ) : id ? <CoverInfo /> : <AddDrainCover lat={lat} lng={lng} />}
     </Box>
   );
 };

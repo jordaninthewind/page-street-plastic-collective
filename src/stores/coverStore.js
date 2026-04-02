@@ -1,3 +1,4 @@
+import { getCoverInfoFromSupabase } from "@app/services";
 import { create } from "zustand";
 
 const useCoverStore = create((set) => ({
@@ -18,6 +19,20 @@ const useCoverStore = create((set) => ({
   setInfo: (info) => set({ info }),
   setWarning: (warning) => set({ warning }),
   clearError: () => set({ error: null }),
+  fetchCover: async (id) => {
+    try {
+      set({ loading: true, error: null });
+
+      const { cover, events, comments } = await getCoverInfoFromSupabase(id);
+
+      set({ cover, events, comments });
+    } catch (error) {
+      set({ error: error.message });
+      throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));
 
 export default useCoverStore;

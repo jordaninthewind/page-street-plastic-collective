@@ -1,6 +1,6 @@
 import { useSnackbar } from "notistack";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Close, ExpandMore } from "@mui/icons-material";
 import {
@@ -20,13 +20,10 @@ import { CoverComments } from "@app/components";
 import withLoading from "@app/components/HOC/withLoading";
 import { useSearchParamState } from "@app/hooks";
 import {
-  getCommentsFromSupabase,
-  getEventsFromSupabase,
-  getSingleCoverFromSupabase,
   recordEventInSupabase,
   updateCoverStateInSupabase,
 } from "@app/services";
-import { useCoverStore } from "@app/stores";
+import { useCoverStore, useMapStore } from "@app/stores";
 import { isStale } from "@app/utils";
 
 const TypographyWithLoading = withLoading(Typography);
@@ -65,6 +62,7 @@ const CoverDetails = ({ cover, mostRecentEvent, ...props }) => {
     </Stack>
   );
 };
+
 const CoverState = ({ covered, onClick, loading }) => (
   <Stack
     flexDirection="row"
@@ -76,7 +74,7 @@ const CoverState = ({ covered, onClick, loading }) => (
       {loading ? <CircularProgress size={20} /> : null}
       <Button
         variant={covered ? "contained" : "outlined"}
-        color={"success"}
+        color="success"
         onClick={() => onClick(true)}
         disabled={loading}
       >
@@ -84,7 +82,7 @@ const CoverState = ({ covered, onClick, loading }) => (
       </Button>
       <Button
         variant={!covered ? "contained" : "outlined"}
-        color={"secondary"}
+        color="secondary"
         onClick={() => onClick(false)}
         disabled={loading}
       >
@@ -125,66 +123,32 @@ const CoverInfo = () => {
   const { enqueueSnackbar } = useSnackbar();
   const {
     cover,
-    setCover,
     comments,
-    setComments,
     events,
-    setEvents,
-    loading: coverLoading,
-    error: coverError,
-    success: coverSuccess,
+    loading,
+    fetchCover,
   } = useCoverStore();
 
-  const [loading, setLoading] = useState(false);
-
-  const fetchCoverAndComments = useCallback(async () => {
-    try {
-      setLoading(true);
-
-      if (id) {
-        const fetchCover = async () => {
-          const [markerData, eventsData, commentsData] = await Promise.all([
-            getSingleCoverFromSupabase(id),
-            getEventsFromSupabase(id),
-            getCommentsFromSupabase(id),
-          ]);
-
-          setCover(markerData);
-          setEvents(eventsData);
-          setComments(commentsData);
-        };
-
-        fetchCover();
-      } else {
-        setCover(null);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [id, setComments, setEvents, setCover]);
+  const { invalidateCover, invalidateMapAssets } = useMapStore();
 
   useEffect(() => {
-    fetchCoverAndComments();
-  }, [fetchCoverAndComments]);
+    fetchCover(id);
+  }, [fetchCover, id]);
 
-  const handleUpdateCoverState = async (updatedCovered) => {
+  const handleUpdateCoverState = async (covered) => {
     try {
-      setLoading(true);
       await recordEventInSupabase({
         event: {
-          type: "update_marker_state",
+          type: "update_cover_state",
           cover_id: id,
-          covered: updatedCovered,
+          covered
         },
       });
-      await updateCoverStateInSupabase({ id, covered: updatedCovered });
-      fetchCoverAndComments();
+      await updateCoverStateInSupabase({ id, covered });
+      invalidateMapAssets();
+      invalidateCover(id);
     } catch (error) {
       enqueueSnackbar(error.message, { variant: "error" });
-    } finally {
-      setLoading(false);
     }
   };
 

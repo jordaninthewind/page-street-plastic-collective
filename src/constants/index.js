@@ -15,7 +15,7 @@ const PAGE_STREET_BOUNDS = [
   [-122.42083449962726, 37.77429666244831],
 ];
 
-export const MARKER_TYPES = {
+export const COVER_STATES = {
   covered: { color: "#4CAF50" },
   missing: { color: "rgba(194,90,60, 1)" },
   temporary: { color: "rgba(60,194,90, 1)" },
