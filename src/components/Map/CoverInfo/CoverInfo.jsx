@@ -2,7 +2,7 @@ import { useSnackbar } from "notistack";
 
 import { useEffect, useState } from "react";
 
-import { Close, ExpandMore } from "@mui/icons-material";
+import { Close, ExpandMore, Info } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -13,6 +13,7 @@ import {
   Divider,
   IconButton,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
@@ -25,6 +26,8 @@ import {
 } from "@app/services";
 import { useCoverStore, useMapStore } from "@app/stores";
 import { isStale } from "@app/utils";
+import withAuth from "@app/components/HOC/withAuth";
+import { Login } from "@app/components";
 
 const TypographyWithLoading = withLoading(Typography);
 
@@ -63,34 +66,21 @@ const CoverDetails = ({ cover, mostRecentEvent, ...props }) => {
   );
 };
 
-const CoverState = ({ covered, onClick, loading }) => (
-  <Stack
-    flexDirection="row"
-    justifyContent="center"
-    alignItems="center"
-    spacing={2}
-  >
-    <ButtonGroup>
-      {loading ? <CircularProgress size={20} /> : null}
+const CoverState = withAuth(({ user, covered, onClick, loading }) => (
+  <Stack flexDirection="row" justifyContent="center" alignItems="center" spacing={2}>
+    <Tooltip title="Login to update cover state">
       <Button
-        variant={covered ? "contained" : "outlined"}
-        color="success"
-        onClick={() => onClick(true)}
+        variant={covered ? "outlined" : "contained"}
+        color={covered ? "error" : "success"}
+        onClick={user ? onClick : undefined}
         disabled={loading}
       >
-        Covered
+        {covered ? "Ugh, it's missing again. ❌" : "Oh look, it's covered! ✅"}
+        {loading ? <CircularProgress size={20} /> : null}
       </Button>
-      <Button
-        variant={!covered ? "contained" : "outlined"}
-        color="secondary"
-        onClick={() => onClick(false)}
-        disabled={loading}
-      >
-        Missing
-      </Button>
-    </ButtonGroup>
-  </Stack>
-);
+    </Tooltip>
+  </Stack >
+));
 
 const EventHistory = ({ events }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -129,7 +119,7 @@ const CoverInfo = () => {
     fetchCover,
   } = useCoverStore();
 
-  const { invalidateCover, invalidateMapAssets } = useMapStore();
+  const { invalidateMapAssets } = useMapStore();
 
   useEffect(() => {
     fetchCover(id);
@@ -145,8 +135,8 @@ const CoverInfo = () => {
         },
       });
       await updateCoverStateInSupabase({ id, covered });
+      await fetchCover(id);
       invalidateMapAssets();
-      invalidateCover(id);
     } catch (error) {
       enqueueSnackbar(error.message, { variant: "error" });
     }
@@ -175,9 +165,11 @@ const CoverInfo = () => {
         loading={loading}
       />
       <Divider sx={{ width: "100%" }} />
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        Update Cover State
-      </Typography>
+      <Stack>
+        <Typography variant="h4" sx={{ mb: 2 }}>
+          Report the status of the drain cover
+        </Typography>
+      </Stack>
       <CoverState covered={cover.covered} onClick={handleUpdateCoverState} />
       <Divider sx={{ width: "100%" }} />
       <EventHistory events={events} />

@@ -7,16 +7,14 @@ import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useUserStore } from "@app/stores";
 
 const validationSchema = yup.object().shape({
-  name: yup.string().required("Name is required"),
+  firstName: yup.string().required("First name is required"),
+  lastName: yup.string().required("Last name is required"),
+  phone: yup.string().required("Phone is required"),
   email: yup
     .string()
     .email("Invalid email")
     .required("Email is required")
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email"),
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
 });
 
 const Signup = () => {
@@ -26,9 +24,10 @@ const Signup = () => {
     formState: { errors, isValid },
   } = useForm<yup.InferType<typeof validationSchema>>({
     defaultValues: {
-      name: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
       email: "",
-      password: "",
     },
     resolver: yupResolver(validationSchema),
   });
@@ -36,7 +35,7 @@ const Signup = () => {
   const { signUpUser, loading } = useUserStore();
 
   const handleSignUp = async (data: yup.InferType<typeof validationSchema>) => {
-    await signUpUser(data.email, data.password, data.name);
+    await signUpUser(data.email, data.firstName, data.lastName, data.phone);
   };
 
   return (
@@ -56,11 +55,27 @@ const Signup = () => {
       </Typography>
       <TextField
         fullWidth
-        label="Name"
+        label="First Name"
         type="text"
-        {...register("name")}
-        error={!!errors.name}
-        helperText={errors.name?.message}
+        {...register("firstName")}
+        error={!!errors.firstName}
+        helperText={errors.firstName?.message}
+      />
+      <TextField
+        fullWidth
+        label="Last Name"
+        type="text"
+        {...register("lastName")}
+        error={!!errors.lastName}
+        helperText={errors.lastName?.message}
+      />
+      <TextField
+        fullWidth
+        label="Phone"
+        type="tel"
+        {...register("phone")}
+        error={!!errors.phone}
+        helperText={errors.phone?.message}
       />
       <TextField
         fullWidth
@@ -69,14 +84,6 @@ const Signup = () => {
         {...register("email")}
         error={!!errors.email}
         helperText={errors.email?.message}
-      />
-      <TextField
-        fullWidth
-        label="Password"
-        type="password"
-        {...register("password")}
-        error={!!errors.password}
-        helperText={errors.password?.message}
       />
       <Button
         fullWidth

@@ -7,12 +7,14 @@ export const supabase = createClient(
   import.meta.env.VITE_SUPABASE_ANON_KEY
 );
 
-export const signUpUserRemote = async (email, password, name) => {
+export const signUpUserRemote = async (email, firstName, lastName, phone) => {
   try {
     const { data, error } = await supabase.auth.signUp({
       email,
-      password,
-      options: { data: { name } },
+      password: Math.random().toString(36).substring(2, 15),
+      phone,
+      options: { data: { first_name: firstName, last_name: lastName } },
+      emailRedirectTo: import.meta.env.VITE_SUPABASE_REDIRECT_URL
     });
 
     if (error) {
@@ -22,6 +24,23 @@ export const signUpUserRemote = async (email, password, name) => {
     return data;
   } catch (error) {
     console.error("Error registering user:", error);
+    throw error;
+  }
+};
+
+export const logInUserWithOtpRemote = async (phone) => {
+  try {
+    const { data, error } = await supabase.auth.signInWithOtp({
+      phone,
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error logging in user with OTP:", error);
     throw error;
   }
 };

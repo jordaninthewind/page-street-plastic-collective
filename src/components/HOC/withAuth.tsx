@@ -1,11 +1,9 @@
 import { useUserStore } from "@app/stores";
 
-const withAuth = (Component: React.ComponentType<any>) => {
-    return (props: any) => {
-        const { user } = useUserStore();
+const withAuth = (Component: React.ComponentType<any>) => (props: any) => {
+    const userStore = useUserStore();
 
-        return <Component {...props} user={user} />;
-    };
+    return <Component {...props} {...userStore} />;
 };
 
 export default withAuth;

@@ -26,6 +26,7 @@ const useMapStore = create((set, get) => ({
   searchNearbyAddresses: async (lng, lat) => {
     try {
       set({ searchLoading: true, searchError: null });
+
       const { results, error } = await searchNearbyAddresses(lng, lat);
 
       if (error) {
