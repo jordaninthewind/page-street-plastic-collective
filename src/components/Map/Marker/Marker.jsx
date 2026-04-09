@@ -22,13 +22,13 @@ const Marker = ({ map, marker }) => {
   const isSelected = selectedId === id ? "marker-selected" : "";
 
   useEffect(() => {
-    markerRef.current = new mapboxgl.Marker(contentRef.current)
-      .setLngLat([lng, lat])
-      .addTo(map);
+    if (map) {
+      markerRef.current = new mapboxgl.Marker(contentRef.current)
+        .setLngLat([lng, lat])
+        .addTo(map);
+    }
 
-    return () => {
-      markerRef.current.remove();
-    };
+    return () => markerRef.current?.remove();
   }, [map, lng, lat]);
 
   const handleClick = () => {

@@ -1,14 +1,17 @@
 import { Navigate, createBrowserRouter } from "react-router";
 
 import { Layout } from "@app/containers";
-import { Home, Map, Profile } from "@app/pages";
+import { Home, Map } from "@app/pages";
+import {
+  Contributors,
+  CoverTheCity,
+  Model3D,
+  Problem,
+  SupportUs,
+} from "@app/sections";
 
-const BaseRouter = () => {
-  return createBrowserRouter([
-    {
-      path: "/profile",
-      element: <Profile />,
-    },
+const BaseRouter = () =>
+  createBrowserRouter([
     {
       element: <Layout />,
       children: [
@@ -21,12 +24,31 @@ const BaseRouter = () => {
           element: <Map />,
         },
         {
+          path: "/problem",
+          element: <Problem />,
+        },
+        {
+          path: "/print",
+          element: <Model3D />,
+        },
+        {
+          path: "/support",
+          element: <SupportUs />,
+        },
+        {
+          path: "/contributors",
+          element: <Contributors />,
+        },
+        {
+          path: "/cover-the-city",
+          element: <CoverTheCity />,
+        },
+        {
           path: "*",
           element: <Navigate to="/" />,
         },
       ],
     },
   ]);
-};
 
 export default BaseRouter;

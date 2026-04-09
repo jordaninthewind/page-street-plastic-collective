@@ -1,0 +1,229 @@
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+
+:root {
+  --header-height: 82px;
+  --color-bg: red;
+  --color-ink: #000;
+  --font-sans: "Open Sans", sans-serif;
+}
+
+/* ─── Eyebrow label ──────────────────────────────────────────────────────── */
+
+.eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  border: 2px solid #000;
+  display: inline-block;
+  padding: 4px 12px;
+  width: fit-content;
+}
+
+/* ─── Tag ────────────────────────────────────────────────────────────────── */
+
+.tag {
+  border: 2px solid #000;
+  padding: 4px 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ─── Rule ───────────────────────────────────────────────────────────────── */
+
+.rule {
+  height: 6px;
+  width: 72px;
+  background: #000;
+  flex-shrink: 0;
+}
+
+/* ─── Stat ───────────────────────────────────────────────────────────────── */
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  border-right: 4px solid #000;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat-number {
+  font-size: clamp(1.75rem, 2.5vw, 2.75rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-top: 6px;
+}
+
+/* ─── Hatch background ───────────────────────────────────────────────────── */
+
+.hatch {
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #000 0px,
+    #000 2px,
+    #f8f6ec 2px,
+    #f8f6ec 18px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hatch-badge {
+  background: #f8f6ec;
+  border: 4px solid #000;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  padding: 10px 28px;
+}
+
+/* ─── Topbar ─────────────────────────────────────────────────────────────── */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: #000;
+  color: #f8f6ec;
+  flex-shrink: 0;
+}
+
+.topbar-logo {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.topbar-subtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.topbar-back {
+  color: #f8f6ec;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 2px solid #f8f6ec;
+  padding: 5px 14px;
+  transition:
+    background 0.1s,
+    color 0.1s;
+}
+
+.topbar-back:hover {
+  background: #f8f6ec;
+  color: #000;
+}
+
+/* ─── Bottom nav menu ────────────────────────────────────────────────────── */
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+  color: #f8f6ec;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border-top: 4px solid #000;
+  z-index: 100;
+}
+
+.bottom-menu--visible {
+  transform: translateY(0);
+}
+
+.bottom-menu-item {
+  color: #f8f6ec;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 22px 32px;
+  border-right: 1px solid rgba(248, 246, 236, 0.15);
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+
+.bottom-menu-item:last-child {
+  border-right: none;
+}
+
+.bottom-menu-item:hover {
+  background: rgba(248, 246, 236, 0.08);
+}
+
+/* ─── Scroll hint ────────────────────────────────────────────────────────── */
+
+.scroll-hint {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.scroll-hint--hidden {
+  opacity: 0;
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .topbar-subtitle {
+    display: none;
+  }
+
+  .bottom-menu {
+    flex-wrap: wrap;
+  }
+
+  .bottom-menu-item {
+    padding: 16px 20px;
+    font-size: 0.65rem;
+    flex: 1;
+    justify-content: center;
+    border-bottom: 1px solid rgba(248, 246, 236, 0.15);
+  }
+}

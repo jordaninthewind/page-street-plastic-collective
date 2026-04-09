@@ -9,7 +9,6 @@ import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
 
 import { Copywrite, ErrorFallback, Header } from "@app/components";
 import { Modal } from "@app/containers";
-import "@app/containers/Layout/Layout.css";
 import theme from "@app/theme";
 
 const Layout = () => {

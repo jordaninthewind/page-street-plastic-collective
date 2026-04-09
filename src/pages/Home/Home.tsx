@@ -1,13 +1,14 @@
-import "./Profile.css";
+import "./Home.css";
+import { Link } from "react-router";
 
 import { useEffect, useRef, useState } from "react";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Map", href: "/map" },
-  { label: "Print a Cover", href: "/#model-3d" },
-  { label: "Support Us", href: "/?overlay=support-us" },
-  { label: "Contribute", href: "/#contributors" },
+  { label: "Print a Cover", href: "/print" },
+  { label: "Support Us", href: "/support" },
+  { label: "Contribute", href: "/contributors" },
 ];
 
 const STATS = [
@@ -16,7 +17,7 @@ const STATS = [
   { number: "SF", label: "Based" },
 ];
 
-const Profile = () => {
+const Home = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const touchStartY = useRef(0);
 
@@ -49,22 +50,9 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      {/* Top bar */}
-      <header className="profile-topbar">
-        <span className="profile-topbar-logo">PSPC</span>
-        <span className="profile-topbar-subtitle">
-          PAGE STREET PLASTIC COLLECTIVE
-        </span>
-        <a href="/" className="profile-topbar-back">
-          ← BACK
-        </a>
-      </header>
-
-      {/* Main content */}
       <main className="profile-main">
-        {/* Left: Identity */}
         <section className="profile-identity">
-          <div className="profile-eyebrow">COLLECTIVE PROFILE — SF, CA</div>
+          <div className="eyebrow">COLLECTIVE PROFILE — SF, CA</div>
 
           <h1 className="profile-name">
             PAGE
@@ -74,7 +62,7 @@ const Profile = () => {
             PLASTIC
           </h1>
 
-          <div className="profile-rule" />
+          <div className="rule" />
 
           <p className="profile-bio">
             A loose collective of neighbors who want to solve local problems
@@ -83,26 +71,26 @@ const Profile = () => {
           </p>
 
           <div className="profile-tags">
-            <span className="profile-tag">HAIGHT / SF</span>
-            <span className="profile-tag">3D PRINT</span>
-            <span className="profile-tag">OPEN SOURCE</span>
-            <span className="profile-tag">COMMUNITY</span>
+            <span className="tag">HAIGHT / SF</span>
+            <span className="tag">3D PRINT</span>
+            <span className="tag">OPEN SOURCE</span>
+            <span className="tag">COMMUNITY</span>
           </div>
         </section>
 
         {/* Right: Visual + stats */}
         <section className="profile-visual">
           <div className="profile-image-frame">
-            <div className="profile-image-hatch">
-              <div className="profile-image-badge">COLLECTIVE</div>
+            <div className="hatch">
+              <div className="hatch-badge">COLLECTIVE</div>
             </div>
           </div>
 
           <div className="profile-stats">
             {STATS.map((stat) => (
-              <div key={stat.label} className="profile-stat">
-                <span className="profile-stat-number">{stat.number}</span>
-                <span className="profile-stat-label">{stat.label}</span>
+              <div key={stat.label} className="stat">
+                <span className="stat-number">{stat.number}</span>
+                <span className="stat-label">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -111,23 +99,23 @@ const Profile = () => {
 
       {/* Scroll hint */}
       <div
-        className={`profile-scroll-hint${menuVisible ? " profile-scroll-hint--hidden" : ""}`}
+        className={`scroll-hint${menuVisible ? " scroll-hint--hidden" : ""}`}
       >
         SCROLL DOWN FOR MENU ↓
       </div>
 
       {/* Scroll-triggered bottom menu */}
       <nav
-        className={`profile-menu${menuVisible ? " profile-menu--visible" : ""}`}
+        className={`bottom-menu${menuVisible ? " bottom-menu--visible" : ""}`}
       >
         {NAV_ITEMS.map((item) => (
-          <a key={item.href} href={item.href} className="profile-menu-item">
+          <Link key={item.href} to={item.href} className="bottom-menu-item">
             {item.label}
-          </a>
+          </Link>
         ))}
       </nav>
     </div>
   );
 };
 
-export default Profile;
+export default Home;

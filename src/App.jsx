@@ -4,6 +4,7 @@ import posthog from "posthog-js";
 import { RouterProvider } from "react-router";
 
 import BaseRouter from "@app/routers/BaseRouter";
+import "@app/styles/base.css";
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
