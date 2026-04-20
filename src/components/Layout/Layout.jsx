@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { CssBaseline, Stack, ThemeProvider } from "@mui/material";
 
 import { Copywrite, ErrorFallback, Header, Modal } from "@app/components";
-import "@app/components/Layout/Layout.css";
 import theme from "@app/theme";
 
 const Layout = () => {

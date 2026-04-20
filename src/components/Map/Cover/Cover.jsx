@@ -22,13 +22,13 @@ const Cover = ({ map, cover }) => {
   const isSelected = selectedId === id ? "cover-selected" : "";
 
   useEffect(() => {
-    coverRef.current = new mapboxgl.Marker(contentRef.current)
-      .setLngLat([lng, lat])
-      .addTo(map);
+    if (map) {
+      markerRef.current = new mapboxgl.Marker(contentRef.current)
+        .setLngLat([lng, lat])
+        .addTo(map);
+    }
 
-    return () => {
-      coverRef.current.remove();
-    };
+    return () => markerRef.current?.remove();
   }, [map, lng, lat]);
 
   const handleClick = () => {

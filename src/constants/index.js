@@ -86,20 +86,6 @@ export const CONTRIBUTORS_SECTION = {
     "We are a loose collective of neighbors who want to solve local problems creatively and sustainably.",
 };
 
-export const PROBLEM_SECTION = {
-  id: "problem",
-  title: "A Frustrating Problem",
-  subtitle:
-    "In SF, homeowners are required to cover the drain pipes on their sidewalks with grates. These covers are made of steel and they a frequently stolen.",
-};
-
-export const SOLUTION_SECTION = {
-  id: "solution",
-  title: "A Simple Solution",
-  subtitle:
-    "As always, there's an opportunity to solve the issue with creativity and community.",
-};
-
 export const SUPPORT_US_SECTION = {
   id: "support-us",
   title: "Support Us",
@@ -113,8 +99,6 @@ export const PRIVACY_SECTION = {
 };
 
 export const SECTIONS = [
-  PROBLEM_SECTION,
-  SOLUTION_SECTION,
   MODEL_3D_SECTION,
   INTERACTIVE_MAP_SECTION,
   COVER_THE_CITY_SECTION,

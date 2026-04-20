@@ -4,6 +4,5 @@ export { default as Map } from "@app/pages/Home/sections/Map/Map";
 export { default as Model3D } from "@app/pages/Home/sections/Model3D/Model3D";
 export { default as Privacy } from "@app/pages/Home/sections/Privacy/Privacy";
 export { default as Problem } from "@app/pages/Home/sections/Problem/Problem";
-export { default as Solution } from "@app/pages/Home/sections/Solution/Solution";
 export { default as SupportUs } from "@app/pages/Home/sections/SupportUs/SupportUs";
 export { default as Hero } from "@app/pages/Home/sections/Hero/Hero";
