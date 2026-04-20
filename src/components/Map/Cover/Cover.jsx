@@ -9,7 +9,7 @@ import { useSearchParamState } from "@app/hooks";
 import { isStale } from "@app/utils";
 
 const Cover = ({ map, cover }) => {
-  const coverRef = useRef(null);
+  const markerRef = useRef(null);
   const contentRef = useRef(document.createElement("div"));
 
   const { filter, setParams, id: selectedId } = useSearchParamState();
