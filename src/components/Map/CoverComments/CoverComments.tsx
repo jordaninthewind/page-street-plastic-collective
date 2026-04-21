@@ -12,7 +12,7 @@ interface Comment {
   text: string;
   created_at: string;
   name: string;
-  marker_id: string;
+  cover_id: string;
 }
 
 const CommentItem = ({ comment }: { comment: Comment }) => (
@@ -59,7 +59,7 @@ const AddComment = () => {
 
     try {
       setLoading(true);
-      await addCommentToSupabase({ text: comment, marker_id: id, name });
+      await addCommentToSupabase({ text: comment, cover_id: id, name });
       setComment("");
       setError("");
     } catch (error) {
@@ -143,7 +143,7 @@ const AddComment = () => {
 
 const CommentList = ({ comments }: { comments: Comment[] }) => (
   <Stack gap={1}>
-    {comments.length > 0 ? (
+    {comments?.length && comments.length > 0 ? (
       comments.map((comment) => (
         <CommentItem key={comment.id} comment={comment} />
       ))

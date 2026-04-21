@@ -23,6 +23,8 @@ const useMapStore = create((set, get) => ({
   setLoading: (loading) => set({ loading }),
   setError: (error) => set({ error }),
 
+  getCover: (id) => get().covers.find((cover) => cover.id === id),
+
   searchNearbyAddresses: async (lng, lat) => {
     try {
       set({ searchLoading: true, searchError: null });
@@ -77,6 +79,7 @@ const useMapStore = create((set, get) => ({
   invalidateCover: async (id) => {
     try {
       const updatedCover = await getSingleCoverFromSupabase(id);
+
       if (updatedCover) {
         set((state) => ({
           covers: state.covers.map((cover) =>

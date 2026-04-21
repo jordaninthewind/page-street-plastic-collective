@@ -2,37 +2,33 @@ import { useSnackbar } from "notistack";
 
 import { useEffect, useState } from "react";
 
-import { Close, ExpandMore, Info } from "@mui/icons-material";
+import { Close, ExpandMore } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Button,
-  ButtonGroup,
   CircularProgress,
   Divider,
   IconButton,
   Stack,
-  Tooltip,
-  Typography,
+  Typography
 } from "@mui/material";
 
 import { CoverComments } from "@app/components";
+import withAuth from "@app/components/HOC/withAuth";
 import withLoading from "@app/components/HOC/withLoading";
 import { useSearchParamState } from "@app/hooks";
 import {
-  recordEventInSupabase,
-  updateCoverStateInSupabase,
+  recordEventInSupabase
 } from "@app/services";
-import { useCoverStore, useMapStore } from "@app/stores";
+import { useMapStore } from "@app/stores";
 import { isStale } from "@app/utils";
-import withAuth from "@app/components/HOC/withAuth";
-import { Login } from "@app/components";
 
 const TypographyWithLoading = withLoading(Typography);
 
-const CoverDetails = ({ cover, mostRecentEvent, ...props }) => {
-  const { created_at: update } = mostRecentEvent || cover;
+const CoverDetails = ({ cover, ...props }) => {
+  const { created_at: update, covered } = cover.events[cover.events.length - 1] || cover;
 
   return (
     <Stack
@@ -48,7 +44,7 @@ const CoverDetails = ({ cover, mostRecentEvent, ...props }) => {
         {cover.address}, SF, CA
       </TypographyWithLoading>
       <TypographyWithLoading {...props} variant="h3" sx={{ mb: 2 }}>
-        is {cover.covered ? "covered ✅" : "missing ❌"}
+        is {covered ? "covered ✅" : "missing ❌"}
       </TypographyWithLoading>
       <TypographyWithLoading {...props} variant="body1">
         As of {new Date(update).toLocaleString()}
@@ -68,18 +64,16 @@ const CoverDetails = ({ cover, mostRecentEvent, ...props }) => {
 
 const CoverState = withAuth(({ user, covered, onClick, loading }) => (
   <Stack flexDirection="row" justifyContent="center" alignItems="center" spacing={2}>
-    <Tooltip title="Login to update cover state">
-      <Button
-        variant={covered ? "outlined" : "contained"}
-        color={covered ? "error" : "success"}
-        onClick={user ? onClick : undefined}
-        disabled={loading}
-      >
-        {covered ? "Ugh, it's missing again. ❌" : "Oh look, it's covered! ✅"}
-        {loading ? <CircularProgress size={20} /> : null}
-      </Button>
-    </Tooltip>
-  </Stack >
+    <Button
+      variant={covered ? "outlined" : "contained"}
+      color={covered ? "error" : "success"}
+      onClick={onClick}
+      disabled={loading || !user}
+    >
+      {covered ? "Ugh, it's missing again. ❌" : "Oh look, it's covered! ✅"}
+      {loading ? <CircularProgress size={20} /> : null}
+    </Button>
+  </Stack>
 ));
 
 const EventHistory = ({ events }) => {
@@ -107,35 +101,45 @@ const EventHistory = ({ events }) => {
   );
 };
 
-const CoverInfo = () => {
+const CoverInfo = withAuth(({ user }) => {
+  const [cover, setCover] = useState(null);
+
   const { id, setParams } = useSearchParamState();
 
   const { enqueueSnackbar } = useSnackbar();
-  const {
-    cover,
-    comments,
-    events,
-    loading,
-    fetchCover,
-  } = useCoverStore();
 
-  const { invalidateMapAssets } = useMapStore();
+  const { invalidateMapAssets, getCover, loading } = useMapStore();
 
   useEffect(() => {
-    fetchCover(id);
-  }, [fetchCover, id]);
+    if (loading) return;
 
-  const handleUpdateCoverState = async (covered) => {
+    const cover = getCover(id);
+
+    if (cover) {
+      setCover(cover);
+    }
+  }, [getCover, id, loading]);
+
+
+  const mostRecentEvent = cover?.events?.length ? cover.events[cover.events.length - 1] : cover;
+
+
+  const handleUpdateCoverState = async () => {
     try {
+      if (!user) {
+        enqueueSnackbar("Please login to update the cover state", { variant: "error" });
+        return;
+      }
+
       await recordEventInSupabase({
         event: {
           type: "update_cover_state",
           cover_id: id,
-          covered
+          covered: !mostRecentEvent.covered,
+          reported_by: user.id
         },
       });
-      await updateCoverStateInSupabase({ id, covered });
-      await fetchCover(id);
+
       invalidateMapAssets();
     } catch (error) {
       enqueueSnackbar(error.message, { variant: "error" });
@@ -161,7 +165,7 @@ const CoverInfo = () => {
       </IconButton>
       <CoverDetails
         cover={cover}
-        mostRecentEvent={events[events.length - 1]}
+        mostRecentEvent={mostRecentEvent}
         loading={loading}
       />
       <Divider sx={{ width: "100%" }} />
@@ -170,12 +174,12 @@ const CoverInfo = () => {
           Report the status of the drain cover
         </Typography>
       </Stack>
-      <CoverState covered={cover.covered} onClick={handleUpdateCoverState} />
+      <CoverState covered={mostRecentEvent?.covered} onClick={handleUpdateCoverState} />
       <Divider sx={{ width: "100%" }} />
-      <EventHistory events={events} />
-      <CoverComments comments={comments} />
+      <EventHistory events={cover.events} />
+      <CoverComments comments={cover.comments} />
     </Stack>
   );
-};
+});
 
 export default CoverInfo;

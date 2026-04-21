@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { User } from "@app/types";
 import {
   Button,
   Divider,
@@ -45,7 +46,7 @@ const SignupOrLogin = () => {
 
 const UserInfo = ({ user, logOutUser, loading }: UserInfoProps) => (
   <Stack spacing={2} alignItems="center" width="100%">
-    <Typography>Hey {user?.first_name}!</Typography>
+    <Typography>Hey {user.name ? user.name : "neighbor"}!</Typography>
     <Button
       fullWidth
       variant="contained"

@@ -14,7 +14,8 @@ const Cover = ({ map, cover }) => {
 
   const { filter, setParams, id: selectedId } = useSearchParamState();
 
-  const { id, lng, lat, covered, updated_at: updatedAt } = cover;
+  const { id, lng, lat, updated_at: updatedAt, events } = cover;
+  const covered = events?.length ? events[events.length - 1].covered : cover.covered;
 
   const state = covered ? "cover-covered" : "cover-missing";
   const temporary = !id ? "cover-temporary" : "";

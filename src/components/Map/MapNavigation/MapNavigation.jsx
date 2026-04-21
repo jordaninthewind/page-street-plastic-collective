@@ -26,7 +26,7 @@ const MapNavigation = () => {
         p: 2,
         minHeight: "100%",
         maxHeight: "100%",
-        maxWidth: "500px",
+        maxWidth: "fit-content",
         width: "100%",
       }}
     >

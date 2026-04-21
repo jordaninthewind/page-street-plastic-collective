@@ -2,10 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 
 import { formatEntry } from "@app/helpers";
 
-export const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+export const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 export const signUpUserRemote = async (email, firstName, lastName, phone) => {
   try {
@@ -78,7 +75,6 @@ export const logOutUserRemote = async () => {
   }
 };
 
-// Get a single cover from the database
 export const getSingleCoverFromSupabase = async (id) => {
   try {
     const { data, error } = await supabase
@@ -104,7 +100,7 @@ export const getCommentsFromSupabase = async (id) => {
       .select("*")
       .limit(10)
       .order('created_at', { ascending: false })
-      .eq("marker_id", id);
+      .eq("cover_id", id);
 
     if (error) {
       throw error;
@@ -153,8 +149,9 @@ export const updateCoverStateInSupabase = async ({ id, covered }) => {
 // Get all covers from the database
 export const getCoversFromSupabase = async () => {
   try {
-    const { data, error } = await supabase.from("drain_covers").select('id, created_at, covered, lat, lng');
-    console.log("data", data);
+    const { data, error } = await supabase.from("drain_covers")
+      .select('id, created_at, covered, lat, lng, requested_by, address, events(*), comments(*)');
+
     if (error) {
       throw error;
     }
@@ -222,13 +219,16 @@ export const getEventsFromSupabase = async (id) => {
 
 export const getCoverInfoFromSupabase = async (id) => {
   try {
-    const [cover, events, comments] = await Promise.all([
-      getSingleCoverFromSupabase(id),
-      getEventsFromSupabase(id),
-      getCommentsFromSupabase(id),
-    ]);
+    const { data, error } = await supabase
+      .from("drain_covers")
+      .select("*, events(*), comments(*)")
+      .eq("id", id);
 
-    return { cover, events, comments };
+    if (error) {
+      throw error;
+    }
+
+    return data[0];
   } catch (error) {
     console.error("Error getting cover info from Supabase:", error);
     throw error;

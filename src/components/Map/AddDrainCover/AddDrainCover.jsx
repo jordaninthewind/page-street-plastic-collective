@@ -21,9 +21,10 @@ import {
 import { COVER_TYPES } from "@app/constants";
 import { useSearchParamState } from "@app/hooks";
 import { useMapStore } from "@app/stores";
-import { formatDecimal, validateEmail } from "@app/utils";
+import { formatDecimal } from "@app/utils";
+import withAuth from "@app/components/HOC/withAuth";
 
-const AddDrainCover = () => {
+const AddDrainCover = withAuth(({ user }) => {
   const { id, lng, lat, setParams } = useSearchParamState();
 
   const { register, handleSubmit, reset, watch, setValue } = useForm({
@@ -57,7 +58,7 @@ const AddDrainCover = () => {
 
   const onSubmit = async (data) => {
     try {
-      await addCover({ lng, lat, ...data });
+      await addCover({ lng, lat, ...data, requested_by: user.name });
 
       enqueueSnackbar(
         "We received your request and will update the map and (try to) send you an email when it's been added!",
@@ -205,23 +206,32 @@ const AddDrainCover = () => {
           ))}
         </Stack>
         <input type="hidden" {...register("cover_type")} />
-        <TextField
-          label="Requested By"
-          fullWidth
-          sx={{ mb: 2 }}
-          {...register("requested_by")}
-          required
-          placeholder="Emperor Norton II of San Francisco"
-        />
-        <TextField
-          label="Email Address"
-          type="email"
-          fullWidth
-          sx={{ mb: 2 }}
-          {...register("email")}
-          required
-          placeholder="example@example.com"
-        />
+        {user ? (
+          <>
+            <input type="hidden" {...register("requested_by")} value={user.id} />
+            <input type="hidden" {...register("email")} value={user.email} />
+          </>
+        ) : (
+          <>
+            <TextField
+              label="Requested By"
+              fullWidth
+              sx={{ mb: 2 }}
+              {...register("requested_by")}
+              required
+              placeholder="Emperor Norton II of San Francisco"
+            />
+            <TextField
+              label="Email Address"
+              type="email"
+              fullWidth
+              sx={{ mb: 2 }}
+              {...register("email")}
+              required
+              placeholder="example@example.com"
+            />
+          </>
+        )}
         <TextField
           label="Anything else you want to add?"
           fullWidth
@@ -238,27 +248,15 @@ const AddDrainCover = () => {
           disabled={
             loading ||
             saving ||
-            !watch("address") ||
-            !watch("requested_by") ||
-            !validateEmail(watch("email"))
+            !watch("address")
           }
           fullWidth
         >
-          {saving ? "Sending Request..." : "Submit Request"}
+          {saving ? "Sending Request..." : "Add Request"}
         </Button>
       </form>
-      <Button
-        variant="outlined"
-        color="primary"
-        sx={{ mt: 2 }}
-        disabled={saving}
-        onClick={() => setParams({})}
-        fullWidth
-      >
-        Cancel
-      </Button>
     </Stack>
   );
-};
+});
 
 export default AddDrainCover;
