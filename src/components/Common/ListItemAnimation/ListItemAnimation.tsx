@@ -18,7 +18,7 @@ const ICON_SX = {
   justifyContent: "center",
 };
 
-type Item = {
+export type Item = {
   icon: ReactElement;
   text: string;
 };

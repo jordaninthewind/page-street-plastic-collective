@@ -1,0 +1,50 @@
+import { Button, ButtonGroup, CircularProgress, Stack } from "@mui/material";
+
+import { useIsMobile, useSearchParamState } from "@app/hooks";
+import useMapStore from "@app/stores/mapStore";
+
+const MapFilters = () => {
+  const { isMobile } = useIsMobile();
+  const { filter, setFilter, clearFilter } = useSearchParamState();
+  const { covers, loading } = useMapStore();
+
+  if (loading) return <CircularProgress />;
+
+  const handleSetFilter = (value: string) => () => setFilter(value);
+
+  return (
+    <Stack direction={isMobile ? "column" : "row"} spacing={2}>
+      <ButtonGroup>
+        <Button
+          onClick={handleSetFilter("covered")}
+          value="covered"
+          color="primary"
+          variant={filter === "covered" ? "contained" : "outlined"}
+          size="small"
+        >
+          Covered ({covers.filter(({ covered }) => covered).length})
+        </Button>
+        <Button
+          onClick={handleSetFilter("missing")}
+          value="missing"
+          color="secondary"
+          variant={filter === "missing" ? "contained" : "outlined"}
+          size="small"
+        >
+          Missing ({covers.filter(({ covered }) => !covered).length})
+        </Button>
+      </ButtonGroup>
+      <Button
+        value="reset"
+        color="error"
+        variant="outlined"
+        size="small"
+        onClick={clearFilter}
+      >
+        Reset map
+      </Button>
+    </Stack>
+  );
+};
+
+export default MapFilters;

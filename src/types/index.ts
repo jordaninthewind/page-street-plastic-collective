@@ -1,14 +1,19 @@
 export interface User {
-  password: string;
+  id: string;
   email: string;
   name: string;
+  password?: string;
 }
 
 export interface Event {
   id: string;
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
   created_at: string;
+  covered?: boolean;
+  cover_id?: string;
+  type?: string;
+  reported_by?: string;
 }
 
 export interface Comment {

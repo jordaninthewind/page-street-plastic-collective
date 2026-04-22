@@ -1,0 +1,44 @@
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+  styled,
+} from "@mui/material";
+
+interface ContributorCardProps {
+  name: string;
+  description: string;
+  image: string;
+  link: string;
+}
+
+const StyledCard = styled(Card)({
+  cursor: "pointer",
+  width: "100%",
+  "&:hover": {
+    transform: "translateY(-10px)",
+    transition: "transform 0.2s ease-in-out",
+  },
+});
+
+const ContributorCard = ({ name, description, image, link }: ContributorCardProps) => (
+  <StyledCard onClick={() => window.open(link, "_blank")}>
+    <CardActionArea
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <CardMedia component="img" image={image} alt={name} loading="lazy" />
+      <CardContent>
+        <Typography variant="h3" sx={{ textAlign: "center" }}>
+          {name}
+        </Typography>
+        <Typography variant="body1" sx={{ textAlign: "center" }}>
+          {description}
+        </Typography>
+      </CardContent>
+    </CardActionArea>
+  </StyledCard>
+);
+
+export default ContributorCard;

@@ -1,9 +1,26 @@
 import { create } from "zustand";
 
 import { getCoverInfoFromSupabase } from "@app/services/supabase/supabaseService";
-import { type Cover } from "@app/types";
+import type { Cover } from "@app/types";
 
-const useCoverStore = create((set) => ({
+interface CoverStore {
+  cover: Cover | null;
+  loading: boolean;
+  error: string | null;
+  success: string | null;
+  info: string | null;
+  warning: string | null;
+  setCover: (cover: Cover) => void;
+  setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
+  setSuccess: (success: string | null) => void;
+  setInfo: (info: string | null) => void;
+  setWarning: (warning: string | null) => void;
+  clearError: () => void;
+  fetchCover: (id: string) => Promise<void>;
+}
+
+const useCoverStore = create<CoverStore>((set) => ({
   cover: null,
   loading: false,
   error: null,
@@ -20,10 +37,8 @@ const useCoverStore = create((set) => ({
   fetchCover: async (id: string) => {
     try {
       set({ loading: true, error: null });
-
       const cover = await getCoverInfoFromSupabase(id);
-
-      set({ cover });
+      set({ cover: cover ?? null });
     } catch (error) {
       set({ error: (error as Error).message });
       throw error;
