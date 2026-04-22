@@ -21,7 +21,7 @@ import withLoading from "@app/components/HOC/withLoading";
 import { useSearchParamState } from "@app/hooks";
 import {
   recordEventInSupabase
-} from "@app/services";
+} from "@app/services/supabase/supabaseService";
 import useMapStore from "@app/stores/mapStore";
 import { isStale } from "@app/utils";
 

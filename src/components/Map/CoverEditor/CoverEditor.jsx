@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 
 import { CoverInfo } from "@app/components";
-import { getSingleCoverFromSupabase } from "@app/services";
+import { getSingleCoverFromSupabase } from "@app/services/supabase/supabaseService";
 
 const CoverEditor = () => {
   const [searchParams] = useSearchParams();
