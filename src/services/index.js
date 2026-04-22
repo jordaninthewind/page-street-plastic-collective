@@ -1,4 +1,3 @@
-import { searchNearbyAddresses } from "@app/services/map/mapDataService";
 import {
   addCommentToSupabase,
   createCoverRemote,
@@ -25,7 +24,6 @@ export {
   logInUserRemote,
   logOutUserRemote,
   recordEventInSupabase,
-  searchNearbyAddresses,
   signUpUserRemote,
   supabase,
   updateCoverRemote,
