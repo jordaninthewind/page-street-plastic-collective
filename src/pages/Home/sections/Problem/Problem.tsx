@@ -18,20 +18,6 @@ const reasons = [
   "Easy to steal",
 ];
 
-interface ReasonProps {
-  text: string;
-  idx: number;
-}
-
-const Reason = ({ text, idx }: ReasonProps) => (
-  <ListItem>
-    <Typography variant="listText">0{idx + 1}</Typography>
-    <ListItemText sx={{ alignSelf: "flex-start", ml: 2, mt: 1 }}>
-      <Typography variant="subtitle">{text}</Typography>
-    </ListItemText>
-  </ListItem>
-);
-
 const PROBLEM_SECTION = {
   id: "problem",
   title: "A Frustrating Problem",
@@ -64,10 +50,15 @@ const Problem = () => (
       </Grid>
       <Grid size={{ xs: 12, md: 6 }}>
         <Divider sx={{ border: "3px solid #000", mb: 2 }} />
-        <Typography variant="subtitle">{PROBLEM_SECTION.subtitle}</Typography>
+        <Typography variant="subtitle1">{PROBLEM_SECTION.subtitle}</Typography>
         <List>
           {reasons.map((reason, idx) => (
-            <Reason text={reason} idx={idx} key={idx} />
+            <ListItem key={idx}>
+              <ListItemText sx={{ alignSelf: "flex-start", ml: 2, mt: 1 }}>
+                <Typography variant="subtitle1">{reason}</Typography>
+              </ListItemText>
+            </ListItem>
+
           ))}
         </List>
       </Grid>

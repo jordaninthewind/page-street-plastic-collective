@@ -49,9 +49,6 @@ const colors = {
     800: "#424242",
     900: "#212121",
   },
-  accent: {
-    main: "#D32F2F",
-  },
   background: {
     default: "rgba(248, 246, 236, 1)",
     paper: "#FFFFFF",
@@ -123,7 +120,7 @@ const customTypographyVariants = {
     fontWeight: 600,
     lineHeight: 1.2,
     letterSpacing: "-0.02em",
-    color: colors.accent.main,
+    color: colors.secondary.main,
   },
 };
 
@@ -184,22 +181,6 @@ const theme = createTheme({
           "&:hover": { boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)" },
         },
       },
-    },
-  },
-  custom: {
-    environmental: {
-      positive: "#4CAF50",
-      neutral: "#FF9800",
-      negative: "#F44336",
-    },
-    plasticTypes: {
-      pet: "#2196F3",
-      hdpe: "#4CAF50",
-      pvc: "#FF9800",
-      ldpe: "#9C27B0",
-      pp: "#795548",
-      ps: "#607D8B",
-      other: "#9E9E9E",
     },
   },
 });

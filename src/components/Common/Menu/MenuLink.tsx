@@ -36,7 +36,7 @@ const MenuLink = ({ id, title, onClick }: MenuLinkProps) => {
             sx={{
               p: 0,
               height: 10,
-              backgroundColor: theme.palette.accent.main,
+              backgroundColor: theme.palette.secondary.main,
             }}
             component="span"
           />

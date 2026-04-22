@@ -77,7 +77,7 @@ const Menu = ({ open, handleClose }: MenuProps) => {
           onClick={handleClose}
           sx={{ position: "absolute", top: 5, right: 5, zIndex: 1000 }}
         >
-          <CloseIcon sx={{ height: 50, width: 50 }} color="accent" />
+          <CloseIcon sx={{ height: 50, width: 50 }} color="secondary" />
         </IconButton>
         <Fade timeout={1200} in={open} mountOnEnter unmountOnExit>
           <Stack direction="column" spacing={2}>
