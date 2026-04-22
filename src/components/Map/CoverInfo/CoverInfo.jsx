@@ -22,7 +22,7 @@ import { useSearchParamState } from "@app/hooks";
 import {
   recordEventInSupabase
 } from "@app/services";
-import { useMapStore } from "@app/stores";
+import useMapStore from "@app/stores/mapStore";
 import { isStale } from "@app/utils";
 
 const TypographyWithLoading = withLoading(Typography);

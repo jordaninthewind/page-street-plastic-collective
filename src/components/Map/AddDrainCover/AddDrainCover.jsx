@@ -20,7 +20,7 @@ import {
 
 import { COVER_TYPES } from "@app/constants";
 import { useSearchParamState } from "@app/hooks";
-import { useMapStore } from "@app/stores";
+import useMapStore from "@app/stores/mapStore";
 import { formatDecimal } from "@app/utils";
 import withAuth from "@app/components/HOC/withAuth";
 

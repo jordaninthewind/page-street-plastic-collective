@@ -4,7 +4,7 @@ import * as yup from "yup";
 
 import { Button, Stack, TextField } from "@mui/material";
 
-import { useUserStore } from "@app/stores";
+import useUserStore from "@app/stores/userStore";
 
 const validationSchema = yup.object().shape({
   email: yup

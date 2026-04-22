@@ -12,7 +12,7 @@ import {
   PAGE_STREET_HIGHLIGHT_SOURCE,
 } from "@app/constants";
 import { useIsMobile, useMap, useSearchParamState } from "@app/hooks";
-import { useMapStore } from "@app/stores";
+import useMapStore from "@app/stores/mapStore";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 

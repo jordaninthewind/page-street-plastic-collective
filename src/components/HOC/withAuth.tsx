@@ -1,9 +1,12 @@
-import { useUserStore } from "@app/stores";
+import { type ComponentType } from "react";
 
-const withAuth = (Component: React.ComponentType<any>) => (props: any) => {
-    const userStore = useUserStore();
+import useUserStore from "@app/stores/userStore";
+import { type User } from "@app/types";
 
-    return <Component {...props} {...userStore} />;
+const withAuth = <T extends object>(Component: ComponentType<T & { user: User | null }>) => (props: T) => {
+    const { user } = useUserStore();
+
+    return <Component {...(props as T)} user={user} />;
 };
 
 export default withAuth;

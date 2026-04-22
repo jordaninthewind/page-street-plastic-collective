@@ -1,4 +1,4 @@
-import { searchNearbyAddresses } from "@app/services/map/MapDataService";
+import { searchNearbyAddresses } from "@app/services/map/mapDataService";
 import {
   addCommentToSupabase,
   createCoverRemote,

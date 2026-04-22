@@ -1,21 +1,16 @@
-import { useState } from "react";
-
-import { User } from "@app/types";
 import {
   Button,
   Divider,
   Stack,
   Typography
 } from "@mui/material";
+import { useState } from "react";
 
-import { Login, Signup } from "@app/components";
 import withAuth from "@app/components/HOC/withAuth";
-
-interface UserInfoProps {
-  user: User;
-  logOutUser: () => void;
-  loading: boolean;
-}
+import Login from "@app/components/Map/Auth/Login/Login";
+import Signup from "@app/components/Map/Auth/Signup/Signup";
+import useUserStore from "@app/stores/userStore";
+import { type User } from "@app/types";
 
 const SignupOrLogin = () => {
   const [showSignup, setShowSignup] = useState(false);
@@ -44,22 +39,26 @@ const SignupOrLogin = () => {
 };
 
 
-const UserInfo = ({ user, logOutUser, loading }: UserInfoProps) => (
-  <Stack spacing={2} alignItems="center" width="100%">
-    <Typography>Hey {user.name ? user.name : "neighbor"}!</Typography>
-    <Button
-      fullWidth
-      variant="contained"
-      color="primary"
-      onClick={logOutUser}
-      disabled={loading}
-    >
-      Logout
-    </Button>
-  </Stack>
-)
+const UserInfo = () => {
+  const { user, logOutUser, loading } = useUserStore();
+
+  return (
+    <Stack spacing={2} alignItems="center" width="100%">
+      <Typography>Hey {user?.name ? user.name : "neighbor"}!</Typography>
+      <Button
+        fullWidth
+        variant="contained"
+        color="primary"
+        onClick={logOutUser}
+        disabled={loading}
+      >
+        Logout
+      </Button>
+    </Stack>
+  )
+}
 
 
-const UserPanel = withAuth(({ user, logOutUser, loading }) => user ? <UserInfo user={user} logOutUser={logOutUser} loading={loading} /> : <SignupOrLogin />)
+const UserPanel = withAuth(({ user }: { user: User | null }) => user ? <UserInfo /> : <SignupOrLogin />)
 
 export default UserPanel;

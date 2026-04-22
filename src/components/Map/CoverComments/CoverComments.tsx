@@ -4,16 +4,9 @@ import { type ChangeEvent, useState } from "react";
 
 import { Button, Fade, Stack, TextField, Typography } from "@mui/material";
 
-import { useSearchParamState } from "@app/hooks";
-import { addCommentToSupabase } from "@app/services";
-
-interface Comment {
-  id: string;
-  text: string;
-  created_at: string;
-  name: string;
-  cover_id: string;
-}
+import { useSearchParamState } from "@app/hooks/index";
+import { addCommentToSupabase } from "@app/services/supabase/supabaseService";
+import { type Comment } from "@app/types";
 
 const CommentItem = ({ comment }: { comment: Comment }) => (
   <Stack
@@ -63,8 +56,8 @@ const AddComment = () => {
       setComment("");
       setError("");
     } catch (error) {
-      setError(error?.message || "An unknown error occurred");
-      enqueueSnackbar(error?.message || "An unknown error occurred", {
+      setError((error as Error)?.message || "An unknown error occurred");
+      enqueueSnackbar((error as Error)?.message || "An unknown error occurred", {
         variant: "error",
       });
     } finally {

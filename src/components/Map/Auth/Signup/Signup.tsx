@@ -4,7 +4,7 @@ import * as yup from "yup";
 
 import { Button, Stack, TextField, Typography } from "@mui/material";
 
-import { useUserStore } from "@app/stores";
+import useUserStore from "@app/stores/userStore";
 
 const validationSchema = yup.object().shape({
   firstName: yup.string().required("First name is required"),

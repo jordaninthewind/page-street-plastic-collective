@@ -18,14 +18,14 @@ const ICON_SX = {
   justifyContent: "center",
 };
 
-interface Item {
+type Item = {
   icon: ReactElement;
   text: string;
-}
+};
 
-interface ListAnimationProps {
+type ListAnimationProps = {
   items: Item[];
-}
+};
 
 const ListItemAnimation = ({ items }: ListAnimationProps) => {
   const [cycleIndex, setCycleIndex] = useState(0);
@@ -66,7 +66,7 @@ const ListItemAnimation = ({ items }: ListAnimationProps) => {
   }, [cycleIndex, expanded, items, itemVisible]);
 
   if (!expanded) {
-    const { icon, text } = items[cycleIndex];
+    const { icon, text } = items[cycleIndex] || {};
 
     return (
       <List>

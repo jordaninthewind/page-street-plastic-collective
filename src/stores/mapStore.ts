@@ -4,10 +4,20 @@ import {
   createCoverRemote,
   getCoversFromSupabase,
   getSingleCoverFromSupabase,
-  searchNearbyAddresses,
-} from "@app/services";
+} from "@app/services/supabase/supabaseService";
+import { searchNearbyAddresses } from "@app/services/map/mapDataService";
 
-const useMapStore = create((set, get) => ({
+interface MapStore {
+  covers: any[];
+  searchResults: any[];
+  searchLoading: boolean;
+  searchError: string | null;
+  loading: boolean;
+  saving: boolean;
+  error: string | null;
+}
+
+const useMapStore = create<MapStore>((set, get) => ({
   covers: [],
   searchResults: [],
   searchLoading: false,
@@ -16,16 +26,16 @@ const useMapStore = create((set, get) => ({
   saving: false,
   error: null,
 
-  setSearchLoading: (searchLoading) => set({ searchLoading }),
-  setSearchError: (searchError) => set({ searchError }),
-  setSearchResults: (searchResults) => set({ searchResults }),
-  setSaving: (saving) => set({ saving }),
-  setLoading: (loading) => set({ loading }),
-  setError: (error) => set({ error }),
+  setSearchLoading: (searchLoading: boolean) => set({ searchLoading }),
+  setSearchError: (searchError: string | null) => set({ searchError }),
+  setSearchResults: (searchResults: any[]) => set({ searchResults }),
+  setSaving: (saving: boolean) => set({ saving }),
+  setLoading: (loading: boolean) => set({ loading }),
+  setError: (error: string | null) => set({ error }),
 
-  getCover: (id) => get().covers.find((cover) => cover.id === id),
+  getCover: (id: string) => get().covers.find((cover: any) => cover.id === id),
 
-  searchNearbyAddresses: async (lng, lat) => {
+  searchNearbyAddresses: async (lng: number, lat: number) => {
     try {
       set({ searchLoading: true, searchError: null });
 
@@ -39,7 +49,7 @@ const useMapStore = create((set, get) => ({
 
       return results;
     } catch (error) {
-      set({ searchError: error.message });
+      set({ searchError: (error as Error).message });
     } finally {
       set({ searchLoading: false });
     }
@@ -53,43 +63,39 @@ const useMapStore = create((set, get) => ({
 
       set({ covers: data });
     } catch (error) {
-      set({ error: error.message });
-      throw error;
+      set({ error: (error as Error).message });
+      throw error as Error;
     } finally {
       set({ loading: false });
     }
   },
 
-  addCover: async (data) => {
+  addCover: async (data: any) => {
     try {
       set({ loading: true, error: null });
       await createCoverRemote(data);
     } catch (error) {
-      set({ error: error.message });
-      throw error;
+      set({ error: (error as Error).message });
+      throw error as Error;
     } finally {
       set({ loading: false });
     }
   },
 
-  invalidateMapAssets: () => {
-    get().fetchMapAssets();
-  },
-
-  invalidateCover: async (id) => {
+  invalidateCover: async (id: string) => {
     try {
       const updatedCover = await getSingleCoverFromSupabase(id);
 
       if (updatedCover) {
         set((state) => ({
-          covers: state.covers.map((cover) =>
+          covers: state.covers.map((cover: any) =>
             cover.id === id ? updatedCover : cover
           ),
         }));
       }
     } catch (error) {
       console.error("Failed to invalidate cover:", error);
-      set({ error: error.message });
+      set({ error: (error as Error).message });
     }
   },
 

@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { Box, MenuItem, Select } from "@mui/material";
 
 import { useSearchParamState } from "@app/hooks";
-import { useMapStore } from "@app/stores";
+import useMapStore from "@app/stores/mapStore";
 
 const AddressSearch = () => {
   const { id, setParams } = useSearchParamState();

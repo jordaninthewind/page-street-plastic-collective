@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, CircularProgress, Stack } from "@mui/material";
 
 import { useIsMobile, useSearchParamState } from "@app/hooks";
-import { useMapStore } from "@app/stores";
+import useMapStore from "@app/stores/mapStore";
 
 const MapFilters = () => {
   const { isMobile } = useIsMobile();
