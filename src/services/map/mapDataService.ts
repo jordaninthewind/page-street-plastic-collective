@@ -1,9 +1,16 @@
-// TODO: Improve error handling in ADC Component
+interface SearchNearbyAddressesResponse {
+  results: {
+    id: string;
+    text: string;
+  }[];
+  error: string | null;
+}
+
 export const searchNearbyAddresses = async (
-  longitude,
-  latitude,
+  longitude: number,
+  latitude: number,
   radius = 30
-) => {
+): Promise<SearchNearbyAddressesResponse> => {
   const query = `
             [out:json];
             node(around:${radius},${latitude},${longitude})[~"^addr:"~"."];
@@ -23,13 +30,13 @@ export const searchNearbyAddresses = async (
 
   const results = data.elements
     .filter(
-      (el) =>
+      (el: any) =>
         el.tags &&
         (el.tags["addr:street"] ||
           el.tags["addr:housenumber"] ||
           el.tags["addr:full"])
     )
-    .map((el) => ({
+    .map((el: any) => ({
       id: el.id,
       text:
         el.tags["addr:full"] ||
