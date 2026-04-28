@@ -1,10 +1,5 @@
 import type { GeoJSONSourceSpecification, LineLayerSpecification } from "mapbox-gl";
 
-import DrainVaderImage from "@app/assets/draINvader.png";
-import PageStreetPlasticCollectiveImage from "@app/assets/pspc.png";
-
-export const PROJECT_NAME = "Page Street Plastic Collective";
-
 export const MAP_CENTER: [number, number] = [-122.4347310677153, 37.77261132114993];
 
 export const MAP_BOUNDS: [[number, number], [number, number]] = [
@@ -109,49 +104,33 @@ export const SECTIONS = [
   PRIVACY_SECTION,
 ];
 
-export const CONTRIBUTORS = [
-  {
-    name: "Page Street Plastic Collective",
-    description: "Functional minimalism to cover the city.",
-    image: PageStreetPlasticCollectiveImage as string,
-    link: "https://instagram.com/pagestreetplasticcollective",
-  },
-  {
-    name: "draINvader",
-    description:
-      "Inspired by Space Invader, draINvader uses multi-colored filament to create art and cover the city!",
-    image: DrainVaderImage as string,
-    link: "https://www.instagram.com/drainvader/",
-  },
-];
-
 export const IMPLEMENTATION_PHASES: {
   done?: boolean;
   title: string;
   description: string;
 }[] = [
-  {
-    done: true,
-    title: "Page Street",
-    description:
-      "Starting with our local neighborhood from Market to Stanyan Street.",
-  },
-  {
-    title: "Lower Haight / Haight Ashbury",
-    description:
-      "Expanding to neighboring districts with similar drainage challenges.",
-  },
-  {
-    title: "Citywide Coverage",
-    description:
-      "Scaling our solution across all of San Francisco's storm drain network.",
-  },
-  {
-    title: "WORLDWIDE",
-    description:
-      "Scaling our solution across the world. (Okay, maybe not the whole world, but we're trying to make a big impact!)",
-  },
-];
+    {
+      done: true,
+      title: "Page Street",
+      description:
+        "Starting with our local neighborhood from Market to Stanyan Street.",
+    },
+    {
+      title: "Lower Haight / Haight Ashbury",
+      description:
+        "Expanding to neighboring districts with similar drainage challenges.",
+    },
+    {
+      title: "Citywide Coverage",
+      description:
+        "Scaling our solution across all of San Francisco's storm drain network.",
+    },
+    {
+      title: "WORLDWIDE",
+      description:
+        "Scaling our solution across the world. (Okay, maybe not the whole world, but we're trying to make a big impact!)",
+    },
+  ];
 
 export const COVER_STATS: { title: string; value: string }[] = [
   {

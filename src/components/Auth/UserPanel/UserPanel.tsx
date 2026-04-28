@@ -7,8 +7,7 @@ import {
 import { useState } from "react";
 
 import withAuth from "@app/components/HOC/withAuth";
-import Login from "@app/components/Map/Auth/Login/Login";
-import Signup from "@app/components/Map/Auth/Signup/Signup";
+import { Login, Signup } from "@app/components/Auth";
 import useUserStore from "@app/stores/userStore";
 import { type User } from "@app/types";
 

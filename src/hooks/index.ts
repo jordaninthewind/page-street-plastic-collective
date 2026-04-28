@@ -18,10 +18,11 @@ interface MobileState {
 }
 
 interface SearchParamState {
-  id: number | null;
-  filter: string | null;
-  lat: string | null;
-  lng: string | null;
+  id?: number | null;
+  overlay?: string | null;
+  filter?: string | null;
+  lat?: string | null;
+  lng?: string | null;
   setParams: (params: Record<string, string>) => void;
   setFilter: (value: string) => void;
   clearFilter: () => void;
@@ -31,6 +32,7 @@ export const useSearchParamState = (): SearchParamState => {
   const [searchParams, setParams] = useSearchParams();
 
   const id = Number(searchParams.get("id"));
+  const overlay = searchParams.get("overlay");
   const filter = searchParams.get("filter");
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
@@ -41,6 +43,7 @@ export const useSearchParamState = (): SearchParamState => {
 
   return {
     id,
+    overlay,
     lat,
     lng,
     filter,

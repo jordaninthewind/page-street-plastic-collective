@@ -1,7 +1,3 @@
-import { useSnackbar } from "notistack";
-
-import { useEffect, useState } from "react";
-
 import { Close, ExpandMore } from "@mui/icons-material";
 import {
   Accordion,
@@ -14,6 +10,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useSnackbar } from "notistack";
+import { useEffect, useState } from "react";
 
 import { CoverComments } from "@app/components";
 import withAuth from "@app/components/HOC/withAuth";
@@ -21,8 +19,8 @@ import withLoading from "@app/components/HOC/withLoading";
 import { useSearchParamState } from "@app/hooks";
 import { recordEventInSupabase } from "@app/services/supabase/supabaseService";
 import useMapStore from "@app/stores/mapStore";
-import { isStale } from "@app/utils";
 import type { Cover, Event, User } from "@app/types";
+import { isStale } from "@app/utils";
 
 const TypographyWithLoading = withLoading(Typography);
 
@@ -122,12 +120,12 @@ const CoverInfo = withAuth(({ user }: { user: User | null }) => {
 
   useEffect(() => {
     if (loading) return;
-    const matched = id !== null ? getCover(id) : undefined;
+    const matched = id !== null ? getCover(String(id)) : undefined;
     if (matched) setCover(matched);
   }, [getCover, id, loading]);
 
   const lastEvent: Event | undefined =
-    cover?.events && cover.events.length > 0
+    cover && cover.events && cover.events.length > 0
       ? cover.events[cover.events.length - 1]
       : undefined;
   const mostRecentEvent = lastEvent ?? cover;
@@ -153,7 +151,7 @@ const CoverInfo = withAuth(({ user }: { user: User | null }) => {
   };
 
   if (!cover) return null;
-
+  console.log('mostRecentEvent', mostRecentEvent);
   return (
     <Stack
       alignItems="center"

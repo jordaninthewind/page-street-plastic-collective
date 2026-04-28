@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 
-import { Section } from "@app/components";
 import "@app/pages/Home/sections/Problem/Problem.css";
 
 const reasons = [
@@ -30,7 +29,7 @@ const SOLUTION_SECTION = {
 };
 
 const Problem = () => (
-  <Section id={PROBLEM_SECTION.id} title={PROBLEM_SECTION.title}>
+  <Grid>
     <Grid container spacing={4}>
       <Grid size={{ xs: 12, md: 6 }}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -58,7 +57,6 @@ const Problem = () => (
                 <Typography variant="subtitle1">{reason}</Typography>
               </ListItemText>
             </ListItem>
-
           ))}
         </List>
       </Grid>
@@ -94,7 +92,7 @@ const Problem = () => (
         />
       </Grid>
     </Grid>
-  </Section>
+  </Grid>
 );
 
 export default Problem;

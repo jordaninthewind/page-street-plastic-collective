@@ -1,31 +1,17 @@
-import { useSearchParams } from "react-router";
-
-import { useEffect, useState } from "react";
-
 import CloseIcon from "@mui/icons-material/Close";
 import { Dialog, IconButton } from "@mui/material";
 
 import { ModelViewer } from "@app/components";
+import withSearchParamState from "@app/components/HOC/withSearchParamState";
 import { useIsMobile } from "@app/hooks";
-import { SupportUs } from "@app/pages/Home/sections";
 
-const Modal = () => {
+const Modal = withSearchParamState(({ overlay, clearOverlay }: { overlay: string | null, clearOverlay: () => void }) => {
   const { isMobile } = useIsMobile();
-  const [overlay, setOverlay] = useState<string | null>(null);
-  const [searchParams, setParams] = useSearchParams();
-
-  useEffect(() => {
-    const overlayParam = searchParams.get("overlay");
-    setOverlay(overlayParam);
-    return () => setOverlay(null);
-  }, [searchParams]);
-
-  const handleClose = () => setParams({});
 
   return (
     <Dialog
       open={!!overlay}
-      onClose={handleClose}
+      onClose={clearOverlay}
       scroll="body"
       fullScreen={isMobile}
       slotProps={{
@@ -38,15 +24,14 @@ const Modal = () => {
       }}
     >
       <IconButton
-        onClick={handleClose}
+        onClick={clearOverlay}
         sx={{ position: "absolute", top: 5, right: 5, zIndex: 1000 }}
       >
         <CloseIcon />
       </IconButton>
       {overlay === "model" && <ModelViewer />}
-      {overlay === "support-us" && <SupportUs />}
     </Dialog>
   );
-};
+});
 
 export default Modal;

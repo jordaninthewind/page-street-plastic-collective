@@ -1,14 +1,13 @@
-import "./Home.css";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
-import { useEffect, useRef, useState } from "react";
+import "./Home.css";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Map", href: "/map" },
   { label: "Print a Cover", href: "/print" },
-  { label: "Support Us", href: "/support" },
-  { label: "Contribute", href: "/contributors" },
+  { label: "Contribute", href: "/contribute" },
 ];
 
 const STATS = [
@@ -17,9 +16,11 @@ const STATS = [
   { number: "SF", label: "Based" },
 ];
 
+
 const Home = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const touchStartY = useRef(0);
+
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
