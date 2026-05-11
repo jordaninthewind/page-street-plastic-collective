@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
+import CoverLogo from "@app/assets/cover-logo.svg";
+
 import "./Home.css";
 
 const NAV_ITEMS = [
@@ -83,7 +85,9 @@ const Home = () => {
         <section className="profile-visual">
           <div className="profile-image-frame">
             <div className="hatch">
-              <div className="hatch-badge">COLLECTIVE</div>
+              <div className="hatch-badge">
+                <img src={CoverLogo as string} alt="Cover Logo" />
+              </div>
             </div>
           </div>
 
