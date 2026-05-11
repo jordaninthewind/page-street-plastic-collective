@@ -1,17 +1,18 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { Dialog, IconButton } from "@mui/material";
 
-import { ModelViewer } from "@app/components";
+import PrintACover from "@app/components/Home/PrintACover/PrintACover";
+import Contribute from "@app/components/Home/Contribute/Contribute";
 import withSearchParamState from "@app/components/HOC/withSearchParamState";
 import { useIsMobile } from "@app/hooks";
 
-const Modal = withSearchParamState(({ overlay, clearOverlay }: { overlay: string | null, clearOverlay: () => void }) => {
+const Modal = withSearchParamState(({ overlay, clearFilter }: { overlay: string | null, clearFilter: () => void }) => {
   const { isMobile } = useIsMobile();
 
   return (
     <Dialog
       open={!!overlay}
-      onClose={clearOverlay}
+      onClose={clearFilter}
       scroll="body"
       fullScreen={isMobile}
       slotProps={{
@@ -19,17 +20,18 @@ const Modal = withSearchParamState(({ overlay, clearOverlay }: { overlay: string
           sx: { backgroundColor: "rgba(0, 0, 255, 0.5)" },
         },
         paper: {
-          sx: { borderRadius: "20px", overflow: "hidden" },
+          sx: { borderRadius: "20px", p: 4, maxHeight: "80vh" },
         },
       }}
     >
       <IconButton
-        onClick={clearOverlay}
+        onClick={clearFilter}
         sx={{ position: "absolute", top: 5, right: 5, zIndex: 1000 }}
       >
         <CloseIcon />
       </IconButton>
-      {overlay === "model" && <ModelViewer />}
+      {overlay === "model" && <PrintACover />}
+      {overlay === "contribute" && <Contribute />}
     </Dialog>
   );
 });

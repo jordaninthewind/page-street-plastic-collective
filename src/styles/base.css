@@ -82,16 +82,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: hatch-scroll 4s linear infinite;
+  animation: hatch-animation 1s linear infinite;
 }
 
-@keyframes hatch-scroll {
-  from { background-position: 0 0; }
-  to { background-position: 100px 0; }
+@keyframes hatch-animation {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
 }
 
 .hatch-badge {
-
   img {
     width: 100%;
     height: 100%;

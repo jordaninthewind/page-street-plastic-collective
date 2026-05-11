@@ -73,7 +73,7 @@ export const MODEL_3D_SECTION = {
   id: "model-3d",
   title: "Basic 3D Model",
   subtitle:
-    "Explore our drain cover design in 3D. You can rotate, zoom, and download the model for 3D printing and further development.",
+    "",
 };
 
 export const CONTRIBUTORS_SECTION = {
@@ -96,7 +96,6 @@ export const PRIVACY_SECTION = {
 };
 
 export const SECTIONS = [
-  MODEL_3D_SECTION,
   INTERACTIVE_MAP_SECTION,
   COVER_THE_CITY_SECTION,
   CONTRIBUTORS_SECTION,

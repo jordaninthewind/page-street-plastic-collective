@@ -1,12 +1,13 @@
+import { Box, Button, Divider, Link, Stack, Typography } from "@mui/material";
 import { usePostHog } from "@posthog/react";
-import { Box, Button, Grid, Link, Stack } from "@mui/material";
+import { useSnackbar } from "notistack";
 
 import DrainVaderImage from "@app/assets/draINvader.png";
 import PageStreetPlasticCollectiveImage from "@app/assets/pspc.png";
 import { CardSection, ContributorCard } from "@app/components";
 import { useIsMobile } from "@app/hooks";
 
-import "@app/pages/Home/sections/Contribute/Contribute.css";
+import "./Contribute.css";
 
 const CONTRIBUTORS = [
   {
@@ -27,19 +28,28 @@ const CONTRIBUTORS = [
 
 const SupportUs = () => {
   const posthog = usePostHog();
+
   const { isMobile } = useIsMobile();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleShareClick = async () => {
     posthog.capture("support_share_clicked");
-    await navigator.share({
-      title: "Page Street Plastic Collective",
-      text: "Join us in cleaning up our community!",
-      url: window.location.href,
-    });
+    try {
+      await navigator.share({
+        title: "Page Street Plastic Collective",
+        text: "Join us in cleaning up our community!",
+        url: window.location.href,
+      });
+    } catch (error) {
+      enqueueSnackbar("Failed to share", { variant: "error" });
+    }
   };
 
   return (
     <Stack>
+      <Typography variant="h2" sx={{ textAlign: "center", mb: 2 }}>Help us cover the city!</Typography>
+      <Divider sx={{ border: "2px solid #000", mb: 4 }} />
+      <Typography variant="body1" sx={{ textAlign: "center", mb: 2 }}>We are a loose collective of neighbors who want to solve local problems creatively and sustainably. We replace stolen steel drain covers with open-source, 3D-printable ones.</Typography>
       <Stack
         direction={isMobile ? "column" : "row"}
         spacing={2}
@@ -90,25 +100,15 @@ const SupportUs = () => {
           </Box>
         </CardSection>
       </Stack>
-    </Stack>
+    </Stack >
   );
 };
 
 
-const Contributors = () => (
-  <Grid container spacing={2} justifyContent="center" alignItems="center">
-    {CONTRIBUTORS.map((contributor, index) => (
-      <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={index}>
-        <ContributorCard {...contributor} />
-      </Grid>
-    ))}
-  </Grid>
-);
-
 const Contribute = () => (
-  <Stack>
-    <Contributors />
+  <Stack spacing={2}>
     <SupportUs />
+    {CONTRIBUTORS.map((contributor) => <ContributorCard {...contributor} />)}
   </Stack>
 )
 

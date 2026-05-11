@@ -8,8 +8,8 @@ import "./Home.css";
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Map", href: "/map" },
-  { label: "Print a Cover", href: "/print" },
-  { label: "Contribute", href: "/contribute" },
+  { label: "Print a Cover", href: "/?overlay=model" },
+  { label: "Contribute", href: "/?overlay=contribute" },
 ];
 
 const STATS = [
@@ -55,7 +55,7 @@ const Home = () => {
     <div className="profile">
       <main className="profile-main">
         <section className="profile-identity">
-          <div className="eyebrow">COLLECTIVE PROFILE — SF, CA</div>
+          <div className="eyebrow">One cover at a time</div>
 
           <h1 className="profile-name">
             PAGE
@@ -63,6 +63,8 @@ const Home = () => {
             STREET
             <br />
             PLASTIC
+            <br />
+            COLLECTIVE
           </h1>
 
           <div className="rule" />
@@ -74,10 +76,9 @@ const Home = () => {
           </p>
 
           <div className="profile-tags">
-            <span className="tag">HAIGHT / SF</span>
-            <span className="tag">3D PRINT</span>
-            <span className="tag">OPEN SOURCE</span>
+            <span className="tag">LOWER HAIGHT / SF</span>
             <span className="tag">COMMUNITY</span>
+            <span className="tag">3D PRINT</span>
           </div>
         </section>
 

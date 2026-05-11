@@ -7,7 +7,8 @@ export { default as HoverActionCard } from "@app/components/Common/HoverActionCa
 export { default as InfoBlock } from "@app/components/Common/InfoBlock/InfoBlock";
 export { default as ListItemAnimation } from "@app/components/Common/ListItemAnimation/ListItemAnimation";
 export { default as Modal } from "@app/components/Common/Modal/Modal";
-export { default as ModelViewer } from "@app/components/ModelViewer/ModelViewer";
+export { default as ModelViewer } from "@app/components/Home/ModelViewer/ModelViewer";
+export { default as PrintACover } from "@app/components/Home/PrintACover/PrintACover";
 export { default as Layout } from "@app/components/Layout/Layout";
 export { default as AddDrainCover } from "@app/components/Map/AddDrainCover/AddDrainCover";
 export { default as AddressSearch } from "@app/components/Map/AddressSearch/AddressSearch";
