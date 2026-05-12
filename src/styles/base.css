@@ -113,6 +113,7 @@
   background: #000;
   color: #f8f6ec;
   flex-shrink: 0;
+  position: relative;
 }
 
 .topbar-logo {
@@ -147,6 +148,68 @@
 .topbar-back:hover {
   background: #f8f6ec;
   color: #000;
+}
+
+/* ─── Hamburger button ───────────────────────────────────────────────────── */
+
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+
+.hamburger span {
+  background: #f8f6ec;
+  display: block;
+  height: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+  width: 22px;
+}
+
+.hamburger--open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger--open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ─── Topbar dropdown nav ────────────────────────────────────────────────── */
+
+.topbar-dropdown {
+  background: #000;
+  border-top: 2px solid rgba(248, 246, 236, 0.15);
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 200;
+}
+
+.topbar-dropdown-item {
+  border-bottom: 1px solid rgba(248, 246, 236, 0.1);
+  color: #f8f6ec;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  padding: 18px 28px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.15s;
+}
+
+.topbar-dropdown-item:hover {
+  background: rgba(248, 246, 236, 0.08);
 }
 
 /* ─── Bottom nav menu ────────────────────────────────────────────────────── */
