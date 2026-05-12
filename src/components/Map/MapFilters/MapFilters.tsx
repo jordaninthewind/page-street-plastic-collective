@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, CircularProgress, Stack } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 
 import { useIsMobile, useSearchParamState } from "@app/hooks";
 import useMapStore from "@app/stores/mapStore";
@@ -8,42 +8,28 @@ const MapFilters = () => {
   const { filter, setFilter, clearFilter } = useSearchParamState();
   const { covers, loading } = useMapStore();
 
-  if (loading) return <CircularProgress />;
+  if (loading) return <CircularProgress size={18} />;
 
   const handleSetFilter = (value: string) => () => setFilter(value);
 
   return (
-    <Stack direction={isMobile ? "column" : "row"} spacing={2}>
-      <ButtonGroup>
-        <Button
-          onClick={handleSetFilter("covered")}
-          value="covered"
-          color="primary"
-          variant={filter === "covered" ? "contained" : "outlined"}
-          size="small"
-        >
-          Covered ({covers.filter(({ covered }) => covered).length})
-        </Button>
-        <Button
-          onClick={handleSetFilter("missing")}
-          value="missing"
-          color="secondary"
-          variant={filter === "missing" ? "contained" : "outlined"}
-          size="small"
-        >
-          Missing ({covers.filter(({ covered }) => !covered).length})
-        </Button>
-      </ButtonGroup>
-      <Button
-        value="reset"
-        color="error"
-        variant="outlined"
-        size="small"
-        onClick={clearFilter}
+    <div className={`map-filter-row${isMobile ? " map-filter-row--col" : ""}`}>
+      <button
+        className={`map-btn map-btn--sm${filter === "covered" ? " map-btn--fill" : ""}`}
+        onClick={handleSetFilter("covered")}
       >
-        Reset map
-      </Button>
-    </Stack>
+        Covered ({covers.filter(({ covered }) => covered).length})
+      </button>
+      <button
+        className={`map-btn map-btn--sm${filter === "missing" ? " map-btn--fill" : ""}`}
+        onClick={handleSetFilter("missing")}
+      >
+        Missing ({covers.filter(({ covered }) => !covered).length})
+      </button>
+      <button className="map-btn map-btn--sm" onClick={clearFilter}>
+        Reset
+      </button>
+    </div>
   );
 };
 

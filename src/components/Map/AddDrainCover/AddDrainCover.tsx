@@ -1,29 +1,14 @@
+import { CircularProgress, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { useEffect } from "react";
-
-import { Clear, Close, ErrorOutline, LocationPin } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Chip,
-  CircularProgress,
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-
+import withAuth from "@app/components/HOC/withAuth";
 import { COVER_TYPES } from "@app/constants";
 import { useSearchParamState } from "@app/hooks";
 import useMapStore from "@app/stores/mapStore";
-import { formatDecimal } from "@app/utils";
-import withAuth from "@app/components/HOC/withAuth";
 import type { User } from "@app/types";
+import { formatDecimal } from "@app/utils";
 
 interface AddDrainCoverFormValues {
   cover_type: string;
@@ -98,108 +83,86 @@ const AddDrainCover = withAuth(({ user }: { user: User | null }) => {
   if (!id && !lat && !lng) return null;
 
   return (
-    <Stack>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={2}
-        sx={{ mb: 2, width: "100%" }}
-      >
-        <Typography variant="h4">Missing a cover here?</Typography>
-        <IconButton onClick={() => setParams({})}>
-          <Close />
-        </IconButton>
-      </Stack>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={2}
-          sx={{ mb: 2, width: "100%" }}
-        >
-          <Typography variant="body1">
-            Location: {formatDecimal(lat)}, {formatDecimal(lng)}
-          </Typography>
-          <IconButton onClick={handleLocationClick}>
-            <LocationPin />
-          </IconButton>
-        </Stack>
-        <Stack
-          sx={{ mb: 2, width: "100%" }}
-          direction="column"
-          spacing={2}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <InputLabel sx={{ mb: 2 }}>
-            <Typography variant="h5">Nearby Addresses</Typography>
-          </InputLabel>
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div className="eyebrow">Missing a cover here?</div>
+        <button className="map-close-btn" onClick={() => setParams({})}>×</button>
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <p className="cover-details-meta" style={{ margin: 0 }}>
+          Location: {formatDecimal(lat)}, {formatDecimal(lng)}
+        </p>
+        <button type="button" className="map-btn map-btn--sm" onClick={handleLocationClick}>
+          Use GPS
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div>
+          <span className="map-field-label">Nearby Addresses</span>
           {searchLoading ? (
-            <CircularProgress size={20} />
+            <CircularProgress size={18} />
           ) : searchError ? (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <ErrorOutline color="error" />
-              <Typography variant="body1" color="error">
-                {searchError}
-              </Typography>
-            </Box>
+            <p className="cover-details-meta" style={{ color: "#c00" }}>{searchError}</p>
           ) : searchResults.length > 0 ? (
-            <Grid container spacing={2} sx={{ width: "fit-content", margin: "0 auto" }}>
+            <div style={{ display: "flex", gap: 6 }}>
               {searchResults.map((result) => (
-                <Grid size={{ xs: 12 }} key={result.id}>
-                  <Button
-                    variant="outlined"
-                    fullWidth
-                    onClick={() => setValue("address", result.text)}
-                  >
-                    {result.text}
-                  </Button>
-                </Grid>
+                <button
+                  key={result.id}
+                  type="button"
+                  className="map-btn map-btn--sm"
+                  onClick={() => setValue("address", result.text)}
+                >
+                  {result.text}
+                </button>
               ))}
-            </Grid>
+            </div>
           ) : (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <ErrorOutline />
-              <Typography variant="body1">No nearby addresses found</Typography>
-            </Box>
+            <p className="cover-details-meta">No nearby addresses found</p>
           )}
-        </Stack>
-        <InputLabel>Address</InputLabel>
+        </div>
+
         <TextField
+          label="Address"
           fullWidth
+          focused
           placeholder="Any nearby street address"
-          sx={{ mb: 2 }}
           {...register("address")}
           required
           slotProps={{
             input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={() => setValue("address", "")}>
-                    <Clear />
-                  </IconButton>
-                </InputAdornment>
-              ),
+              endAdornment: watch("address") ? (
+                <button
+                  type="button"
+                  className="map-close-btn"
+                  style={{ border: "none" }}
+                  onClick={() => setValue("address", "")}
+                >
+                  ×
+                </button>
+              ) : null,
             },
           }}
         />
-        <InputLabel sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-          Cover Type
-        </InputLabel>
-        <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: "wrap" }}>
-          {COVER_TYPES.map(({ value, label }) => (
-            <Chip
-              key={value}
-              label={label}
-              onClick={() => setValue("cover_type", value)}
-              color={watch("cover_type") === value ? "primary" : "default"}
-              variant={watch("cover_type") === value ? "filled" : "outlined"}
-            />
-          ))}
-        </Stack>
-        <input type="hidden" {...register("cover_type")} />
+
+        <div>
+          <span className="map-field-label">Cover Type</span>
+          <div className="map-filter-row">
+            {COVER_TYPES.map(({ value, label }) => (
+              <button
+                key={value}
+                type="button"
+                className={`cover-type-tag${watch("cover_type") === value ? " cover-type-tag--active" : ""}`}
+                onClick={() => setValue("cover_type", value)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <input type="hidden" {...register("cover_type")} />
+        </div>
+
         {user ? (
           <>
             <input type="hidden" {...register("requested_by")} value={user.id} />
@@ -210,7 +173,6 @@ const AddDrainCover = withAuth(({ user }: { user: User | null }) => {
             <TextField
               label="Requested By"
               fullWidth
-              sx={{ mb: 2 }}
               {...register("requested_by")}
               required
               placeholder="Emperor Norton II of San Francisco"
@@ -219,33 +181,31 @@ const AddDrainCover = withAuth(({ user }: { user: User | null }) => {
               label="Email Address"
               type="email"
               fullWidth
-              sx={{ mb: 2 }}
               {...register("email")}
               required
               placeholder="example@example.com"
             />
           </>
         )}
+
         <TextField
-          label="Anything else you want to add?"
+          label="Anything else?"
           fullWidth
           multiline
-          rows={4}
-          sx={{ mb: 2 }}
+          rows={3}
           {...register("description")}
           placeholder="Give some details if you want!"
         />
-        <Button
+
+        <button
           type="submit"
-          variant="contained"
-          color="primary"
+          className="map-btn map-btn--fill"
           disabled={loading || saving || !watch("address")}
-          fullWidth
         >
           {saving ? "Sending Request..." : "Add Request"}
-        </Button>
+        </button>
       </form>
-    </Stack>
+    </div>
   );
 });
 

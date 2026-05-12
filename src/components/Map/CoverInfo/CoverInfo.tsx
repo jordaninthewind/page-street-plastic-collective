@@ -1,28 +1,14 @@
-import { Close, ExpandMore } from "@mui/icons-material";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Button,
-  CircularProgress,
-  Divider,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 
 import { CoverComments } from "@app/components";
+import { Skeleton } from "@mui/material";
 import withAuth from "@app/components/HOC/withAuth";
-import withLoading from "@app/components/HOC/withLoading";
 import { useSearchParamState } from "@app/hooks";
 import { recordEventInSupabase } from "@app/services/supabase/supabaseService";
 import useMapStore from "@app/stores/mapStore";
 import type { Cover, Event, User } from "@app/types";
 import { isStale } from "@app/utils";
-
-const TypographyWithLoading = withLoading(Typography);
 
 interface CoverDetailsProps {
   cover: Cover;
@@ -36,29 +22,57 @@ const CoverDetails = ({ cover, loading }: CoverDetailsProps) => {
   const covered = lastEvent?.covered ?? cover.covered;
 
   return (
-    <Stack flexDirection="column" justifyContent="center" alignItems="center" spacing={2}>
-      <Typography variant="h3" sx={{ mb: 2 }}>
-        The drain at
-      </Typography>
-      <TypographyWithLoading loading={loading} variant="h2" sx={{ mb: 2 }}>
-        {cover.address}, SF, CA
-      </TypographyWithLoading>
-      <TypographyWithLoading loading={loading} variant="h3" sx={{ mb: 2 }}>
-        is {covered ? "covered ✅" : "missing ❌"}
-      </TypographyWithLoading>
-      <TypographyWithLoading loading={loading} variant="body1">
-        As of {new Date(update).toLocaleString()}
-      </TypographyWithLoading>
-      <TypographyWithLoading loading={loading} variant="body1">
-        This info is {isStale(new Date(update)) ? "stale" : "fresh"}
-      </TypographyWithLoading>
-      <TypographyWithLoading loading={loading} variant="h6">
-        Requested By: {cover.requested_by}
-      </TypographyWithLoading>
-      <TypographyWithLoading loading={loading} variant="body1">
+    <div className="cover-details-block">
+      <p className="cover-details-headline">The drain at</p>
+      {loading ? (
+        <Skeleton variant="rectangular" width="100%" height={28} />
+      ) : (
+        <p className="cover-details-address">{cover.address}, SF, CA</p>
+      )}
+      <div className="cover-status-badge">
+        {covered ? "Covered ✅" : "Missing ❌"}
+      </div>
+      <p className="cover-details-meta">
+        As of {new Date(update).toLocaleString()} &mdash;{" "}
+        {isStale(new Date(update)) ? "stale info" : "fresh info"}
+      </p>
+      <p className="cover-details-meta">
+        Requested by {cover.requested_by}
+      </p>
+      <p className="cover-details-meta">
         First reported: {new Date(cover.created_at).toLocaleString()}
-      </TypographyWithLoading>
-    </Stack>
+      </p>
+    </div>
+  );
+};
+
+interface EventHistoryProps {
+  events: Event[];
+}
+
+const EventHistory = ({ events }: EventHistoryProps) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="history-section">
+      <button
+        className={`history-toggle${open ? " history-toggle--open" : ""}`}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="history-toggle-label">History ({events.length})</span>
+        <span className="history-toggle-arrow">▾</span>
+      </button>
+      {open && (
+        <div className="history-list">
+          {events.map(({ created_at: createdAt, covered }, idx) => (
+            <div key={createdAt ?? idx} className="event-row">
+              <span className="event-date">{new Date(createdAt).toLocaleString()}</span>
+              <span className="event-state">{covered ? "Covered ✅" : "Missing ❌"}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -69,48 +83,14 @@ interface CoverStateOwnProps {
 }
 
 const CoverState = withAuth(({ user, covered, onClick, loading }: CoverStateOwnProps & { user: User | null }) => (
-  <Stack flexDirection="row" justifyContent="center" alignItems="center" spacing={2}>
-    <Button
-      variant={covered ? "outlined" : "contained"}
-      color={covered ? "error" : "success"}
-      onClick={onClick}
-      disabled={loading || !user}
-    >
-      {covered ? "Ugh, it's missing again. ❌" : "Oh look, it's covered! ✅"}
-      {loading ? <CircularProgress size={20} /> : null}
-    </Button>
-  </Stack>
-));
-
-interface EventHistoryProps {
-  events: Event[];
-}
-
-const EventHistory = ({ events }: EventHistoryProps) => (
-  <Accordion
-    elevation={0}
-    sx={{ width: "100%", border: "1px solid #e0e0e0", borderRadius: "8px" }}
+  <button
+    className={`map-btn${covered ? "" : " map-btn--fill"}`}
+    onClick={onClick}
+    disabled={loading || !user}
   >
-    <AccordionSummary expandIcon={<ExpandMore />}>
-      <Typography variant="h6">History ({events.length})</Typography>
-    </AccordionSummary>
-    <AccordionDetails>
-      {events.map(({ created_at: createdAt, covered }, idx) => (
-        <Stack
-          key={createdAt ?? idx}
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="flex-end"
-          spacing={2}
-        >
-          <Typography variant="h6">{new Date(createdAt).toLocaleString()}</Typography>
-          <Divider orientation="vertical" flexItem />
-          <Typography variant="h6">{covered ? "Covered ✅" : "Missing ❌"}</Typography>
-        </Stack>
-      ))}
-    </AccordionDetails>
-  </Accordion>
-);
+    {covered ? "Ugh, it's missing again. ❌" : "Oh look, it's covered! ✅"}
+  </button>
+));
 
 const CoverInfo = withAuth(({ user }: { user: User | null }) => {
   const [cover, setCover] = useState<Cover | null>(null);
@@ -151,34 +131,21 @@ const CoverInfo = withAuth(({ user }: { user: User | null }) => {
   };
 
   if (!cover) return null;
-  console.log('mostRecentEvent', mostRecentEvent);
+
   return (
-    <Stack
-      alignItems="center"
-      flexDirection="column"
-      justifyContent="flex-start"
-      position="relative"
-      spacing={2}
-      width="100%"
-    >
-      <IconButton
-        onClick={() => setParams({})}
-        sx={{ position: "absolute", top: 0, right: 0 }}
-      >
-        <Close />
-      </IconButton>
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div className="eyebrow">Cover info</div>
+        <button className="map-close-btn" onClick={() => setParams({})}>×</button>
+      </div>
       <CoverDetails cover={cover} loading={loading} />
-      <Divider sx={{ width: "100%" }} />
-      <Stack>
-        <Typography variant="h4" sx={{ mb: 2 }}>
-          Report the status of the drain cover
-        </Typography>
-      </Stack>
+      <div className="map-divider" />
+      <div className="eyebrow">Report status</div>
       <CoverState covered={mostRecentEvent?.covered} onClick={handleUpdateCoverState} loading={loading} />
-      <Divider sx={{ width: "100%" }} />
+      <div className="map-divider" />
       <EventHistory events={cover.events} />
       <CoverComments comments={cover.comments} />
-    </Stack>
+    </div>
   );
 });
 

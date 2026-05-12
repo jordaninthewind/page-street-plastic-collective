@@ -20,7 +20,7 @@ const Modal = withSearchParamState(({ overlay, clearFilter }: { overlay: string 
           sx: { backgroundColor: "rgba(0, 0, 255, 0.5)" },
         },
         paper: {
-          sx: { borderRadius: "20px", p: 4, maxHeight: "80vh" },
+          sx: { borderRadius: "20px", p: 4, height: "fit-content", maxHeight: "80vh" },
         },
       }}
     >

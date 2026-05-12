@@ -1,0 +1,345 @@
+/* ─── Map Navigation Panel — Brutalist ─────────────────────────────────── */
+
+.map-panel {
+  background: #f8f6ec;
+  font-family: "Open Sans", sans-serif;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 100%;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* ─── Brutalist buttons ─────────────────────────────────────────────────── */
+
+.map-btn {
+  background: none;
+  border: 2px solid #000;
+  color: #000;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: background 0.1s, color 0.1s;
+  width: 100%;
+  display: block;
+  text-align: center;
+  line-height: 1;
+}
+
+.map-btn:hover:not(:disabled) {
+  background: #000;
+  color: #f8f6ec;
+}
+
+.map-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.map-btn--fill {
+  background: #000;
+  color: #f8f6ec;
+}
+
+.map-btn--fill:hover:not(:disabled) {
+  background: #222;
+}
+
+.map-btn--sm {
+  font-size: 0.6rem;
+  padding: 5px 12px;
+  width: auto;
+  display: inline-block;
+}
+
+/* ─── Filter row ────────────────────────────────────────────────────────── */
+
+.map-filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ─── Cover type tags ───────────────────────────────────────────────────── */
+
+.cover-type-tag {
+  border: 2px solid #000;
+  padding: 4px 12px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  font-family: "Open Sans", sans-serif;
+  transition: background 0.1s, color 0.1s;
+  color: #000;
+}
+
+.cover-type-tag:hover {
+  background: #000;
+  color: #f8f6ec;
+}
+
+.cover-type-tag--active {
+  background: #000;
+  color: #f8f6ec;
+}
+
+/* ─── Field labels ──────────────────────────────────────────────────────── */
+
+.map-field-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+  color: #000;
+}
+
+/* ─── Divider ───────────────────────────────────────────────────────────── */
+
+.map-divider {
+  height: 4px;
+  background: #000;
+  flex-shrink: 0;
+  width: 100%;
+  margin: 4px 0;
+}
+
+/* ─── Close button ──────────────────────────────────────────────────────── */
+
+.map-close-btn {
+  background: none;
+  border: 2px solid #000;
+  cursor: pointer;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+  flex-shrink: 0;
+  transition: background 0.1s, color 0.1s;
+  font-family: "Open Sans", sans-serif;
+}
+
+.map-close-btn:hover {
+  background: #000;
+  color: #f8f6ec;
+}
+
+/* ─── Native select ─────────────────────────────────────────────────────── */
+
+.map-select {
+  width: 100%;
+  border: 2px solid #000;
+  border-radius: 0;
+  padding: 10px 36px 10px 12px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: #f8f6ec;
+  color: #000;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+}
+
+.map-select:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* ─── Comments ──────────────────────────────────────────────────────────── */
+
+.comment-item {
+  border: 2px solid #000;
+  padding: 12px 16px;
+}
+
+.comment-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0 0 6px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.comment-meta {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* ─── Event history ─────────────────────────────────────────────────────── */
+
+.event-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  font-family: "Open Sans", sans-serif;
+}
+
+.event-row:last-child {
+  border-bottom: none;
+}
+
+.event-date,
+.event-state {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.history-section {
+  width: 100%;
+  border: 2px solid #000;
+}
+
+.history-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: "Open Sans", sans-serif;
+}
+
+.history-toggle-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.history-toggle-arrow {
+  font-size: 0.8rem;
+  font-weight: 900;
+  transition: transform 0.2s;
+  display: block;
+}
+
+.history-toggle--open .history-toggle-arrow {
+  transform: rotate(180deg);
+}
+
+.history-list {
+  border-top: 2px solid #000;
+  padding: 8px 14px;
+}
+
+/* ─── Cover details block ───────────────────────────────────────────────── */
+
+.cover-details-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cover-details-headline {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.cover-details-address {
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.cover-details-meta {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.cover-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 2px solid #000;
+  padding: 5px 14px;
+  width: fit-content;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* ─── MUI TextField / Select overrides ─────────────────────────────────── */
+
+.map-panel .MuiOutlinedInput-root {
+  border-radius: 0;
+  font-family: "Open Sans", sans-serif;
+  background: #f8f6ec;
+}
+
+.map-panel .MuiOutlinedInput-root fieldset {
+  border: 2px solid #000;
+}
+
+.map-panel .MuiOutlinedInput-root:hover fieldset {
+  border-color: #000;
+}
+
+.map-panel .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: #000;
+  border-width: 2px;
+}
+
+.map-panel .MuiInputLabel-root {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.map-panel .MuiInputLabel-root.Mui-focused {
+  color: #000;
+}
+
+.map-panel .MuiInputBase-input {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.85rem;
+}

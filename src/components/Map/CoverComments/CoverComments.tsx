@@ -2,44 +2,30 @@ import { useSnackbar } from "notistack";
 
 import { type ChangeEvent, useState } from "react";
 
-import { Button, Fade, Stack, TextField, Typography } from "@mui/material";
+import { TextField } from "@mui/material";
 
 import { useSearchParamState } from "@app/hooks/index";
 import { addCommentToSupabase } from "@app/services/supabase/supabaseService";
 import { type Comment } from "@app/types";
 
 const CommentItem = ({ comment }: { comment: Comment }) => (
-  <Stack
-    key={comment.id}
-    sx={{ border: "1px solid #e0e0e0", p: 2, borderRadius: 2 }}
-  >
-    <Typography variant="body1">{comment.text}</Typography>
-    <Typography variant="body2">
-      Posted by {comment.name || "Anonymous"} on{" "}
-      {new Date(comment.created_at).toLocaleString()}
-    </Typography>
-  </Stack>
+  <div className="comment-item">
+    <p className="comment-text">{comment.text}</p>
+    <p className="comment-meta">
+      {comment.name || "Anonymous"} &mdash; {new Date(comment.created_at).toLocaleString()}
+    </p>
+  </div>
 );
 
 const AddComment = () => {
   const { id } = useSearchParamState();
-
   const { enqueueSnackbar } = useSnackbar();
 
   const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
-
-  const [showAddComment, setShowAddComment] = useState(true);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setComment(event.target.value);
-  };
-
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-  };
+  const [showForm, setShowForm] = useState(false);
 
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,102 +41,79 @@ const AddComment = () => {
       await addCommentToSupabase({ text: comment, cover_id: id, name });
       setComment("");
       setError("");
-    } catch (error) {
-      setError((error as Error)?.message || "An unknown error occurred");
-      enqueueSnackbar((error as Error)?.message || "An unknown error occurred", {
-        variant: "error",
-      });
+      setShowForm(false);
+    } catch (err) {
+      setError((err as Error)?.message || "An unknown error occurred");
+      enqueueSnackbar((err as Error)?.message || "An unknown error occurred", { variant: "error" });
     } finally {
       setLoading(false);
-      setShowAddComment(false);
     }
   };
 
+  if (!showForm) {
+    return (
+      <button className="map-btn" onClick={() => setShowForm(true)}>
+        Add a comment
+      </button>
+    );
+  }
+
   return (
-    <Stack sx={{ width: "100%", mb: 2 }}>
-      {showAddComment ? (
-        <Button
-          variant="outlined"
-          onClick={() => setShowAddComment(!showAddComment)}
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <span className="map-field-label">Add a comment</span>
+      <TextField
+        multiline
+        rows={2}
+        fullWidth
+        label="Comment"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        disabled={loading}
+        error={!!error}
+      />
+      <div style={{ display: "flex", gap: 8 }}>
+        <TextField
+          label="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          disabled={loading}
+          error={!!error}
+          fullWidth
+        />
+        <button type="submit" className="map-btn map-btn--fill" style={{ width: "auto", padding: "0 20px" }} disabled={loading}>
+          Submit
+        </button>
+        <button
+          type="button"
+          className="map-btn"
+          style={{ width: "auto", padding: "0 16px" }}
+          disabled={loading}
+          onClick={() => setShowForm(false)}
         >
-          Add a comment
-        </Button>
-      ) : (
-        <Fade in={!showAddComment}>
-          <Stack>
-            <form onSubmit={handleSubmit}>
-              <Typography variant="h6" sx={{ mb: 1 }}>
-                Add a comment
-              </Typography>
-              <TextField
-                multiline
-                rows={2}
-                sx={{ width: "100%" }}
-                label="Comment"
-                value={comment}
-                onChange={handleChange}
-                disabled={loading}
-                error={!!error}
-              />
-              <Stack sx={{ mt: 2 }}>
-                <Stack direction="row" spacing={2}>
-                  <TextField
-                    label="Name"
-                    value={name}
-                    onChange={handleNameChange}
-                    disabled={loading}
-                    error={!!error}
-                    fullWidth
-                  />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    disabled={loading}
-                  >
-                    Submit
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outlined"
-                    color="primary"
-                    disabled={loading}
-                    onClick={() => setShowAddComment(!showAddComment)}
-                  >
-                    Cancel
-                  </Button>
-                </Stack>
-                {error && (
-                  <Typography variant="body2" color="error">
-                    {error}
-                  </Typography>
-                )}
-              </Stack>
-            </form>
-          </Stack>
-        </Fade>
-      )}
-    </Stack>
+          Cancel
+        </button>
+      </div>
+      {error && <p className="cover-details-meta" style={{ color: "#c00" }}>{error}</p>}
+    </form>
   );
 };
 
 const CommentList = ({ comments }: { comments: Comment[] }) => (
-  <Stack gap={1}>
-    {comments?.length && comments.length > 0 ? (
-      comments.map((comment) => (
-        <CommentItem key={comment.id} comment={comment} />
-      ))
+  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+    {comments?.length > 0 ? (
+      comments.map((comment) => <CommentItem key={comment.id} comment={comment} />)
     ) : (
-      <Typography>No comments yet</Typography>
+      <p className="cover-details-meta">No comments yet</p>
     )}
-  </Stack>
+  </div>
 );
 
 const CoverComments = ({ comments }: { comments: Comment[] }) => (
-  <Stack sx={{ width: "100%" }}>
+  <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 12 }}>
+    <div className="eyebrow">Comments</div>
     <AddComment />
     <CommentList comments={comments} />
-  </Stack>
+  </div>
 );
 
 export default CoverComments;

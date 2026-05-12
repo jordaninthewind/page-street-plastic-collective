@@ -1,7 +1,7 @@
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
 
 :root {
-  --header-height: 82px;
+  --header-height: 65px;
   --color-bg: red;
   --color-ink: #000;
   --font-sans: "Open Sans", sans-serif;
@@ -109,7 +109,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 28px;
+  padding: 0 28px;
   background: #000;
   color: #f8f6ec;
   flex-shrink: 0;
