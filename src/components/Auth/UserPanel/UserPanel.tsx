@@ -28,7 +28,7 @@ const SignupOrLogin = () => {
       <Button
         fullWidth
         variant="text"
-        color="primary"
+        sx={{ color: "black", borderColor: "black" }}
         onClick={toggleShowSignup}
       >
         {showSignup ? "Login" : "Make an account"}
@@ -46,8 +46,8 @@ const UserInfo = () => {
       <Typography>Hey {user?.name ? user.name : "neighbor"}!</Typography>
       <Button
         fullWidth
-        variant="contained"
-        color="primary"
+        variant="outlined"
+        sx={{ color: "black", borderColor: "black" }}
         onClick={logOutUser}
         disabled={loading}
       >

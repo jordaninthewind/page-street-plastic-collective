@@ -1,8 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button, Stack, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-
-import { Button, Stack, TextField } from "@mui/material";
 
 import useUserStore from "@app/stores/userStore";
 
@@ -50,6 +49,7 @@ const Login = () => {
         label="Email"
         type="email"
         {...register("email")}
+        autoComplete="email"
         error={!!errors.email}
         helperText={errors.email?.message}
       />
@@ -57,14 +57,15 @@ const Login = () => {
         fullWidth
         label="Password"
         type="password"
+        autoComplete="current-password"
         {...register("password")}
         error={!!errors.password}
         helperText={errors.password?.message}
       />
       <Button
         fullWidth
-        variant="contained"
-        color="primary"
+        variant="outlined"
+        sx={{ color: "black", borderColor: "black" }}
         type="submit"
         disabled={loading || !isValid}
       >

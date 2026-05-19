@@ -16,6 +16,10 @@ import useMapStore from "@app/stores/mapStore";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN as string;
 
+const MAP_ERRORS_TO_IGNORE = [
+  "t3.json.meshes is not iterable",
+]
+
 const InteractiveMap = () => {
   const { isMobile } = useIsMobile();
   const { map, mapContainerRef } = useMap();
@@ -55,6 +59,8 @@ const InteractiveMap = () => {
         }
       })
       ?.on("error", (event) => {
+        if (MAP_ERRORS_TO_IGNORE.includes(event.error?.message ?? "")) return;
+
         enqueueSnackbar(event.error?.message ?? "Map error", { variant: "error" });
       });
   }, [map, enqueueSnackbar, setParams]);
